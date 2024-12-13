@@ -1,3 +1,3 @@
-# template
+# todo-app
 
-a template repo to have everything set up from the get-go
+a simple, yet comprehensive todo-app in conjunction with the [the odin project](https://www.theodinproject.com/)'s javascript curriculum.

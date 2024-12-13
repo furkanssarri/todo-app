@@ -1,39 +1,38 @@
 {
-    "name": "template",
-    "version": "1.0.0",
-    "description": "a template repo to have everything set up from the get-go",
-    "main": "./src/index.js",
-    "private": true,
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack --config webpack.dev.js",
-        "start": "webpack --config webpack.prod.js",
-        "dev": "webpack serve --open --config webpack.dev.js",
-        "deploy": "git subtree push --prefix dist origin gh-pages",
-        "babel": "babel src -d lib"
-    },
-    "prettier": {
-        "useTabs": false,
-        "tabWidth": 4
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@babel/cli": "^7.25.7",
-        "@babel/core": "^7.25.7",
-        "@babel/preset-env": "^7.25.7",
-        "@eslint/js": "^9.12.0",
-        "css-loader": "^7.1.2",
-        "eslint": "^9.12.0",
-        "globals": "^15.10.0",
-        "html-loader": "^5.1.0",
-        "html-webpack-plugin": "^5.6.0",
-        "prettier": "3.3.3",
-        "style-loader": "^4.0.0",
-        "webpack": "^5.95.0",
-        "webpack-cli": "^5.1.4",
-        "webpack-dev-server": "^5.1.0",
-        "webpack-merge": "^6.0.1"
-    }
+   "name": "template",
+   "version": "1.0.0",
+   "description": "a template repo to have everything set up from the get-go",
+   "main": "./src/index.js",
+   "private": true,
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "webpack --config webpack.dev.js",
+      "start": "webpack --config webpack.prod.js",
+      "dev": "webpack serve --open --config webpack.dev.js",
+      "deploy": "git subtree push --prefix dist origin gh-pages",
+      "babel": "babel src -d lib"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+      "@babel/cli": "^7.25.7",
+      "@babel/core": "^7.25.7",
+      "@babel/preset-env": "^7.25.7",
+      "@eslint/js": "^9.12.0",
+      "css-loader": "^7.1.2",
+      "eslint": "^9.12.0",
+      "globals": "^15.10.0",
+      "html-loader": "^5.1.0",
+      "html-webpack-plugin": "^5.6.0",
+      "prettier": "3.3.3",
+      "style-loader": "^4.0.0",
+      "webpack": "^5.95.0",
+      "webpack-cli": "^5.1.4",
+      "webpack-dev-server": "^5.1.0",
+      "webpack-merge": "^6.0.1"
+   },
+   "dependencies": {
+      "date-fns": "^4.1.0"
+   }
 }
