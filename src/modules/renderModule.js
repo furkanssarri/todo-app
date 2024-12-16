@@ -1,0 +1,100 @@
+import { todos } from "./todos";
+import { manageDB } from "./storage";
+
+export const mainArea = document.querySelector("main");
+const hamburger = document.querySelector(".fa-bars");
+const leftMenu = document.createElement("div");
+
+hamburger.addEventListener("click", () => {
+   if (leftMenu.classList.contains("hide")) {
+      leftMenu.classList.remove("animate__slideOutLeft");
+      leftMenu.classList.add("animate__slideInLeft");
+      leftMenu.classList.remove("hide");
+      leftMenu.classList.add("show");
+   } else {
+      leftMenu.classList.remove("animate__slideInLeft");
+      leftMenu.classList.add("animate__slideOutLeft");
+      setTimeout(() => {
+         leftMenu.classList.remove("show");
+         leftMenu.classList.add("hide");
+      }, 850);
+   }
+});
+
+leftMenu.classList.add("left-menu", "hide", "animate__animated");
+
+mainArea.appendChild(leftMenu);
+
+const container = document.createElement("div");
+
+container.classList.add("container")
+
+
+
+mainArea.appendChild(container);
+
+window.addEventListener("load", getTodos);
+
+   function getTodos() {
+      manageDB(false, todos);
+      init()
+   }
+
+function init() {
+   for (let index = 0; index < todos.length; index++) {
+      const todo = todos[index];
+      const task = document.createElement("div");
+      task.classList.add("task");
+
+      // Form side
+      const checkForm = document.createElement("div");
+      const checkBox = document.createElement("input");
+      const checkboxLabel = document.createElement("label");
+
+      checkboxLabel.textContent = todo.title;
+
+      checkBox.id = "renderTodoCheckbox";
+
+      checkBox.setAttribute("type", "checkbox");
+      checkBox.setAttribute("for", "renderTodoCheckbox");
+      checkForm.classList.add("is-checked-form");
+
+
+      // Controls side
+      const todoControls = document.createElement("div");
+      const editBtn = document.createElement("button");
+      const prioBtn = document.createElement("button");
+      const deleteBtn = document.createElement("button");
+
+      const editFa = document.createElement("i");
+      const prioFa = document.createElement("i");
+      const deleteFa = document.createElement("i");
+
+
+      editFa.classList.add("fa-solid", "fa-pen-to-square");
+      prioFa.classList.add("fa-solid", "fa-flag");
+      deleteFa.classList.add("fa-solid", "fa-trash-can");
+
+      editBtn.appendChild(editFa);
+      prioBtn.appendChild(prioFa);
+      deleteBtn.appendChild(deleteFa);
+
+      todoControls.classList.add("todo-controls");
+
+      checkForm.appendChild(checkBox);
+      checkForm.appendChild(checkboxLabel);
+
+      const controlBtns = [editBtn, prioBtn, deleteBtn];
+      controlBtns.forEach(btn => {
+         todoControls.appendChild(btn);
+      });
+
+      task.appendChild(checkForm);
+      task.appendChild(todoControls);
+
+      container.appendChild(task);
+
+      console.log(todo)
+   }
+}
+

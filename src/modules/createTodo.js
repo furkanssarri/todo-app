@@ -1,14 +1,15 @@
 import Todo from "./Todo";
-import { titleInput, descriptionInput, dateInput, priorityStatus, noteInput } from "./createForm";
+import createPopUpForm from "./createForm";
+import { formElements } from "./createForm";
 import { manageDB } from "./storage";
 import { todos } from "./todos";
 
 export default function () {
-   const titleVal = titleInput.value.trim();
-   const descriptionValue = descriptionInput.value.trim();
-   const priorityValue = priorityStatus.value;
-   const noteValue = noteInput.value.trim();
-   const dateVal = dateInput.value.trim();
+   const titleVal = formElements.titleInput.value.trim();
+   const descriptionValue = formElements.descriptionInput.value.trim();
+   const priorityValue = formElements.priorityStatus.value;
+   const noteValue = formElements.noteInput.value.trim();
+   const dateVal = formElements.dateInput.value.trim();
    const isComplete = false;
    const newTodo = new Todo(titleVal, descriptionValue, dateVal, priorityValue, noteValue, isComplete);
 
@@ -22,9 +23,9 @@ export default function () {
       manageDB(true, todos);
    }
 
-   window.addEventListener("load", getTodos);
+   // window.addEventListener("load", getTodos);
 
-   function getTodos() {
-      manageDB(false, todos);
-   }
+   // function getTodos() {
+   //    manageDB(false, todos);
+   // }
 };

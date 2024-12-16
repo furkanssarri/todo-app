@@ -1,11 +1,13 @@
+import { todos } from "./todos";
+
 function sendTodoToDB(todos) {
    localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 function getTodosfromDB() {
    const getTodos = localStorage.getItem("todos");
-   todos.push(getTodos);
-   return getTodos ? JSON.parse(getTodos) : [];
+   let returnedTodosObj =  getTodos ? JSON.parse(getTodos) : [];
+   todos.splice(0, todos.length, ...returnedTodosObj);
 }
 
 export const manageDB = function (conditional, todos) {
