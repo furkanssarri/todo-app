@@ -8,14 +8,17 @@ export default function createPopUpForm() {
    const overlay = document.createElement("div");
    const formContainer = document.createElement("div");
 
+   overlay.id = "formOverlay"
    overlay.classList.add("form-overlay") //, "animate__animated", "animate__animated", "animate__zoomIn");
    formContainer.classList.add("form-container");
+   formContainer.id = "formContainer";
    
 
    // Close Button
    const formCloseBtn = document.createElement("button");
    const closeFa = document.createElement("i");
    closeFa.classList.add("fa-solid", "fa-xmark");
+   formCloseBtn.classList.add("close-btn")
 
    
    
