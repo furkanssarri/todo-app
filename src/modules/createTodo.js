@@ -3,7 +3,7 @@ import { formElements } from "./createForm";
 import { manageDB } from "./storage";
 import { todos } from "./todos";
 
-export default function () {
+export default function createTodo() {
    const selectedPriority = Array.from(
       document.getElementsByName("priorityStatus"),
    ).find((radio) => radio.checked)?.value;

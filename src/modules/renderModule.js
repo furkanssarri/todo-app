@@ -1,6 +1,9 @@
 import { todos } from "./todos";
 import { manageDB } from "./storage";
 
+/*This render module is very sloppy and is violating some of the important best practices suc as DRY and
+more importantly, the Single Responsibility principle. A refactor is in order for this module in the future. */
+
 export const mainArea = document.querySelector("main");
 const hamburger = document.querySelector(".fa-bars");
 const leftMenu = document.createElement("div");
