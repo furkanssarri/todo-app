@@ -416,6 +416,62 @@ label {
    font-size: 1rem;
 }
 
+/* Container styling */
+#priorityStatusContainer {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+/* Priority options layout */
+.priority-options {
+   display: flex;
+   gap: 10px;
+}
+
+/* Hide default radio buttons */
+.priority-options input[type="radio"] {
+   display: none;
+}
+
+/* Styled labels as options */
+.priority-option {
+   padding: 10px 20px;
+   border: 2px solid #ccc;
+   border-radius: 5px;
+   cursor: pointer;
+   text-align: center;
+   font-size: 1rem;
+   transition: all 0.3s;
+}
+
+/* Colors for priority levels */
+.priority-option.low {
+   background-color: #d4edda;
+   border-color: #c3e6cb;
+   color: #155724;
+}
+
+.priority-option.medium {
+   background-color: #fff3cd;
+   border-color: #ffeeba;
+   color: #856404;
+}
+
+.priority-option.high {
+   background-color: #f8d7da;
+   border-color: #f5c6cb;
+   color: #721c24;
+}
+
+/* Highlight selected option */
+.priority-options input[type="radio"]:checked + .priority-option {
+   border-color: #007bff;
+   background-color: #cce5ff;
+   color: #004085;
+   font-weight: bold;
+}
+
 @media screen and (max-width: 768px) {
    #formContainer {
       max-width: 90%;

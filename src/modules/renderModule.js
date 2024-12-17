@@ -27,18 +27,16 @@ mainArea.appendChild(leftMenu);
 
 const container = document.createElement("div");
 
-container.classList.add("container")
-
-
+container.classList.add("container");
 
 mainArea.appendChild(container);
 
 window.addEventListener("load", getTodos);
 
-   function getTodos() {
-      manageDB(false, todos);
-      init()
-   }
+function getTodos() {
+   manageDB(false, todos);
+   init();
+}
 
 function init() {
    for (let index = 0; index < todos.length; index++) {
@@ -51,14 +49,18 @@ function init() {
       const checkBox = document.createElement("input");
       const checkboxLabel = document.createElement("label");
 
-      checkboxLabel.textContent = todo.title;
+      let todoTitleConverted = convertChars(todo.title);
+      let currentTodoID = todoTitleConverted.replace(/\s+/g, '-').toLowerCase();
 
-      checkBox.id = "renderTodoCheckbox";
+      /* Logical improvement: Will implement an id number for every todo and will assign that number here instead. 
+      For now, this will remain todo.title  */
+      checkBox.id = currentTodoID; 
+
+      checkboxLabel.textContent = todo.title;
+      checkboxLabel.htmlFor = currentTodoID;
 
       checkBox.setAttribute("type", "checkbox");
-      checkBox.setAttribute("for", "renderTodoCheckbox");
       checkForm.classList.add("is-checked-form");
-
 
       // Controls side
       const todoControls = document.createElement("div");
@@ -69,7 +71,6 @@ function init() {
       const editFa = document.createElement("i");
       const prioFa = document.createElement("i");
       const deleteFa = document.createElement("i");
-
 
       editFa.classList.add("fa-solid", "fa-pen-to-square");
       prioFa.classList.add("fa-solid", "fa-flag");
@@ -85,7 +86,7 @@ function init() {
       checkForm.appendChild(checkboxLabel);
 
       const controlBtns = [editBtn, prioBtn, deleteBtn];
-      controlBtns.forEach(btn => {
+      controlBtns.forEach((btn) => {
          todoControls.appendChild(btn);
       });
 
@@ -93,8 +94,18 @@ function init() {
       task.appendChild(todoControls);
 
       container.appendChild(task);
-
-      console.log(todo)
    }
 }
 
+function convertChars(text) {
+   const charMap = {
+      "ı": "i",
+      "ü": "u",
+      "ğ": "g",
+      "ç": "c",
+      "ö": "o",
+      "ş": "s",
+   };
+
+   return text.replace(/[ığçöşü]/g, (match) => charMap[match]);
+}

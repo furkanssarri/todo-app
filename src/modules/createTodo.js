@@ -5,11 +5,21 @@ import { manageDB } from "./storage";
 import { todos } from "./todos";
 
 export default function () {
+   const selectedPriority = Array.from(
+      document.getElementsByName("priorityStatus"),
+   ).find((radio) => radio.checked)?.value;
+
+   if (selectedPriority) {
+      console.log(`selected prio: ${selectedPriority}`);
+   } else {
+      console.log(`no selected prio`);
+   }
+
    const titleVal = formElements.titleInput.value.trim();
    const descriptionValue = formElements.descriptionInput.value.trim();
-   const priorityValue = formElements.priorityStatus.value;
+   const priorityValue = formElements.getPriorityStatus();
    const noteValue = formElements.noteInput.value.trim();
-   const dateVal = formElements.dateInput.value.trim();
+   const dateVal = new Date(formElements.dateInput.value);
    const isComplete = false;
    const newTodo = new Todo(titleVal, descriptionValue, dateVal, priorityValue, noteValue, isComplete);
 
@@ -23,9 +33,9 @@ export default function () {
       manageDB(true, todos);
    }
 
-   // window.addEventListener("load", getTodos);
+   window.addEventListener("load", getTodos);
 
-   // function getTodos() {
-   //    manageDB(false, todos);
-   // }
-};
+   function getTodos() {
+      manageDB(false, todos);
+   }
+}
