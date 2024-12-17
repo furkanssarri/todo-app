@@ -219,8 +219,8 @@ main {
 .left-menu {
    display: flex;
    z-index: 900;
-   width: 30%;
-   height: 100%;
+   width: 35%;
+   height: calc(100vh - 55px);
    position: absolute;
    left: 0;
    border-right: 1px solid #cbcbcb;
