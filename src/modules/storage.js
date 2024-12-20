@@ -1,13 +1,15 @@
-import { todos } from "./todos";
+import { addTodo, getTodos, spliceTodos } from "./todos";
 
-function sendTodoToDB(todos) { // Will implement an error handler for this function.
-   localStorage.setItem("todos", JSON.stringify(todos));
+/* A series of security checks and precautions are in order for storing todos perhaps even encryption? Nobody knows! */
+
+function sendTodoToDB(getTodos) { // Will implement an error handler for this function.
+   localStorage.setItem("todos", JSON.stringify(getTodos));
 }
 
 function getTodosfromDB() { // Will implement an error handler for this function.
-   const getTodos = localStorage.getItem("todos");
-   let returnedTodosObj =  getTodos ? JSON.parse(getTodos) : [];
-   todos.splice(0, todos.length, ...returnedTodosObj);
+   const getTodosFromStorage = localStorage.getItem("todos");
+   let returnedTodosObj =  getTodosFromStorage ? JSON.parse(getTodosFromStorage) : [];
+   spliceTodos(returnedTodosObj);
 }
 
 export const manageDB = function (conditional, todos) {

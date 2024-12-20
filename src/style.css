@@ -224,7 +224,29 @@ main {
    position: absolute;
    left: 0;
    border-right: 1px solid #cbcbcb;
-   background-color: aliceblue;
+   background-color: #ddecf9;
+}
+
+.left-menu nav ul {
+   margin-left: 30px;
+}
+
+.left-menu nav ul li {
+   padding: 10px;
+   cursor: pointer;
+}
+
+.left-menu nav ul li:hover {
+   background-color: #f0f6fa;
+}
+
+.left-menu nav ul li a {
+   text-decoration: none;
+   color: #525252;
+}
+
+.left-menu nav ul li a i {
+   margin-right: 10px;
 }
 
 .container {
@@ -286,6 +308,12 @@ button {
 .todo-controls {
    display: flex;
    justify-content: center;
+}
+
+.todo-controls button {
+   padding: 2px;
+   background-color: #00408500;
+   border: none;
 }
 
 .show {

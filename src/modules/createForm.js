@@ -2,7 +2,14 @@ import { format } from "date-fns";
 import getInfo from "./createTodo";
 
 /* This module is sloppy and is violating some of the important best practices such as DRY and Single responsibility.
-A look back -and potentially a refactor- is in order for this module in the future.*/
+A look back -and potentially a refactor- is in order for this module in the future.
+
+Additionally an encapsulation is in order for the formElements here to improve security.
+
+Also an event listener management is in order to improve security.
+
+And lastly, a form validation is in order.
+*/
 
 const formElements = {};
 

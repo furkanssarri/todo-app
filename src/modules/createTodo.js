@@ -1,7 +1,7 @@
 import Todo from "./Todo";
 import { formElements } from "./createForm";
 import { manageDB } from "./storage";
-import { todos } from "./todos";
+import { addTodo, getTodos } from "./todos";
 
 export default function createTodo() {
    const selectedPriority = Array.from(
@@ -20,21 +20,23 @@ export default function createTodo() {
    const noteValue = formElements.noteInput.value.trim();
    const dateVal = new Date(formElements.dateInput.value);
    const isComplete = false;
+   
    const newTodo = new Todo(titleVal, descriptionValue, dateVal, priorityValue, noteValue, isComplete);
 
-   console.log(todos);
-   todos.push(newTodo);
-   console.log(todos);
+   console.log(getTodos());
+   addTodo(newTodo);
+   console.log(getTodos());
 
    if (!newTodo) {
       return;
    } else {
-      manageDB(true, todos);
+      manageDB(true, getTodos());
    }
 
-   window.addEventListener("load", getTodos);
+   window.addEventListener("load", getTodosFromStorage);
 
-   function getTodos() {
-      manageDB(false, todos);
+   function getTodosFromStorage() {
+      manageDB(false, getTodos());
    }
 }
+
