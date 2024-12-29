@@ -223,30 +223,68 @@ main {
    height: calc(100vh - 55px);
    position: absolute;
    left: 0;
-   border-right: 1px solid #cbcbcb;
+   -webkit-box-shadow: 0.5px 5px 9px 0px #000000bf;
+   -moz-box-shadow: 0.5px 5px 9px 0px #000000bf;
+   box-shadow: 0.5px 5px 9px 0px #000000bf;
    background-color: #ddecf9;
 }
 
-.left-menu nav ul {
-   margin-left: 30px;
+.left-menu nav {
+   padding-top: 25px;
 }
 
-.left-menu nav ul li {
-   padding: 10px;
+.left-menu nav > ul {
+   margin-left: 30px;
+   margin-top: 25px;
+}
+
+.left-menu nav > ul li {
+   padding: 9px;
+   margin: 1px;
    cursor: pointer;
 }
 
-.left-menu nav ul li:hover {
+.left-menu nav > ul li:hover {
    background-color: #f0f6fa;
 }
 
-.left-menu nav ul li a {
+#project-list:hover {
+   background-color: #ddecf9;
+}
+
+#project-list i:last-child:hover {
+   font-size: 1.2rem;
+   transition: font-size .5s ease;
+}
+
+.left-menu nav > ul li a {
    text-decoration: none;
    color: #525252;
 }
 
-.left-menu nav ul li a i {
+.left-menu nav > ul li a i {
    margin-right: 10px;
+}
+
+.left-menu nav > ul li:last-child > i {
+   margin-right: 10px;
+}
+
+.left-menu nav > ul li:last-child > ul {
+   /* background-color: blue; */
+}
+
+#display-menu{
+   float:right;
+}
+
+#add-project {
+   margin-left: 5px;
+}
+
+#add-project a {
+   color: #606060;
+   font-size: 0.85rem;
 }
 
 .container {
@@ -291,6 +329,11 @@ button {
    position: relative;
 }
 
+.task button:hover {
+   font-size: 1.2rem;
+   transition: font-size .5s ease;
+}
+
 .task label {
    margin-left: 15px;
 }
@@ -308,6 +351,7 @@ button {
 .todo-controls {
    display: flex;
    justify-content: center;
+   gap: 3px
 }
 
 .todo-controls button {
@@ -493,7 +537,7 @@ label {
 }
 
 /* Highlight selected option */
-.priority-options input[type="radio"]:checked + .priority-option {
+.priority-options input[type="radio"]:checked+.priority-option {
    border-color: #007bff;
    background-color: #cce5ff;
    color: #004085;

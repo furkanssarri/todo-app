@@ -112,7 +112,7 @@ export default function createPopupForm() {
    formContainer.appendChild(form);
    overlay.appendChild(formContainer);
 
-   form.addEventListener("submit", () => {
+   form.addEventListener("submit", (e) => {
       getInfo();
       const inputs = form.querySelectorAll("input");
       inputs.forEach((input) => {

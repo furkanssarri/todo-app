@@ -1,4 +1,4 @@
-import { getTodos } from "./todos";
+import { getLists } from "./lists";
 
 export const nav = document.createElement("nav");
 const ul = document.createElement("ul");
@@ -20,12 +20,18 @@ tabs.forEach((tab, index) => {
 });
 
 const projectsList = document.createElement("li");
-const projectsAnchor = document.createElement("a");
+// const addProjectAnchor = document.createElement("a");
 const projectsIcon = document.createElement("i");
+const displayMenuIcon = document.createElement("i");
 
-projectsIcon.classList.add("fa-solid", "fa-table-list");
-projectsAnchor.append(projectsIcon, "Lists");
-projectsList.appendChild(projectsAnchor);
+projectsIcon.classList.add("fa-solid", "fa-folder-plus");
+displayMenuIcon.classList.add("fa-solid", "fa-angle-down");
+displayMenuIcon.id = "display-menu";
+projectsList.id = "project-list";
+// addProjectAnchor.id = "add-project-anchor";
+// addProjectAnchor.appendChild(displayMenuIcon);
+projectsList.append(projectsIcon, "Lists", displayMenuIcon);
+// projectsList.appendChild(addProjectAnchor);
 
 ul.appendChild(projectsList);
 nav.appendChild(ul);

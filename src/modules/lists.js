@@ -1,4 +1,13 @@
-const lists = [];
+const lists = [ // Dummy lists to display
+   {
+      title: "List 1",
+      id: "01",
+   },
+   {
+      title: "List 2",
+      id: "02",
+   },
+];
 
 
 export function getLists() {

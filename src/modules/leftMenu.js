@@ -17,4 +17,4 @@ hamburger.addEventListener("click", () => {
    }
 });
 
-leftMenu.classList.add("left-menu", /*"hide" will be replaced once done styling */ "show", "animate__animated");
+leftMenu.classList.add("left-menu", "hide", "animate__animated");

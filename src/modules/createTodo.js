@@ -23,9 +23,7 @@ export default function createTodo() {
    
    const newTodo = new Todo(titleVal, descriptionValue, dateVal, priorityValue, noteValue, isComplete);
 
-   console.log(getTodos());
    addTodo(newTodo);
-   console.log(getTodos());
 
    if (!newTodo) {
       return;
@@ -39,4 +37,3 @@ export default function createTodo() {
       manageDB(false, getTodos());
    }
 }
-
