@@ -233,19 +233,59 @@ main {
    padding-top: 25px;
 }
 
-.left-menu nav > ul {
+.left-menu nav>ul {
    margin-left: 30px;
    margin-top: 25px;
 }
 
-.left-menu nav > ul li {
+.left-menu nav>ul li {
    padding: 9px;
    margin: 1px;
    cursor: pointer;
 }
 
-.left-menu nav > ul li:hover {
+.left-menu nav>ul li:hover {
    background-color: #f0f6fa;
+}
+
+/* Custom slide-in animation for the project list */
+.custom-slide-in {
+   animation: customSlideIn 0.85s forwards;
+}
+
+/* Custom slide-out animation for the project list */
+.custom-slide-out {
+   animation: customSlideOut 0.85s forwards;
+}
+
+@keyframes customSlideIn {
+   from {
+      height: 0;
+      opacity: 0;
+   }
+
+   to {
+      height: auto;
+      opacity: 1;
+   }
+}
+
+@keyframes customSlideOut {
+   from {
+      height: auto;
+      opacity: 1;
+   }
+
+   to {
+      height: 0;
+      opacity: 0;
+   }
+}
+
+
+#project-list {
+   overflow: hidden;
+   position: relative;
 }
 
 #project-list:hover {
@@ -257,25 +297,25 @@ main {
    transition: font-size .5s ease;
 }
 
-.left-menu nav > ul li a {
+.left-menu nav>ul li a {
    text-decoration: none;
    color: #525252;
 }
 
-.left-menu nav > ul li a i {
+.left-menu nav>ul li a i {
    margin-right: 10px;
 }
 
-.left-menu nav > ul li:last-child > i {
+.left-menu nav>ul li:last-child>i {
    margin-right: 10px;
 }
 
-.left-menu nav > ul li:last-child > ul {
+.left-menu nav>ul li:last-child>ul {
    /* background-color: blue; */
 }
 
-#display-menu{
-   float:right;
+#toggle-menu {
+   float: right;
 }
 
 #add-project {
@@ -287,11 +327,69 @@ main {
    font-size: 0.85rem;
 }
 
+
+
+.projects-list-container {
+   margin: auto 10px;
+}
+
+.projects-list-container span i:first-of-type {
+   margin-right: 10px;
+}
+
+.projects-list-container span i:last-of-type {
+   cursor: pointer;
+}
+
+#sub-ul {
+   overflow: hidden; /* Prevent content from spilling */
+   transition: height 0.3s ease; /* Smooth height transition */
+}
+
+#sub-ul.collapsed {
+   height: 0;
+}
+
+#sub-ul.expanded {
+   height: auto; /* Automatically adapt to content size after expansion */
+}
+
 .container {
    margin: 15px;
    padding: 15px;
    width: 70vw;
    position: absolute;
+}
+
+.todo-details {
+   padding: 10px;
+   min-width: 35vw;
+   border: 1px solid transparent;
+   border-radius: 3px;
+   box-shadow: none;
+   transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.todo-details.has-border {
+   border-color: #a0a6ac;
+   box-shadow: 0 0 3px #328ef0;
+}
+
+.todo-details summary {
+   cursor: pointer;
+   transition: margin 150ms ease-out;
+}
+
+.todo-details[open] summary {
+   margin-bottom: 10px;
+}
+
+.todo-details[open].has-border {
+   border-color: #525252;
+}
+
+details p {
+   margin: 5px
 }
 
 .task {

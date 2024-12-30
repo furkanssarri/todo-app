@@ -1,4 +1,4 @@
-import { getLists } from "./lists";
+import { displayLists } from "./displayLists";
 
 export const nav = document.createElement("nav");
 const ul = document.createElement("ul");
@@ -20,18 +20,27 @@ tabs.forEach((tab, index) => {
 });
 
 const projectsList = document.createElement("li");
-// const addProjectAnchor = document.createElement("a");
+
+const projectsLiSpan = document.createElement("span");
+const projectsLiContainer = document.createElement("div");
+
+projectsLiContainer.classList.add("projects-list-container");
+projectsLiSpan.textContent = "Lists";
+
 const projectsIcon = document.createElement("i");
-const displayMenuIcon = document.createElement("i");
+export const toggleMenuBtn = document.createElement("i");
 
 projectsIcon.classList.add("fa-solid", "fa-folder-plus");
-displayMenuIcon.classList.add("fa-solid", "fa-angle-down");
-displayMenuIcon.id = "display-menu";
+toggleMenuBtn.classList.add("fa-solid", "fa-angle-up");
+toggleMenuBtn.id = "toggle-menu";
 projectsList.id = "project-list";
-// addProjectAnchor.id = "add-project-anchor";
-// addProjectAnchor.appendChild(displayMenuIcon);
-projectsList.append(projectsIcon, "Lists", displayMenuIcon);
-// projectsList.appendChild(addProjectAnchor);
+
+projectsLiSpan.prepend(projectsIcon);
+projectsLiSpan.appendChild(toggleMenuBtn);
+projectsLiContainer.append(projectsLiSpan);
+
+projectsList.appendChild(projectsLiContainer)
 
 ul.appendChild(projectsList);
 nav.appendChild(ul);
+displayLists();

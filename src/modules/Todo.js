@@ -59,4 +59,3 @@ export default class Todo {
 function _getID() {
    return uuidv4();
 }
-
