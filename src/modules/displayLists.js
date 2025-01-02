@@ -1,6 +1,6 @@
 import { getLists } from "./lists";
-import { makeTextDashCase } from "./displayTodos";
-import { displayMenuIcon, nav } from "./leftMenuNav";
+import { makeTextDashCase, createDynamicList } from "./utility";
+import { displayTabs, nav } from "./leftMenuNav";
 
 function getLastItem() {
    return nav.firstElementChild.lastElementChild.firstElementChild;
@@ -8,40 +8,48 @@ function getLastItem() {
 
 export function displayLists() {
    const lists = getLists();
-   const subUl = document.createElement("ul");
 
-   subUl.id = "sub-ul";
-   subUl.classList.add( "visible");
-
-   lists.forEach((list, index) => {
-      const listItem = document.createElement("li");
+   const itemGenerator = (list) => {
+      const li = document.createElement("li");
       const anchorTag = document.createElement("a");
       const iconTag = document.createElement("i");
+
       iconTag.classList.add("fa-solid", "fa-folder-open");
-
       const listName = makeTextDashCase(list.title);
-      anchorTag.append(iconTag, listName);
-      listItem.appendChild(anchorTag);
-      subUl.appendChild(listItem);
-   });
 
+      anchorTag.append(iconTag, listName);
+      li.appendChild(anchorTag);
+
+      return li;
+   };
+
+   // Additional "New List" element
    const addProjectLi = document.createElement("li");
    const addProjectAnchor = document.createElement("a");
    const addProjectIcon = document.createElement("i");
 
    addProjectIcon.classList.add("fa-solid", "fa-plus");
-   addProjectLi.id = "add-project";
-
    addProjectAnchor.append(addProjectIcon, "New List");
    addProjectLi.appendChild(addProjectAnchor);
-   subUl.appendChild(addProjectLi);
+
+   const subUl = createDynamicList({
+      data: lists,
+      containerId: "sub-ul",
+      containerClass: ["visible"],
+      itemGenerator,
+      additionalElements: [addProjectLi],
+   });
+
    const lastLiContainer = getLastItem();
    lastLiContainer.appendChild(subUl);
 }
 
 setTimeout(() => {
+
+   displayTabs();
    const toggleMenuButton = document.querySelector("#toggle-menu");
    const projectSubList = document.querySelector("#sub-ul");
+   
 
    toggleMenuButton.addEventListener("click", () => {
       if (projectSubList.classList.contains("collapsed")) {

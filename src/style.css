@@ -591,6 +591,7 @@ label {
    display: flex;
    flex-direction: column;
    gap: 10px;
+   margin: 0 auto;
 }
 
 /* Priority options layout */
