@@ -43,12 +43,7 @@ export function displayTodos() {
 
       // Controls side
       const controlButtons = ["Edit", "Add to", "Flag", "Delete"];
-      const controlIcons = [
-         "pen-to-square",
-         "arrow-right",
-         "flag",
-         "trash-can",
-      ];
+      const controlIcons = ["pen-to-square", "arrow-right", "flag", "trash-can",];
 
       const todoControls = document.createElement("div");
       controlButtons.forEach((buttonText, index) => {

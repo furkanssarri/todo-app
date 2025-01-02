@@ -17,7 +17,3 @@ export function removeTodo(index) {
 export function spliceTodos(returnedTodosObj) { // to send the Todo to the DB
    _todos.splice(0, _todos.length, ...returnedTodosObj);
 }
-
-function rehydrateTodos(todoDataArray) {
-   return todoDataArray.map(data => Todo.fromJSON(data));
-}

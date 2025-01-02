@@ -9,7 +9,6 @@ more importantly, the Single Responsibility principle. A refactor is in order fo
 
 export const mainArea = document.querySelector("main");
 
-
 mainArea.appendChild(leftMenu);
 
 export const container = document.createElement("div");
@@ -24,7 +23,5 @@ function getTodosFromStorage() {
    manageDB(false, getTodos);
    displayTodos();
 }
-
-
 
 leftMenu.appendChild(nav)
