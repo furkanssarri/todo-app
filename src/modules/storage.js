@@ -1,21 +1,38 @@
-import { addTodo, getTodos, spliceTodos } from "./todos";
+import { spliceTodos, spliceLists, getLists } from "./data";
 
 /* A series of security checks and precautions are in order for storing todos perhaps even encryption? Nobody knows! */
 
-function sendTodoToDB(getTodos) { // Will implement an error handler for this function.
-   localStorage.setItem("todos", JSON.stringify(getTodos));
+
+function sendItemToDB(key, data) {
+   localStorage.setItem(key, JSON.stringify(data));
 }
 
-function getTodosfromDB() { // Will implement an error handler for this function.
-   const getTodosFromStorage = localStorage.getItem("todos");
-   let returnedTodosObj =  getTodosFromStorage ? JSON.parse(getTodosFromStorage) : [];
-   spliceTodos(returnedTodosObj);
+function getItemsFromDB(key) {
+   const itemToFetch = localStorage.getItem(key);
+   let fetchedItem = itemToFetch ? JSON.parse(itemToFetch) : [];
+   handleDomainLogic(key, fetchedItem);
+
+   return fetchedItem;
 }
 
-export const manageDB = function (conditional, todos) {
-   if (conditional) {
-      sendTodoToDB(todos);
-   } else {
-      getTodosfromDB();
+function handleDomainLogic(key, data) {
+   switch (key) {
+      case "todos":
+         spliceTodos(data);
+         break;
+      case "lists":
+         spliceLists(data);
+         break;
+      default:
+         // Do nothing
+         break;
    }
 }
+
+export const manageDB = function (conditional, key, value) {
+   if (conditional) {
+      sendItemToDB(key, value);
+   } else {
+      getItemsFromDB(key);
+   }
+};

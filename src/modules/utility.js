@@ -39,6 +39,15 @@ export function createDynamicList({
 
    return ul;
 }
+const IDGenerator = (() => {
+   const { v4: uuidv4 } = require('uuid');
+   function getID() {
+      return uuidv4();
+   }
+   return {
+      generate: getID,
+   };
+})();
 
 export const formElements = {};
 
@@ -100,7 +109,7 @@ export function createPopupForm(config) {
          const input = document.createElement("input");
          input.type = "radio";
          input.id = priority.toLowerCase();
-         input.name = "priorityStatus";
+         input.name = "priority";
          input.value = priority;
          
          const label = document.createElement("label");
@@ -125,6 +134,20 @@ export function createPopupForm(config) {
       form.appendChild(prioWrapper);
    }
 
+   // Append the dropdown element if provided
+   if (config.dropdownElement) {
+      const dropdownWrapper = document.createElement("div");
+      dropdownWrapper.id = "dropdownContainer";
+
+      const dropdownLabel = document.createElement("label");
+      dropdownLabel.htmlFor = config.dropdownElement.id;
+      dropdownLabel.textContent = "Select a List";
+
+      dropdownWrapper.appendChild(dropdownLabel);
+      dropdownWrapper.appendChild(config.dropdownElement);
+      form.appendChild(dropdownWrapper);
+   }
+
    // Submit Button
    const submitBtn = document.createElement("button");
    submitBtn.type = "submit";
@@ -137,3 +160,27 @@ export function createPopupForm(config) {
    overlay.appendChild(formContainer);
    document.body.appendChild(overlay);
 }
+
+export function listenForm(form, callback) {
+   if (form) {
+      form.addEventListener("submit", (e) => {
+         // e.preventDefault();
+         if (typeof callback === "function") {
+            const formData = new FormData(e.target);
+            const userData = Object.fromEntries(formData.entries());
+            callback(userData);
+         } else {
+            console.error("Provided callback is not a function.");
+         }
+         const inputs = form.querySelectorAll("input");
+         inputs.forEach(input => {
+            input.value = "";
+         });
+      })
+   } else {
+      return;
+   }
+}
+
+
+export default IDGenerator;

@@ -342,8 +342,10 @@ main {
 }
 
 #sub-ul {
-   overflow: hidden; /* Prevent content from spilling */
-   transition: height 0.3s ease; /* Smooth height transition */
+   overflow: hidden;
+   /* Prevent content from spilling */
+   transition: height 0.3s ease;
+   /* Smooth height transition */
 }
 
 #sub-ul.collapsed {
@@ -351,7 +353,8 @@ main {
 }
 
 #sub-ul.expanded {
-   height: auto; /* Automatically adapt to content size after expansion */
+   height: auto;
+   /* Automatically adapt to content size after expansion */
 }
 
 .container {
@@ -641,6 +644,59 @@ label {
    background-color: #cce5ff;
    color: #004085;
    font-weight: bold;
+}
+
+/* Dropdown Wrapper */
+#dropdownContainer {
+   text-align: center;
+   margin-top: 20px;
+}
+
+/* Label for Dropdown */
+#dropdownContainer label {
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   font-weight: 500;
+   color: #333;
+   display: block;
+   margin-bottom: 8px;
+}
+
+/* Dropdown Select Element */
+select#todoListsDropdown {
+   width: 100%;
+   max-width: 300px;
+   padding: 10px 12px;
+   font-size: 14px;
+   font-family: Arial, sans-serif;
+   color: #555;
+   border: 1px solid #ccc;
+   border-radius: 6px;
+   background-color: #fff;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   /* appearance: none; */
+   /* Remove default browser styles */
+   outline: none;
+   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+   cursor: pointer;
+}
+
+/* Hover and Focus Effects */
+select#todoListsDropdown:hover {
+   border-color: #888;
+}
+
+select#todoListsDropdown:focus {
+   border-color: #007bff;
+   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Dropdown Options */
+select#todoListsDropdown option {
+   padding: 10px;
+   font-size: 14px;
+   color: #555;
+   background-color: #fff;
 }
 
 @media screen and (max-width: 768px) {
