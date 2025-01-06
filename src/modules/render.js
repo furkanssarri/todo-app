@@ -1,26 +1,22 @@
-import { getTodos } from "./data";
+import { getTodos, getLists } from "./data";
 import { manageDB } from "./storage";
-import { nav }from "./leftMenu";
-import { leftMenu } from "./leftMenu";
-// import { displayTodos } from "./displayTodos";
-
-import { getLists } from "./data";
+import { leftMenu, nav, renderTabs } from "./leftMenu";
 import { makeTextDashCase, createDynamicList, convertChars } from "./utility";
-import { renderTabs }from "./leftMenu";
 import { createListPopup } from "./createForm";
 
 /*This render module is very sloppy and is violating some of the important best practices suc as DRY and
 more importantly, the Single Responsibility principle. A refactor is in order for this module in the future. */
 
-// _________________________LISTS______________________
+export const mainArea = document.querySelector("main");
+export const container = document.createElement("div");
 
+// _________________________LISTS______________________
 function getLastItem() {
    return nav.firstElementChild.lastElementChild.firstElementChild;
 }
 
 export function renderLists() {
    const lists = getLists();
-   console.log(lists)
    const itemGenerator = (list) => {
       const li = document.createElement("li");
       const anchorTag = document.createElement("a");
@@ -28,7 +24,9 @@ export function renderLists() {
 
       iconTag.classList.add("fa-solid", "fa-folder-open");
       const listName = makeTextDashCase(list.title);
-
+      anchorTag.classList.add("filter-todos");
+      anchorTag.id = list.id;
+      
       anchorTag.append(iconTag, listName);
       li.appendChild(anchorTag);
 
@@ -62,7 +60,7 @@ setTimeout(() => {
    renderTabs();
    const toggleMenuButton = document.querySelector("#toggle-menu");
    const projectSubList = document.querySelector("#sub-ul");
-   
+
    toggleMenuButton.addEventListener("click", () => {
       if (projectSubList.classList.contains("collapsed")) {
          projectSubList.style.height = `${projectSubList.scrollHeight}px`; // Explicitly set height for transition
@@ -76,7 +74,7 @@ setTimeout(() => {
          }, 300); // Match the CSS transition duration
       } else {
          projectSubList.style.height = `${projectSubList.scrollHeight}px`; // Set current height for smooth collapse
-         
+
          // Force reflow to apply height change
          requestAnimationFrame(() => {
             projectSubList.style.height = "0"; // Collapse the menu
@@ -85,97 +83,103 @@ setTimeout(() => {
          projectSubList.classList.remove("expanded");
          projectSubList.classList.add("collapsed");
          toggleMenuButton.classList.remove("fa-angle-up");
-         toggleMenuButton.classList.add("fa-angle-down")
+         toggleMenuButton.classList.add("fa-angle-down");
       }
    });
 }, 90);
 
 //____________________________________TODOS_______________________________
 
+export function renderTodos(todosToRender) {
 
-export function renderTodos() {
-   const todos = getTodos();
+   // Ensure a valid array of todos is passed
+   if (!Array.isArray(todosToRender)) {
+      console.error("Invalid todos array provided to renderTodos");
+      return;
+   }
 
-   // Callback to generate each <li> for todos
-   const itemGenerator = (todo) => {
-      const task = document.createElement("li");
-      task.classList.add("task");
+   while (container.firstChild) {
+      container.removeChild(container.firstChild);
+   }
 
-      // Convert Chars and kebab case
-      let todoTitleConverted = convertChars(todo._title);
-      let currentTodoID = makeTextDashCase(todoTitleConverted);
-
-      // Form side
-      const checkForm = document.createElement("div");
-      const checkBox = document.createElement("input");
-      const checkboxLabel = document.createElement("label");
-
-      const taskDetails = document.createElement("details");
-      const detailsSummary = document.createElement("summary");
-      const detailsContent = document.createElement("p");
-
-      detailsSummary.textContent = todo._title;
-      detailsContent.textContent = todo._description;
-
-      taskDetails.classList.add("todo-details");
-      taskDetails.appendChild(detailsSummary);
-      taskDetails.appendChild(detailsContent);
-
-      taskDetails.addEventListener("toggle", () => {
-         taskDetails.classList.toggle("has-border", taskDetails.open);
-      });
-
-      /* Logical improvement: Will implement an id number for every todo and will assign that number here instead. 
-      For now, this will remain todo.title  */
-      checkBox.id = currentTodoID;
-      checkboxLabel.htmlFor = currentTodoID;
-      checkBox.setAttribute("type", "checkbox");
-      checkForm.classList.add("is-checked-form");
-
-      // Controls side
-      const controlButtons = ["Edit", "Add to", "Flag", "Delete"];
-      const controlIcons = ["pen-to-square", "arrow-right", "flag", "trash-can",];
-
-      const todoControls = document.createElement("div");
-      controlButtons.forEach((buttonText, index) => {
-         const btnId = makeTextDashCase(buttonText);
-         const btn = document.createElement("button");
-         const iconTag = document.createElement("i");
-         iconTag.classList.add("fa-solid", `fa-${controlIcons[index]}`);
-         btn.appendChild(iconTag);
-         btn.id = btnId;
-         todoControls.appendChild(btn);
-      });
-      todoControls.classList.add("todo-controls");
-
-      checkboxLabel.appendChild(taskDetails);
-      checkForm.appendChild(checkBox);
-      checkForm.appendChild(checkboxLabel);
-
-      task.appendChild(checkForm);
-      task.appendChild(todoControls);
-
-      return task;
-   };
-
+   // Render only the filtered todos
    const taskViewUl = createDynamicList({
-      data: todos,
+      data: todosToRender,
       containerId: "tasks-ul",
-      itemGenerator,
+      itemGenerator: (todo) => {
+         const task = document.createElement("li");
+         task.classList.add("task");
+
+         // Convert Chars and kebab case
+         let todoTitleConverted = convertChars(todo._title);
+         let currentTodoID = makeTextDashCase(todoTitleConverted);
+
+         // Form side
+         const checkForm = document.createElement("div");
+         const checkBox = document.createElement("input");
+         const checkboxLabel = document.createElement("label");
+
+         const taskDetails = document.createElement("details");
+         const detailsSummary = document.createElement("summary");
+         const detailsContent = document.createElement("p");
+
+         detailsSummary.textContent = todo._title;
+         detailsContent.textContent = todo._dueDate;
+
+         taskDetails.classList.add("todo-details");
+         taskDetails.appendChild(detailsSummary);
+         taskDetails.appendChild(detailsContent);
+
+         taskDetails.addEventListener("toggle", () => {
+            taskDetails.classList.toggle("has-border", taskDetails.open);
+         });
+
+         /* Logical improvement: Will implement an id number for every todo and will assign that number here instead. 
+         For now, this will remain todo.title  */
+         checkBox.id = currentTodoID;
+         checkboxLabel.htmlFor = currentTodoID;
+         checkBox.setAttribute("type", "checkbox");
+         checkForm.classList.add("is-checked-form");
+
+         // Controls side
+         const controlButtons = ["Edit", "Add to", "Flag", "Delete"];
+         const controlIcons = [
+            "pen-to-square",
+            "arrow-right",
+            "flag",
+            "trash-can",
+         ];
+
+         const todoControls = document.createElement("div");
+         controlButtons.forEach((buttonText, index) => {
+            const btnId = makeTextDashCase(buttonText);
+            const btn = document.createElement("button");
+            const iconTag = document.createElement("i");
+            iconTag.classList.add("fa-solid", `fa-${controlIcons[index]}`);
+            btn.appendChild(iconTag);
+            btn.id = btnId;
+            todoControls.appendChild(btn);
+         });
+         todoControls.classList.add("todo-controls");
+
+         checkboxLabel.appendChild(taskDetails);
+         checkForm.appendChild(checkBox);
+         checkForm.appendChild(checkboxLabel);
+
+         task.appendChild(checkForm);
+         task.appendChild(todoControls);
+
+         return task;
+      },
    });
-
-   render().container.appendChild(taskViewUl);
+   container.appendChild(taskViewUl);
 }
-
 
 //_____________________________RENDER________________________________________
 
 export function render() {
-   const mainArea = document.querySelector("main");
-
+   const unFilteredTodos = getTodos();
    mainArea.appendChild(leftMenu);
-
-   const container = document.createElement("div");
 
    container.classList.add("container");
 
@@ -185,14 +189,9 @@ export function render() {
 
    function fetchItemsFromStorage() {
       manageDB(false, "todos", getTodos);
-      renderTodos();
+      renderTodos(unFilteredTodos);
       manageDB(false, "lists", getLists);
    }
 
    leftMenu.appendChild(nav);
-
-   return {
-      mainArea,
-      container,
-   }
 }

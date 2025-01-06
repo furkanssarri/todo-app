@@ -40,7 +40,7 @@ export function createDynamicList({
    return ul;
 }
 const IDGenerator = (() => {
-   const { v4: uuidv4 } = require('uuid');
+   const { v4: uuidv4 } = require("uuid");
    function getID() {
       return uuidv4();
    }
@@ -48,8 +48,6 @@ const IDGenerator = (() => {
       generate: getID,
    };
 })();
-
-export const formElements = {};
 
 export function createPopupForm(config) {
    // Overlay and Container
@@ -76,7 +74,7 @@ export function createPopupForm(config) {
 
    // Create inputs based on Config
    if (config && Array.isArray(config.inputs)) {
-      config.inputs.forEach(inputConfig => {
+      config.inputs.forEach((inputConfig) => {
          const input = document.createElement("input");
          input.type = inputConfig.type || "text";
          input.id = `${inputConfig.id}-input`;
@@ -84,8 +82,6 @@ export function createPopupForm(config) {
          input.placeholder = inputConfig.placeholder || "";
          if (inputConfig.value) input.value = inputConfig.value;
          form.appendChild(input);
-         // Store reference to the input element
-         formElements[inputConfig.id] = input;
       });
    } else {
       console.error("Invalid config or config.inputs is not an array");
@@ -105,13 +101,13 @@ export function createPopupForm(config) {
       const priorityContainer = document.createElement("div");
       priorityContainer.classList.add("priority-options");
 
-      priorities.forEach(priority => {
+      priorities.forEach((priority) => {
          const input = document.createElement("input");
          input.type = "radio";
          input.id = priority.toLowerCase();
          input.name = "priority";
          input.value = priority;
-         
+
          const label = document.createElement("label");
          label.htmlFor = input.id;
          label.textContent = priority;
@@ -119,15 +115,6 @@ export function createPopupForm(config) {
 
          priorityContainer.appendChild(input);
          priorityContainer.appendChild(label);
-
-         // Store reference to the priority input element
-         // formElements[priority.toLowerCase()] = input;
-         formElements.getPriorityStatus = () => {
-                  const selectedPriority = Array.from(
-                     document.getElementsByName("priorityStatus"),
-                  ).find((radio) => radio.checked);
-                  return selectedPriority ? selectedPriority.value : null;
-               };
       });
 
       prioWrapper.appendChild(priorityContainer);
@@ -173,14 +160,13 @@ export function listenForm(form, callback) {
             console.error("Provided callback is not a function.");
          }
          const inputs = form.querySelectorAll("input");
-         inputs.forEach(input => {
+         inputs.forEach((input) => {
             input.value = "";
          });
-      })
+      });
    } else {
       return;
    }
 }
-
 
 export default IDGenerator;

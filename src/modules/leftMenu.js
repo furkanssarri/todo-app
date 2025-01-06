@@ -1,5 +1,6 @@
-import { renderLists } from "./render";
+import { renderLists, renderTodos } from "./render";
 import { createDynamicList } from "./utility";
+import { getSystemDefaultLists, getLists } from "./data";
 
 const hamburger = document.querySelector(".fa-bars");
 export const leftMenu = document.createElement("div");
@@ -9,7 +10,11 @@ hamburger.addEventListener("click", () => {
 });
 
 document.addEventListener("click", (event) => {
-   if (!leftMenu.contains(event.target) && !hamburger.contains(event.target) && leftMenu.classList.contains("show")) {
+   if (
+      !leftMenu.contains(event.target) &&
+      !hamburger.contains(event.target) &&
+      leftMenu.classList.contains("show")
+   ) {
       closeLeftMenu();
    }
 });
@@ -34,23 +39,30 @@ const closeLeftMenu = () => {
    }, 850);
 };
 
-leftMenu.classList.add("left-menu", "hide", "animate__animated");
+leftMenu.classList.add("left-menu", "show", "animate__animated");
 
 //____________________ NAVBAR____________________________
 
 export const nav = document.createElement("nav");
 
 export function renderTabs() {
-   const tabs = ["Today", "This Week", "This Month"];
-   const tabIcons = ["calendar-day", "calendar-week", "calendar-days"];
+   const tabs = getSystemDefaultLists();
 
    const itemGenerator = (tab, index) => {
       const li = document.createElement("li");
       const anchorTag = document.createElement("a");
       const iconTag = document.createElement("i");
 
-      iconTag.classList.add("fa-solid", `fa-${tabIcons[index]}`);
-      anchorTag.append(iconTag, tab);
+      const tabId = tab.id;
+
+      anchorTag.id = tabId;
+
+      const tabIcon = tab.icon;
+      iconTag.classList.add("fa-solid", `fa-${tabIcon}`);
+      anchorTag.classList.add("filter-todos");
+
+      const listName = tab.title;
+      anchorTag.append(iconTag, listName);
       li.appendChild(anchorTag);
 
       return li;
@@ -89,6 +101,43 @@ export function renderTabs() {
    nav.appendChild(navUl);
 
    renderLists();
+
+   const filterLists = document.querySelectorAll(".filter-todos");
+   filterLists.forEach((listItem) => {
+      listItem.addEventListener("click", filterItems);
+   });
+
+   function filterItems(e) {
+      if (!e.target.classList.contains("filter-todos")) {
+         console.log("Not filtering...");
+         return;
+      }
+      const lists = getSystemDefaultLists();
+      const clickElem = e.target.id;
+      let list;
+      switch (clickElem) {
+         case "inbox":
+            list = lists[0];
+            break;
+         case "today":
+            list = lists[1];
+            break;
+         case "thisWeek":
+            list = lists[2];
+            break;
+         default:
+            const customLists = getLists();
+            customLists.forEach(listElement => {
+               if (clickElem === listElement.id) {
+                  list = listElement;
+                  return list;
+               }
+            });
+            break;
+      }
+      const filteredItems = list.filterTodos();
+      renderTodos(filteredItems);
+   }
 
    return toggleMenuBtn;
 }

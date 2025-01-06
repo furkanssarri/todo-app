@@ -36,7 +36,7 @@ export function createForm() {
    const lists = getLists();
    const dropdownElement = createDropdownFromLists(lists, {
       id: "todoListsDropdown",
-      name: "todoList",
+      name: "listId",
    });
    const todoFormConfig = {
       formId: "todo",
@@ -52,6 +52,7 @@ export function createForm() {
    createPopupForm(todoFormConfig);
    todoForm = document.querySelector("#todo-form");
    listenForm(todoForm, createTodo);
+   // console.log(lists);
 }
 
 const addNewBtn = document.querySelector(".fa-plus");
@@ -82,6 +83,6 @@ export function createDropdownFromLists(lists, dropdownConfig = {}) {
       optionElement.textContent = list.title || list; // Use the name or fallback to raw list item
       dropdown.appendChild(optionElement);
    });
-
+   console.log("Dropdown element: ", dropdown)
    return dropdown;
 }

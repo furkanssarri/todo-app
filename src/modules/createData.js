@@ -4,10 +4,11 @@ import { manageDB } from "./storage";
 import { addTodo, getTodos, addList, getLists } from "./data";
 
 export function createTodo(todoData) { 
-   const { title, description, dueDate, priority, notes, listId } = todoData;
+   const { title, description, dueDate, priority, listId } = todoData;
    const isComplete = false;
+   console.log(todoData.listId)
    
-   const newTodo = new Todo(title, description, dueDate, priority, notes, isComplete);
+   const newTodo = new Todo(title, description, dueDate, priority, listId, isComplete,);
 
    addTodo(newTodo);
 
@@ -19,10 +20,7 @@ export function createTodo(todoData) {
 }
 
 export function createList(listData) {
-   const { title,  description } = listData;
-
-   // console.log(listData)
-   
+   const { title,  description } = listData;   
    const newList = new List(title, description);
 
    addList(newList);

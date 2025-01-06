@@ -1,4 +1,5 @@
 import IDGenerator from "./utility";
+import { getTodos } from "./data";
 
 export default class List {
    constructor(title, description) {
@@ -22,8 +23,14 @@ export default class List {
    set description(value) {
       this._description = value;
    }
+   filterTodos() {
+      const todos = getTodos();
+      return todos.filter(todo => todo.listId === this.id);
+   }
 
    static fromJSON(data){
-      return new List(data._title, data._description,);
+      const list = new List(data._title, data._description,);
+      list._id = data._id;
+      return list;
    }
 }

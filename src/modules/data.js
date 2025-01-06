@@ -3,40 +3,39 @@ import List from "./List";
 
 const _todos = [];
 const _lists = [];
-const _defaultLists = [
+const _systemDefaultLists = [
+   {
+      id: "inbox",
+      title: "Inbox",
+      description: "All Todos Inbox",
+      icon: "inbox",
+      filterTodos: () => filterTodos(() => true),
+   },
    {
       id: "today",
       title: "Today",
       description: "Todos due today.",
-      filter: (todo) =>
-         new Date(todo.dueDate).toDateString() === new Date().toDateString(),
+      icon: "calendar-day",
+      filterTodos: () => {
+         
+         return filterTodos(todo => new Date(todo._dueDate).toDateString() === new Date().toDateString())
+      },
    },
    {
       id: "thisWeek",
       title: "This Week",
       description: "Todos due this week.",
-      filter: (todo) => {
+      icon: "calendar-week",
+      filterTodos: () => {
          const today = new Date();
-         const weekStart = new Date(
-            today.setDate(today.getDate() - today.getDay()),
-         );
+         const weekStart = new Date(today.setDate(today.getDate() - today.getDay()));
          const weekEnd = new Date(weekStart);
          weekEnd.setDate(weekStart.getDate() + 6);
-         return todo.dueDate >= weekStart && todo.dueDate <= weekEnd;
-      },
-   },
-   {
-      id: "thisMonth",
-      title: "This Month",
-      description: "Todos due this month.",
-      filter: (todo) => {
-         const today = new Date();
-         const todoDate = new Date(todo.dueDate);
 
-         return (
-            todoDate.getFullYear() === today.getFullYear() &&
-            todoDate.getMonth() === today.getMonth()
-         );
+         return filterTodos(todo => {
+            const dueDate = new Date(todo._dueDate);
+            return dueDate >= weekStart && dueDate <= weekEnd;
+         }); 
       },
    },
 ];
@@ -55,8 +54,13 @@ export function removeTodo(index) {
 }
 
 export function spliceTodos(returnedTodosObj) {
-   // to send the Todo to the DB
-   _todos.splice(0, _todos.length, ...returnedTodosObj);
+   _todos.splice(0, _todos.length, ...returnedTodosObj); // MIGHT NEED TO REWORK THIS | to send the Todo to the DB
+}
+
+function filterTodos(condition) {
+   const todos = getTodos();
+   const filtered = todos.filter(condition);
+   return filtered;
 }
 
 // LISTS
@@ -73,7 +77,12 @@ export function removeList(index) {
 }
 
 export function spliceLists(returnedListObj) {
-   _lists.splice(0, _lists.length, ...returnedListObj); // to add the returned lists from DB to the array
+   // _lists.splice(0, _lists.length, ...returnedListObj); // to add the returned lists from DB to the array
+   const storedLists = returnedListObj
+   storedLists.forEach(listData => {
+      const list = List.fromJSON(listData);
+      _lists.push(list);
+   });
 }
 
 export function updateList(updatedList) {
@@ -82,4 +91,8 @@ export function updateList(updatedList) {
       lists[index] = updatedList;
       //send to storage
    }
+}
+
+export function getSystemDefaultLists() {
+   return [..._systemDefaultLists];
 }

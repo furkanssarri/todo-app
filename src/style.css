@@ -239,7 +239,7 @@ main {
 }
 
 .left-menu nav>ul li {
-   padding: 9px;
+   padding-left: 5px;
    margin: 1px;
    cursor: pointer;
 }
@@ -298,8 +298,10 @@ main {
 }
 
 .left-menu nav>ul li a {
+   display: block;
    text-decoration: none;
    color: #525252;
+   padding: 9px;
 }
 
 .left-menu nav>ul li a i {
