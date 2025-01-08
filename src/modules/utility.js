@@ -15,6 +15,31 @@ export function makeTextDashCase(text) {
    return text.replace(/\s+/g, "-").toLowerCase();
 }
 
+/**
+ * Formats a key to make it more readable.
+ * - Handles camelCase by inserting spaces before uppercase letters.
+ * - Removes underscores.
+ * - Capitalizes the first letter.
+ *
+ * @param {string} text - The key to format.
+ * @returns {string} - The formatted key.
+ */
+export function formatText(text) {
+   return (
+      text
+         // Insert space before uppercase letters (for camelCase handling)
+         .replace(/([a-z])([A-Z])/g, function (match, p1, p2) {
+            return p1 + " " + p2; // Insert space between lowercase and uppercase letter
+         })
+         // Replace underscores with spaces
+         .replace(/_/g, "")
+         // Capitalize the first letter of the resulting string
+         .replace(/^\w/, function (c) {
+            return c.toUpperCase();
+         })
+   );
+}
+
 export function createDynamicList({
    data, // Array of items to be used (e.g., lists or tabs)
    containerId = null, // ID for the `<ul>` container
@@ -39,6 +64,7 @@ export function createDynamicList({
 
    return ul;
 }
+
 const IDGenerator = (() => {
    const { v4: uuidv4 } = require("uuid");
    function getID() {
@@ -64,9 +90,24 @@ export function createPopupForm(config) {
    closeFa.classList.add("fa-solid", "fa-xmark");
    formCloseBtn.classList.add("close-btn");
    formCloseBtn.appendChild(closeFa);
-   formCloseBtn.addEventListener("click", () => {
-      document.body.removeChild(overlay);
+   document.addEventListener("click", (event) => {
+      if (overlay.contains(event.target) && !formContainer.contains(event.target)) {
+         document.body.removeChild(overlay);
+      }
+      if (formCloseBtn.contains(event.target)) {
+         document.body.removeChild(overlay)
+      }
    });
+   document.addEventListener("keyup", (event) => {
+      if (!document.body.contains(overlay)) {
+         return;
+      }
+      if (event.key === "Escape") {
+         document.body.removeChild(overlay)
+      } else {
+         return;
+      }
+   })
 
    // Form
    const form = document.createElement("form");
@@ -75,11 +116,22 @@ export function createPopupForm(config) {
    // Create inputs based on Config
    if (config && Array.isArray(config.inputs)) {
       config.inputs.forEach((inputConfig) => {
-         const input = document.createElement("input");
-         input.type = inputConfig.type || "text";
+         let input;
+         // Handle different input types
+         if (inputConfig.type === "textarea") {
+            // Create a textarea element
+            input = document.createElement("textarea");
+            if (inputConfig.rows) input.rows = inputConfig.rows;
+            if (inputConfig.cols) input.cols = inputConfig.cols;
+         } else {
+            // Default to creating an input element
+            input = document.createElement("input");
+            input.type = inputConfig.type || "text";
+         }
          input.id = `${inputConfig.id}-input`;
          input.name = inputConfig.name;
          input.placeholder = inputConfig.placeholder || "";
+
          if (inputConfig.value) input.value = inputConfig.value;
          form.appendChild(input);
       });
@@ -87,9 +139,14 @@ export function createPopupForm(config) {
       console.error("Invalid config or config.inputs is not an array");
    }
 
-   // Priority Status Wrapper Container (if provided in the config)
+   if (config.prioritySelected) {
+      var selectedPrio = config.prioritySelected;
+   }
 
+
+   // Priority Status Wrapper Container (if provided in the config)
    if (config.priority) {
+
       const prioWrapper = document.createElement("div");
       prioWrapper.id = "priorityStatusContainer";
 
@@ -101,12 +158,18 @@ export function createPopupForm(config) {
       const priorityContainer = document.createElement("div");
       priorityContainer.classList.add("priority-options");
 
+      
+      
       priorities.forEach((priority) => {
          const input = document.createElement("input");
          input.type = "radio";
          input.id = priority.toLowerCase();
          input.name = "priority";
          input.value = priority;
+
+         if (input.value === selectedPrio) {
+            input.checked = true;
+         }
 
          const label = document.createElement("label");
          label.htmlFor = input.id;

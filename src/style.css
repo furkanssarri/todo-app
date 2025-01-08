@@ -153,6 +153,7 @@ body {
 }
 
 header {
+   position: fixed;
    display: flex;
    justify-content: start;
    align-items: center;
@@ -210,6 +211,7 @@ main {
    /* background-color: white; */
    width: 100vw;
    height: 330px;
+   margin-top: 55px;
    flex-grow: 1;
    display: flex;
    justify-content: center;
@@ -222,6 +224,7 @@ main {
    width: 35%;
    height: calc(100vh - 55px);
    position: absolute;
+   top: 55px;
    left: 0;
    -webkit-box-shadow: 0.5px 5px 9px 0px #000000bf;
    -moz-box-shadow: 0.5px 5px 9px 0px #000000bf;
@@ -312,10 +315,6 @@ main {
    margin-right: 10px;
 }
 
-.left-menu nav>ul li:last-child>ul {
-   /* background-color: blue; */
-}
-
 #toggle-menu {
    float: right;
 }
@@ -345,9 +344,7 @@ main {
 
 #sub-ul {
    overflow: hidden;
-   /* Prevent content from spilling */
    transition: height 0.3s ease;
-   /* Smooth height transition */
 }
 
 #sub-ul.collapsed {
@@ -366,109 +363,12 @@ main {
    position: absolute;
 }
 
-.todo-details {
-   padding: 10px;
-   min-width: 35vw;
-   border: 1px solid transparent;
-   border-radius: 3px;
-   box-shadow: none;
-   transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
-}
-
-.todo-details.has-border {
-   border-color: #a0a6ac;
-   box-shadow: 0 0 3px #328ef0;
-}
-
-.todo-details summary {
-   cursor: pointer;
-   transition: margin 150ms ease-out;
-}
-
-.todo-details[open] summary {
-   margin-bottom: 10px;
-}
-
-.todo-details[open].has-border {
-   border-color: #525252;
-}
-
-details p {
-   margin: 5px
-}
-
-.task {
-   display: flex;
-   padding: 10px;
-   width: 100%;
-   position: relative;
-   justify-content: center;
-   cursor: pointer;
-}
-
-.task::after {
-   content: '';
-   display: inline-block;
-   width: 85%;
-   height: 1px;
-   background-color: #cbcbcb;
-   margin: 0 auto;
-   position: absolute;
-   bottom: 0;
-}
-
-.is-checked-form {
-   flex-grow: 1;
-   display: flex;
-   align-items: center;
-   margin-left: 10px;
-}
-
-.task label,
-input,
-button {
-   cursor: inherit;
-   padding: 10px 5px;
-   position: relative;
-}
-
-.task button:hover {
-   font-size: 1.2rem;
-   transition: font-size .5s ease;
-}
-
-.task label {
-   margin-left: 15px;
-}
-
-#renderTodoCheckbox::after {
-   content: '';
-   display: inline-block;
-   width: 1px;
-   height: 120%;
-   background-color: #cbcbcb;
-   position: absolute;
-   right: -11px;
-}
-
-.todo-controls {
-   display: flex;
-   justify-content: center;
-   gap: 3px
-}
-
-.todo-controls button {
-   padding: 2px;
-   background-color: #00408500;
-   border: none;
-}
-
 .show {
    display: block;
 }
 
 .hide {
-   display: none;
+   display: none!important;
 }
 
 .submit-button {
@@ -495,17 +395,144 @@ form label {
    justify-content: center;
 }
 
+/*------ TASKS ------*/
 
+.task {
+   display: flex;
+   flex-direction: column;
+   cursor: pointer;
+   /* border: 1px solid #e0e0e0; */
+   /* border-radius: 8px; */
+   /* background-color: #f9f9f9; */
+   margin: .5rem;
+   transition: box-shadow 0.2s ease;
+}
+
+.is-checked-form {
+   display: flex;
+   align-items: center;
+   padding: .3rem;
+}
+
+.is-checked-form label {
+   cursor: inherit;
+}
+
+.todo-info {
+   flex: 1;
+}
+
+.todo-info .is-checked-form input {
+   margin-right: 15px;
+}
+
+.todo-wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid #cdcfd0;
+   padding: .27rem;
+}
+
+.todo-wrapper:hover {
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-controls {
+   display: flex;
+   /* gap: .3rem; */
+}
+
+.todo-controls button {
+   background-color: #f0f8ff00;
+   border: none;
+   padding: 1px 6px;
+   cursor: pointer;
+}
+
+.todo-controls button.edit {
+   color: #2db72dbf;
+}
+
+.todo-controls button.flag {
+   color: orange;
+}
+
+.todo-controls button.delete {
+   color: #cb16169f;
+}
+
+.tooltip {
+   position: absolute;
+   background-color: #333;
+   color: #fff;
+   padding: 5px 10px;
+   border-radius: 4px;
+   font-size: 0.8rem;
+   white-space: nowrap;
+   pointer-events: none; /* Ensure the tooltip doesn't interfere with mouse events */
+   opacity: 0;
+   visibility: hidden;
+   transition: opacity 0.2s ease, visibility 0.2s ease;
+   z-index: 1000;
+}
+
+
+
+.details-wrapper {
+   overflow: hidden;
+   transition: height 0.3s ease;
+   height: 0; /* Start with height 0 (collapsed) */
+}
+
+.details-wrapper.expanded {
+   height: auto;
+}
+
+.todo-details-container {
+   padding: .5rem;
+   margin: .5rem;
+   border: 1px solid #cdcfd0;
+   border-radius: 3px;
+}
+
+.todo-group {
+   display: flex;
+   justify-content: space-between;
+   padding: 0.5rem 0;
+   border-bottom: 1px solid #ddd;
+}
+
+.todo-group:last-child {
+   border-bottom: none;
+}
+
+.todo-item {
+   font-size: 0.9rem;
+   color: #333;
+   flex: 1;
+}
+
+.todo-item .key {
+   color: #007bff;
+   font-weight: bold;
+}
+
+.todo-item .value {
+   word-wrap: break-word;
+}
 
 
 footer {
-   /* background-color: #6fb9e0; */
-   height: 40px;
+   background-color: #71b8de;
+   position: fixed;
+   bottom: 0;
+   height: 30px;
    width: 100vw;
    display: flex;
    justify-content: center;
    align-items: center;
-   color: black;
+   color: white;
 }
 
 footer a {
@@ -568,7 +595,8 @@ form {
 
 /* Input and button styles */
 input,
-button {
+button,
+textarea {
    padding: 10px;
    font-size: 1rem;
    border: 1px solid #ccc;
@@ -665,7 +693,7 @@ label {
 }
 
 /* Dropdown Select Element */
-select#todoListsDropdown {
+select#todoListsDropdown, select#editTodoListDropdown {
    width: 100%;
    max-width: 300px;
    padding: 10px 12px;

@@ -1,7 +1,7 @@
 import IDGenerator from "./utility";
 
 export default class Todo {
-   constructor(title, description, dueDate, priority, listId, isComplete,) {
+   constructor(title, description, dueDate, priority, listId, isComplete) {
       this._id = IDGenerator.generate();
       this._title = title;
       this._description = description;
@@ -10,8 +10,8 @@ export default class Todo {
       this._listId = listId;
       this._isComplete = isComplete;
    }
-   
-   get id(){
+
+   get id() {
       return this._id;
    }
    get title() {
@@ -50,8 +50,18 @@ export default class Todo {
    set status(booleanValue) {
       this._isComplete = booleanValue;
    }
-   static fromJSON(data){
-      return new Todo(data._title, data._description, data._dueDate, data._priority, data._listId,  data._isComplete,);
+   static fromJSON(data) {
+      const todo = new Todo(
+         data._title,
+         data._description,
+         data._dueDate,
+         data._priority,
+         data._listId,
+         data._isComplete,
+      );
+
+      todo._id = data._id;
+
+      return todo;
    }
 }
-

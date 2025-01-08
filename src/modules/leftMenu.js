@@ -39,7 +39,18 @@ const closeLeftMenu = () => {
    }, 850);
 };
 
-leftMenu.classList.add("left-menu", "show", "animate__animated");
+document.addEventListener("keyup", (event) => {
+   if (!leftMenu.classList.contains("show")) {
+      return;
+   }
+   if (event.key === "Escape") {
+      closeLeftMenu();
+   } else {
+      return;
+   }
+});
+
+leftMenu.classList.add("left-menu", "hide", "animate__animated");
 
 //____________________ NAVBAR____________________________
 

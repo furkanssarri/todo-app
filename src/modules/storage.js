@@ -1,4 +1,5 @@
-import { spliceTodos, spliceLists, getLists } from "./data";
+import { spliceTodos, spliceLists, getLists, getTodos } from "./data";
+import { renderTodos } from "./render";
 
 /* A series of security checks and precautions are in order for storing todos perhaps even encryption? Nobody knows! */
 
@@ -36,3 +37,11 @@ export const manageDB = function (conditional, key, value) {
       getItemsFromDB(key);
    }
 };
+
+window.addEventListener("load", fetchItemsFromStorage);
+
+   function fetchItemsFromStorage() {
+      const unFilteredTodos = getTodos();
+      manageDB(false, "todos", getTodos);
+      renderTodos(unFilteredTodos);
+   }

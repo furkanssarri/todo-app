@@ -1,8 +1,8 @@
 import { getTodos, getLists } from "./data";
 import { manageDB } from "./storage";
 import { leftMenu, nav, renderTabs } from "./leftMenu";
-import { makeTextDashCase, createDynamicList, convertChars } from "./utility";
-import { createListPopup } from "./createForm";
+import { makeTextDashCase, createDynamicList, formatText } from "./utility";
+import { createListPopup, createForm, createEditTodoForm } from "./createForm";
 
 /*This render module is very sloppy and is violating some of the important best practices suc as DRY and
 more importantly, the Single Responsibility principle. A refactor is in order for this module in the future. */
@@ -26,7 +26,7 @@ export function renderLists() {
       const listName = makeTextDashCase(list.title);
       anchorTag.classList.add("filter-todos");
       anchorTag.id = list.id;
-      
+
       anchorTag.append(iconTag, listName);
       li.appendChild(anchorTag);
 
@@ -91,7 +91,6 @@ setTimeout(() => {
 //____________________________________TODOS_______________________________
 
 export function renderTodos(todosToRender) {
-
    // Ensure a valid array of todos is passed
    if (!Array.isArray(todosToRender)) {
       console.error("Invalid todos array provided to renderTodos");
@@ -110,44 +109,82 @@ export function renderTodos(todosToRender) {
          const task = document.createElement("li");
          task.classList.add("task");
 
-         // Convert Chars and kebab case
-         let todoTitleConverted = convertChars(todo._title);
-         let currentTodoID = makeTextDashCase(todoTitleConverted);
+         const taskWrapper = document.createElement("div");
+         taskWrapper.classList.add("todo-wrapper");
 
-         // Form side
+         // Left Side
+         const taskInfo = document.createElement("div");
+         taskInfo.classList.add("todo-info");
+
          const checkForm = document.createElement("div");
-         const checkBox = document.createElement("input");
-         const checkboxLabel = document.createElement("label");
-
-         const taskDetails = document.createElement("details");
-         const detailsSummary = document.createElement("summary");
-         const detailsContent = document.createElement("p");
-
-         detailsSummary.textContent = todo._title;
-         detailsContent.textContent = todo._dueDate;
-
-         taskDetails.classList.add("todo-details");
-         taskDetails.appendChild(detailsSummary);
-         taskDetails.appendChild(detailsContent);
-
-         taskDetails.addEventListener("toggle", () => {
-            taskDetails.classList.toggle("has-border", taskDetails.open);
-         });
-
-         /* Logical improvement: Will implement an id number for every todo and will assign that number here instead. 
-         For now, this will remain todo.title  */
-         checkBox.id = currentTodoID;
-         checkboxLabel.htmlFor = currentTodoID;
-         checkBox.setAttribute("type", "checkbox");
          checkForm.classList.add("is-checked-form");
 
+         const checkBox = document.createElement("input");
+         checkBox.id = todo.id;
+         checkBox.setAttribute("type", "checkbox");
+
+         const checkboxLabel = document.createElement("label");
+         checkboxLabel.textContent = todo.title;
+
+         const detailsWrapper = document.createElement("div");
+         detailsWrapper.classList.add("details-wrapper");
+
+         const propsContainer = document.createElement("div");
+         propsContainer.classList.add("todo-details-container");
+
+         let groupDiv;
+         let propCount = 0;
+         for (const key in todo) {
+            if (
+               !Object.prototype.hasOwnProperty.call(todo, key) ||
+               key === "_id" ||
+               key === "_isComplete" ||
+               key === "_listId"
+            ) {
+               // Will improve if needed
+               continue;
+            }
+            if (propCount % 2 === 0) {
+               groupDiv = document.createElement("div");
+               groupDiv.classList.add("todo-group");
+            }
+
+            const content = document.createElement("p");
+            content.classList.add("todo-item");
+
+            const formattedKey = formatText(key);
+
+            const keySpan = document.createElement("span");
+            keySpan.classList.add("key");
+            keySpan.textContent = `${formattedKey}: `;
+
+            const valueSpan = document.createElement("span");
+            valueSpan.classList.add("value");
+            valueSpan.textContent = todo[key];
+
+            content.append(keySpan, valueSpan);
+            groupDiv.appendChild(content);
+
+            // If two properties have been added to the group, append the groupDiv
+            if (propCount % 2 === 1) {
+               propsContainer.appendChild(groupDiv);
+            }
+
+            propCount++;
+         }
+
+         // If there's an unfinished group (odd number of props), append it
+         if (propCount % 2 !== 0) {
+            propsContainer.appendChild(groupDiv);
+         }
+
          // Controls side
-         const controlButtons = ["Edit", "Add to", "Flag", "Delete"];
+         const controlButtons = ["Edit", "Flag", "Add to", "Delete"];
          const controlIcons = [
-            "pen-to-square",
-            "arrow-right",
-            "flag",
-            "trash-can",
+            "fa-regular fa-pen-to-square",
+            "fa-regular fa-flag",
+            "fa-solid fa-arrow-right",
+            "fa-regular fa-trash-can",
          ];
 
          const todoControls = document.createElement("div");
@@ -155,19 +192,25 @@ export function renderTodos(todosToRender) {
             const btnId = makeTextDashCase(buttonText);
             const btn = document.createElement("button");
             const iconTag = document.createElement("i");
-            iconTag.classList.add("fa-solid", `fa-${controlIcons[index]}`);
+            iconTag.className = controlIcons[index];
+
+            btn.classList.add("control-btn", btnId);
             btn.appendChild(iconTag);
             btn.id = btnId;
             todoControls.appendChild(btn);
          });
          todoControls.classList.add("todo-controls");
 
-         checkboxLabel.appendChild(taskDetails);
          checkForm.appendChild(checkBox);
          checkForm.appendChild(checkboxLabel);
+         taskInfo.appendChild(checkForm);
+         detailsWrapper.appendChild(propsContainer);
+         taskWrapper.appendChild(taskInfo);
+         taskWrapper.appendChild(todoControls);
+         task.appendChild(taskWrapper);
+         task.appendChild(detailsWrapper);
 
-         task.appendChild(checkForm);
-         task.appendChild(todoControls);
+         taskInfo.addEventListener("click", animateTodoContent(taskInfo, detailsWrapper));
 
          return task;
       },
@@ -175,10 +218,88 @@ export function renderTodos(todosToRender) {
    container.appendChild(taskViewUl);
 }
 
+// Todo details animation
+function animateTodoContent(task, detailsWrapper) {
+   task.addEventListener("click", () => {
+      const isExpanded = detailsWrapper.classList.contains("expanded");
+
+      if (isExpanded) {
+         detailsWrapper.style.height = `${detailsWrapper.scrollHeight}px`; // Set current height
+         requestAnimationFrame(() => {
+            detailsWrapper.style.height = "0"; // Animate to height 0
+         });
+         detailsWrapper.classList.remove("expanded");
+      } else {
+         // Expand
+         detailsWrapper.style.height = `${detailsWrapper.scrollHeight}px`; // Set to content height
+         detailsWrapper.classList.add("expanded");
+
+         // Reset height after transition
+         detailsWrapper.addEventListener(
+            "transitionend",
+            () => {
+               if (detailsWrapper.classList.contains("expanded")) {
+                  detailsWrapper.style.height = "auto"; // Dynamic height adjustment
+               }
+            },
+            { once: true },
+         );
+      }
+   });
+}
+
+// Show button tooltips
+setTimeout(() => {
+   const controlButtons = document.querySelectorAll(".control-btn");
+
+   const tooltips = {
+      edit: "Edit todo",
+      flag: "Change priority",
+      "add-to": "Add to another list",
+      delete: "Delete todo",
+   };
+
+   controlButtons.forEach((btn) => {
+      const todos = getTodos();
+      const btnId = btn.id;
+      const tooltipText = tooltips[btnId] || "Action";
+
+      const tooltip = document.createElement("div");
+      tooltip.classList.add("tooltip");
+      tooltip.textContent = tooltipText;
+
+      btn.parentElement.appendChild(tooltip);
+
+      btn.addEventListener("mouseenter", (e) => {
+         tooltip.style.left = `${e.target.offsetLeft + e.target.offsetWidth + 10}px`;
+         tooltip.style.top = `${e.target.offsetTop}px`;
+         tooltip.style.opacity = "1";
+         tooltip.style.visibility = "visible";
+      });
+
+      btn.addEventListener("mouseleave", () => {
+         tooltip.style.opacity = "0";
+         tooltip.style.visibility = "hidden";
+      });
+      btn.addEventListener("click", (e) => {
+         const buttonId = e.target.parentElement.id;
+         if (buttonId !== "edit") {
+            return;
+         }
+         const eventId = e.target.parentElement.parentElement.previousElementSibling.firstChild.firstChild.id;
+         todos.forEach(todo => {
+            if (eventId === todo.id) {
+               createEditTodoForm(todo);
+            }
+         });
+         // console.log("___________________________________________________________")
+      });
+   });
+}, 50);
+
 //_____________________________RENDER________________________________________
 
 export function render() {
-   const unFilteredTodos = getTodos();
    mainArea.appendChild(leftMenu);
 
    container.classList.add("container");
@@ -188,6 +309,7 @@ export function render() {
    window.addEventListener("load", fetchItemsFromStorage);
 
    function fetchItemsFromStorage() {
+      const unFilteredTodos = getTodos();
       manageDB(false, "todos", getTodos);
       renderTodos(unFilteredTodos);
       manageDB(false, "lists", getLists);
