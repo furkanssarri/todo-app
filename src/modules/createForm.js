@@ -1,11 +1,11 @@
 import { format } from "date-fns";
-import { createTodo, createList } from "./createData";
+import { createTodo, createList, updateTodo } from "./barrel";
 import {
    createPopupForm,
    // formElements,
    listenForm,
-} from "./utility";
-import { addList, getLists } from "./data";
+} from "./barrel";
+import { addList, getLists } from "./barrel";
 
 /*An event listener management is in order to improve security.
 And a form validation is in order.
@@ -29,7 +29,7 @@ export function createListPopup() {
    listenForm(listForm, createList);
 }
 
-// __________________CREATE TODO FORM_____________________
+// ______________________ADD TODO FORM_____________________
 let today = format(new Date(), "yyyy-MM-dd");
 let addTodoForm;
 export function createAddTodoForm() {
@@ -39,7 +39,7 @@ export function createAddTodoForm() {
       name: "listId",
    });
    const todoFormConfig = {
-      formId: "createTodo",
+      formId: "add-todo",
       inputs: [
          { type: "text", id: "title", name: "title", placeholder: "Title" },
          {
@@ -57,7 +57,7 @@ export function createAddTodoForm() {
       submitText: "Add Todo",
    };
    createPopupForm(todoFormConfig);
-   addTodoForm = document.querySelector("#todo-form");
+   addTodoForm = document.querySelector("#add-todo-form");
    listenForm(addTodoForm, createTodo);
 }
 
@@ -113,7 +113,7 @@ export function createEditTodoForm(todo) {
    };
    createPopupForm(editTodoFormConfig);
    editTodoForm = document.querySelector("#todo-form");
-   listenForm(editTodoForm);
+   listenForm(editTodoForm, updateTodo);
 }
 
 const addNewBtn = document.querySelector(".fa-plus");

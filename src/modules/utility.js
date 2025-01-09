@@ -65,7 +65,7 @@ export function createDynamicList({
    return ul;
 }
 
-const IDGenerator = (() => {
+export const IDGenerator = (() => {
    const { v4: uuidv4 } = require("uuid");
    function getID() {
       return uuidv4();
@@ -231,5 +231,3 @@ export function listenForm(form, callback) {
       return;
    }
 }
-
-export default IDGenerator;

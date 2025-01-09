@@ -1,7 +1,7 @@
-import IDGenerator from "./utility";
-import { getTodos } from "./data";
+import { IDGenerator } from "./barrel";
+import { getTodos } from "./barrel";
 
-export default class List {
+export class List {
    constructor(title, description) {
       this._id = IDGenerator.generate();
       this._title = title;

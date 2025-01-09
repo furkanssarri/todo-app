@@ -1,6 +1,6 @@
-import { renderLists, renderTodos } from "./render";
-import { createDynamicList } from "./utility";
-import { getSystemDefaultLists, getLists } from "./data";
+import { renderLists, renderTodos } from "./barrel";
+import { createDynamicList } from "./barrel";
+import { getSystemDefaultLists, getLists } from "./barrel";
 
 const hamburger = document.querySelector(".fa-bars");
 export const leftMenu = document.createElement("div");
@@ -113,42 +113,14 @@ export function renderTabs() {
 
    renderLists();
 
-   const filterLists = document.querySelectorAll(".filter-todos");
-   filterLists.forEach((listItem) => {
-      listItem.addEventListener("click", filterItems);
-   });
+   // const filterLists = document.querySelectorAll(".filter-todos");
+   // filterLists.forEach((listItem) => {
+   //    listItem.addEventListener("click", filterItems);
+   // });
 
-   function filterItems(e) {
-      if (!e.target.classList.contains("filter-todos")) {
-         console.log("Not filtering...");
-         return;
-      }
-      const lists = getSystemDefaultLists();
-      const clickElem = e.target.id;
-      let list;
-      switch (clickElem) {
-         case "inbox":
-            list = lists[0];
-            break;
-         case "today":
-            list = lists[1];
-            break;
-         case "thisWeek":
-            list = lists[2];
-            break;
-         default:
-            const customLists = getLists();
-            customLists.forEach(listElement => {
-               if (clickElem === listElement.id) {
-                  list = listElement;
-                  return list;
-               }
-            });
-            break;
-      }
-      const filteredItems = list.filterTodos();
-      renderTodos(filteredItems);
-   }
+   
 
    return toggleMenuBtn;
 }
+
+

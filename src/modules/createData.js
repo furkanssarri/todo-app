@@ -1,7 +1,7 @@
-import Todo from "./Todo";
-import List from "./List";
-import { manageDB } from "./storage";
-import { addTodo, getTodos, addList, getLists } from "./data";
+import { Todo } from "./barrel";
+import { List } from "./barrel";
+import { manageDB } from "./barrel";
+import { addTodo, getTodos, addList, getLists } from "./barrel";
 
 export function createTodo(todoData) { 
    const { title, description, dueDate, priority, listId } = todoData;
@@ -17,6 +17,10 @@ export function createTodo(todoData) {
    } else {
       manageDB(true, "todos", getTodos());
    }
+}
+
+export function updateTodo(todo) {
+   console.log("first")
 }
 
 export function createList(listData) {

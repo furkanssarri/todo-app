@@ -1,5 +1,5 @@
-import Todo from "./Todo";
-import List from "./List";
+import { Todo } from "./barrel";
+import { List } from "./barrel";
 
 const _todos = [];
 const _lists = [];

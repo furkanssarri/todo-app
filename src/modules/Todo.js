@@ -1,6 +1,6 @@
-import IDGenerator from "./utility";
+import { IDGenerator } from "./barrel";
 
-export default class Todo {
+export class Todo {
    constructor(title, description, dueDate, priority, listId, isComplete) {
       this._id = IDGenerator.generate();
       this._title = title;

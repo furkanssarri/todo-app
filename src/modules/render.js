@@ -1,8 +1,13 @@
-import { getTodos, getLists } from "./data";
-import { manageDB } from "./storage";
-import { leftMenu, nav, renderTabs } from "./leftMenu";
-import { makeTextDashCase, createDynamicList, formatText } from "./utility";
-import { createListPopup, createForm, createEditTodoForm } from "./createForm";
+import { getTodos, getLists } from "./barrel";
+import { manageDB } from "./barrel";
+import { leftMenu, nav, renderTabs } from "./barrel";
+import { makeTextDashCase, createDynamicList, formatText } from "./barrel";
+import {
+   createListPopup,
+   createForm,
+   createEditTodoForm,
+   getSystemDefaultLists,
+} from "./barrel";
 
 /*This render module is very sloppy and is violating some of the important best practices suc as DRY and
 more importantly, the Single Responsibility principle. A refactor is in order for this module in the future. */
@@ -32,7 +37,6 @@ export function renderLists() {
 
       return li;
    };
-
    // Additional "New List" element
    const addProjectLi = document.createElement("li");
    const addProjectAnchor = document.createElement("a");
@@ -56,7 +60,7 @@ export function renderLists() {
 }
 
 // Lists menu animation
-setTimeout(() => {
+export function animateElements() {
    renderTabs();
    const toggleMenuButton = document.querySelector("#toggle-menu");
    const projectSubList = document.querySelector("#sub-ul");
@@ -86,7 +90,7 @@ setTimeout(() => {
          toggleMenuButton.classList.add("fa-angle-down");
       }
    });
-}, 90);
+}
 
 //____________________________________TODOS_______________________________
 
@@ -120,7 +124,7 @@ export function renderTodos(todosToRender) {
          checkForm.classList.add("is-checked-form");
 
          const checkBox = document.createElement("input");
-         checkBox.id = todo.id;
+         taskWrapper.id = todo.id;
          checkBox.setAttribute("type", "checkbox");
 
          const checkboxLabel = document.createElement("label");
@@ -210,7 +214,10 @@ export function renderTodos(todosToRender) {
          task.appendChild(taskWrapper);
          task.appendChild(detailsWrapper);
 
-         taskInfo.addEventListener("click", animateTodoContent(taskInfo, detailsWrapper));
+         taskInfo.addEventListener(
+            "click",
+            animateTodoContent(taskInfo, detailsWrapper),
+         );
 
          return task;
       },
@@ -248,10 +255,100 @@ function animateTodoContent(task, detailsWrapper) {
    });
 }
 
-// Show button tooltips
-setTimeout(() => {
-   const controlButtons = document.querySelectorAll(".control-btn");
+export function filterItems(e) {
+   if (!e.target.classList.contains("filter-todos")) {
+      console.log("Not filtering...");
+      return;
+   }
+   const lists = getSystemDefaultLists();
+   const clickElem = e.target.id;
+   let list;
+   switch (clickElem) {
+      case "inbox":
+         list = lists[0];
+         break;
+      case "today":
+         list = lists[1];
+         break;
+      case "thisWeek":
+         list = lists[2];
+         break;
+      default:
+         const customLists = getLists();
+         customLists.forEach((listElement) => {
+            if (clickElem === listElement.id) {
+               list = listElement;
+               return list;
+            }
+         });
+         break;
+   }
+   const filteredItems = list.filterTodos();
+   renderTodos(filteredItems);
+}
 
+function handleMouseOver(event, tooltips) {
+   const btnId = event.target.id;
+   const tooltipText = tooltips[btnId] || "Action";
+
+   const tooltip = document.createElement("div");
+   tooltip.classList.add("tooltip");
+   tooltip.textContent = tooltipText;
+
+   event.target.parentElement.appendChild(tooltip);
+
+   tooltip.style.left = `${event.target.offsetLeft + event.target.offsetWidth + 10}px`;
+   tooltip.style.top = `${event.target.offsetTop}px`;
+   tooltip.style.opacity = "1";
+   tooltip.style.visibility = "visible";
+
+   event.target.tooltipElement = tooltip;
+}
+
+function handleMouseOut(event) {
+   setTimeout(() => {
+      const tooltip = event.target.tooltipElement;
+      if (tooltip) {
+         tooltip.style.opacity = "0";
+         tooltip.style.visibility = "hidden";
+         tooltip.remove();
+         delete event.target.tooltipElement;
+      }
+   }, 50);
+}
+
+function cleanupTooltip(target) {
+   const tooltip = target.tooltipElement;
+   if (tooltip) {
+      tooltip.style.opacity = "0";
+      tooltip.style.visibility = "hidden";
+      tooltip.remove();
+      delete target.tooltipElement;
+   }
+}
+
+function handleClick(event) {
+   cleanupTooltip(event.target);
+   const todos = getTodos();
+   const btnId = event.target.parentElement.id;
+   if (btnId === "edit") {
+      const todoId = event.target.parentElement.parentElement.parentElement.id;
+      const todo = todos.find((todo) => todo.id === todoId);
+
+      if (todo) {
+         createEditTodoForm(todo);
+      }
+   } else if (btnId === "delete") {
+      console.log("Delete operation");
+   } else if (btnId === "add-to") {
+      console.log("Update list operation");
+   } else if (btnId === "flag") {
+      console.log("Update prio operation");
+   }
+}
+
+// Button Operations
+export function handleOperations() {
    const tooltips = {
       edit: "Edit todo",
       flag: "Change priority",
@@ -259,61 +356,46 @@ setTimeout(() => {
       delete: "Delete todo",
    };
 
-   controlButtons.forEach((btn) => {
-      const todos = getTodos();
-      const btnId = btn.id;
-      const tooltipText = tooltips[btnId] || "Action";
-
-      const tooltip = document.createElement("div");
-      tooltip.classList.add("tooltip");
-      tooltip.textContent = tooltipText;
-
-      btn.parentElement.appendChild(tooltip);
-
-      btn.addEventListener("mouseenter", (e) => {
-         tooltip.style.left = `${e.target.offsetLeft + e.target.offsetWidth + 10}px`;
-         tooltip.style.top = `${e.target.offsetTop}px`;
-         tooltip.style.opacity = "1";
-         tooltip.style.visibility = "visible";
-      });
-
-      btn.addEventListener("mouseleave", () => {
-         tooltip.style.opacity = "0";
-         tooltip.style.visibility = "hidden";
-      });
-      btn.addEventListener("click", (e) => {
-         const buttonId = e.target.parentElement.id;
-         if (buttonId !== "edit") {
-            return;
+   container.addEventListener("mouseover", (event) => {
+      if (event.target.classList.contains("control-btn")) {
+         if (
+            !event.relatedTarget ||
+            !event.target.contains(event.relatedTarget)
+         ) {
+            handleMouseOver(event, tooltips);
          }
-         const eventId = e.target.parentElement.parentElement.previousElementSibling.firstChild.firstChild.id;
-         todos.forEach(todo => {
-            if (eventId === todo.id) {
-               createEditTodoForm(todo);
-            }
-         });
-         // console.log("___________________________________________________________")
-      });
+      }
    });
-}, 50);
+
+   container.addEventListener("mouseout", (event) => {
+      if (event.target.classList.contains("control-btn")) {
+         if (
+            !event.relatedTarget ||
+            !event.target.contains(event.relatedTarget)
+         ) {
+            handleMouseOut(event);
+         }
+      }
+   });
+   container.addEventListener("click", (event) => {
+      if (event.target.parentElement.classList.contains("control-btn")) {
+         handleClick(event);
+      }
+   });
+   document.addEventListener("click", (event) => {
+      if (!event.target.classList.contains("control-btn")) {
+         // Remove any lingering tooltips if click occurred outside buttons
+         const buttons = container.querySelectorAll(".control-btn");
+         buttons.forEach((btn) => cleanupTooltip(btn));
+      }
+   });
+}
 
 //_____________________________RENDER________________________________________
 
 export function render() {
    mainArea.appendChild(leftMenu);
-
    container.classList.add("container");
-
    mainArea.appendChild(container);
-
-   window.addEventListener("load", fetchItemsFromStorage);
-
-   function fetchItemsFromStorage() {
-      const unFilteredTodos = getTodos();
-      manageDB(false, "todos", getTodos);
-      renderTodos(unFilteredTodos);
-      manageDB(false, "lists", getLists);
-   }
-
    leftMenu.appendChild(nav);
 }
