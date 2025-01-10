@@ -42,7 +42,7 @@ export class Todo {
       return this._listId;
    }
    set listId(value) {
-      this._listId.push(value);
+      this._listId = value;
    }
    get status() {
       return this._isComplete;

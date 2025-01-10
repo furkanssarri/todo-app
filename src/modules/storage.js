@@ -3,8 +3,8 @@ import { renderTodos } from "./barrel";
 
 /* A series of security checks and precautions are in order for storing todos perhaps even encryption? Nobody knows! */
 
-function sendItemToDB(key, data) {
-   localStorage.setItem(key, JSON.stringify(data));
+function sendItemToDB(key, value) {
+   localStorage.setItem(key, JSON.stringify(value));
 }
 
 function getItemsFromDB(key) {
@@ -15,13 +15,13 @@ function getItemsFromDB(key) {
    return fetchedItem;
 }
 
-function handleDomainLogic(key, data) {
+function handleDomainLogic(key, value) {
    switch (key) {
       case "todos":
-         spliceTodos(data);
+         spliceTodos(value);
          break;
       case "lists":
-         spliceLists(data);
+         spliceLists(value);
          break;
       default:
          // Do nothing

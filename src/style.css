@@ -522,6 +522,66 @@ form label {
    word-wrap: break-word;
 }
 
+#priority-popup {
+   position: absolute;
+   /* top: 4*0px; */
+   right: 30px;
+   transform: translateX(-50%);
+   z-index: 999;
+   width: 120px;
+   background-color: inherit;
+   border: 1px solid #cce7ff;
+   border-radius: 5px;
+   box-shadow: 0 4px 8px rgba(0,0,0, 0.1);
+   overflow: hidden;
+   font-family: Arial, sans-serif;
+}
+
+#priority-popup ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+
+#priority-popup li {
+   padding: 10px 0;
+   cursor: pointer;
+   text-align: center;
+   font-size: 1rem;
+   color: #0077cc;
+   background-color: #e7f3ff;
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#priority-popup li:hover {
+   background-color: #cce7ff;
+   color: #005fa3;
+}
+
+#priority-popup li:active {
+   background-color: #b3d8ff;
+   color: #004080;
+}
+
+.popup-priority-option {
+   display: block;
+   width: 100%;
+   margin: 0;
+   text-align: center;
+   border: none;
+   background: transparent;
+   font-size: 1rem;
+   color: #0077cc;
+   cursor: pointer;
+   transition: all 0.2s ease-in-out;
+}
+
+.popup-priority-option.selected {
+   font-weight: bold;
+   background-color: #b3d8ff;
+   color: #004080;
+}
+
 
 footer {
    background-color: #71b8de;

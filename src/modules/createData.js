@@ -19,9 +19,7 @@ export function createTodo(todoData) {
    }
 }
 
-export function updateTodo(todo) {
-   console.log("first")
-}
+
 
 export function createList(listData) {
    const { title,  description } = listData;   

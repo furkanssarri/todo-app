@@ -1,12 +1,17 @@
-import { getTodos, getLists } from "./barrel";
-import { manageDB } from "./barrel";
-import { leftMenu, nav, renderTabs } from "./barrel";
-import { makeTextDashCase, createDynamicList, formatText } from "./barrel";
 import {
    createListPopup,
-   createForm,
+   getLists,
+   getTodos,
+   removeTodo,
+   leftMenu,
+   nav,
+   renderTabs,
    createEditTodoForm,
    getSystemDefaultLists,
+   updateTodoProps,
+   makeTextDashCase,
+   createDynamicList,
+   formatText,
 } from "./barrel";
 
 /*This render module is very sloppy and is violating some of the important best practices suc as DRY and
@@ -28,7 +33,7 @@ export function renderLists() {
       const iconTag = document.createElement("i");
 
       iconTag.classList.add("fa-solid", "fa-folder-open");
-      const listName = makeTextDashCase(list.title);
+      const listName = formatText(list.title);
       anchorTag.classList.add("filter-todos");
       anchorTag.id = list.id;
 
@@ -142,8 +147,7 @@ export function renderTodos(todosToRender) {
             if (
                !Object.prototype.hasOwnProperty.call(todo, key) ||
                key === "_id" ||
-               key === "_isComplete" ||
-               key === "_listId"
+               key === "_isComplete"
             ) {
                // Will improve if needed
                continue;
@@ -331,19 +335,18 @@ function handleClick(event) {
    cleanupTooltip(event.target);
    const todos = getTodos();
    const btnId = event.target.parentElement.id;
-   if (btnId === "edit") {
-      const todoId = event.target.parentElement.parentElement.parentElement.id;
-      const todo = todos.find((todo) => todo.id === todoId);
-
-      if (todo) {
+   const todoId = event.target.parentElement.parentElement.parentElement.id;
+   const todo = todos.find((todo) => todo.id === todoId);
+   if (todo) {
+      if (btnId === "edit") {
          createEditTodoForm(todo);
+      } else if (btnId === "flag") {
+         updateTodoProps(event, todo, todo.priority);
+      } else if (btnId === "add-to") {
+         updateTodoProps(event, todo, todo.listId);
+      } else if (btnId === "delete") {
+         removeTodo(todo);
       }
-   } else if (btnId === "delete") {
-      console.log("Delete operation");
-   } else if (btnId === "add-to") {
-      console.log("Update list operation");
-   } else if (btnId === "flag") {
-      console.log("Update prio operation");
    }
 }
 

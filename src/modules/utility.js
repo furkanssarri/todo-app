@@ -1,3 +1,5 @@
+import { getLists } from "./data";
+
 export function convertChars(text) {
    const charMap = {
       ı: "i",
@@ -231,3 +233,77 @@ export function listenForm(form, callback) {
       return;
    }
 }
+
+export function updateTodoProps(event, todo, prop) {
+   const listsArr = getLists();
+   const prioritiesArr = [
+      {
+         title: "Low",
+      },
+      {
+         title: "Medium",
+      },
+      {
+         title: "High",
+      },
+   ];
+
+   if (prop === todo.priority) {
+      createPopupCard(event, todo, prioritiesArr, prop);
+   } else if (prop === todo.listId) {
+      createPopupCard(event, todo, listsArr, prop)
+   }
+}
+
+async function createPopupCard(event, todo, propsToUpdate, prop) {
+   const { updateTodo } = await import("./data");
+   const popupOverlay = document.createElement("div");
+   popupOverlay.id = "priority-popup";
+
+   const ul = document.createElement("ul");
+   propsToUpdate.forEach(element => {
+      const titleConverted = convertChars(element.title);
+      const li = document.createElement("li");
+      li.textContent = element.title;
+      li.classList.add(`popup-${makeTextDashCase(titleConverted)}-option`);
+
+      li.addEventListener("click", () => {
+         if (prop === todo.priority) {
+            todo.priority = element.title;
+         } else if (prop === todo.listId) {
+            todo.listId = element.id;
+         }
+         updateTodo(todo);
+         popupOverlay.remove();
+      });
+      ul.appendChild(li);
+   });
+   popupOverlay.appendChild(ul);
+   event.target.parentElement.appendChild(popupOverlay);
+}
+
+// async function createPrioCard(event, todo) {
+//    const { updateTodo } = await import("./data"); 
+//    const priorities = ["Low", "Medium", "High"];
+//    const popupOverlay = document.createElement("div");
+//    popupOverlay.id = "priority-popup";
+
+//    const ul = document.createElement("ul");
+
+//    priorities.forEach((priority) => {
+//       const li = document.createElement("li");
+//       li.textContent = priority;
+//       li.classList.add("popup-priority-option", priority.toLowerCase());
+
+//       li.addEventListener("click", () => {
+//          todo.priority = priority;
+//          updateTodo(todo);
+//          popupOverlay.remove(); // Remove the popup after selection
+//       });
+
+//       ul.appendChild(li);
+//    });
+
+//    popupOverlay.appendChild(ul);
+//    event.target.parentElement.appendChild(popupOverlay);
+// }

@@ -22,7 +22,7 @@ function init() {
    renderTodos(unFilteredTodos);
    animateElements();
    handleOperations();
-   
+
    const filterLists = document.querySelectorAll(".filter-todos");
    filterLists.forEach((listItem) => {
       listItem.addEventListener("click", filterItems);
