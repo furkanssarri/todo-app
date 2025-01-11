@@ -230,6 +230,13 @@ main {
    -moz-box-shadow: 0.5px 5px 9px 0px #000000bf;
    box-shadow: 0.5px 5px 9px 0px #000000bf;
    background-color: #ddecf9;
+   transform: translateX(-100%); /* Initially hidden */
+   transition: transform 0.3s ease-in-out; /* Smooth slide-in/out */
+   z-index: 900;
+}
+
+.left-menu.show {
+   transform: translateX(0);
 }
 
 .left-menu nav {
@@ -245,6 +252,10 @@ main {
    padding-left: 5px;
    margin: 1px;
    cursor: pointer;
+}
+
+.left-menu nav>ul li:last-child:hover {
+   background-color: rgb(227, 174, 174);
 }
 
 .left-menu nav>ul li:hover {
@@ -311,6 +322,16 @@ main {
    margin-right: 10px;
 }
 
+.left-menu nav a i.fa-xmark {
+   margin-right: 0;
+   float: right;
+   font-size: 0.8rem;
+}
+
+.left-menu nav a i.fa-xmark:hover {
+   font-size: 0.9rem!important;
+}
+
 .left-menu nav>ul li:last-child>i {
    margin-right: 10px;
 }
@@ -332,6 +353,12 @@ main {
 
 .projects-list-container {
    margin: auto 10px;
+}
+
+.projects-list-container span {
+   display: inline-block;
+   height: 25px;
+   width: 100%;
 }
 
 .projects-list-container span i:first-of-type {
@@ -360,7 +387,12 @@ main {
    margin: 15px;
    padding: 15px;
    width: 70vw;
-   position: absolute;
+   margin-left: 0;
+   transition: margin-left 0.3s ease-in-out;
+}
+
+.container.shifted {
+   margin-left: 250px;
 }
 
 .show {
@@ -436,6 +468,23 @@ form label {
 
 .todo-wrapper:hover {
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todo-complete {
+   background-color: #f0f0f0;
+   color: #a0a0a0;
+   text-decoration: line-through;
+   opacity: 0.7;
+   transition: all 0.3 ease;
+}
+
+todo.todo-complete .todo-info {
+   color: #a0a0a0;
+}
+
+.todo-complete input {
+   opacity: 0.5;
+   cursor: not-allowed;
 }
 
 .todo-controls {
@@ -813,5 +862,52 @@ select#todoListsDropdown option {
    input,
    button {
       font-size: 0.8rem;
+   }
+}
+
+/* Media query for tablets and smaller laptops */
+@media screen and (max-width: 1024px) {
+   .left-menu {
+      width: 30%; /* Slightly larger width for medium screens */
+   }
+}
+
+/* Media query for mobile devices in landscape */
+@media screen and (max-width: 768px) {
+   .left-menu {
+      width: 40%; /* Half-screen width for landscape */
+   }
+}
+
+/* Media query for mobile devices in portrait */
+@media screen and (max-width: 480px) {
+   .left-menu {
+      width: 70%; /* Larger width for portrait mode */
+   }
+}
+
+/* Media query for extra small devices (e.g., older phones) */
+@media screen and (max-width: 360px) {
+   .left-menu {
+      width: 80%; /* Maximize width for very small screens */
+   }
+}
+
+/* Reduce width for larger screens */
+@media screen and (min-width: 1440px) {
+   .left-menu {
+      width: 20%; /* Slightly narrower for large screens */
+   }
+}
+
+@media screen and (min-width: 1920px) {
+   .left-menu {
+      width: 15%; /* Even narrower for ultra-wide screens */
+   }
+}
+
+@media screen and (min-width: 2560px) {
+   .left-menu {
+      width: 10%; /* Further reduce width for very large displays */
    }
 }

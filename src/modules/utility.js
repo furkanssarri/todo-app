@@ -211,6 +211,11 @@ export function createPopupForm(config) {
    formContainer.appendChild(formCloseBtn);
    overlay.appendChild(formContainer);
    document.body.appendChild(overlay);
+
+   const firstInput = form.querySelector("input");
+   if (firstInput) {
+      firstInput.focus();
+   }
 }
 
 export function listenForm(form, callback) {
@@ -234,7 +239,8 @@ export function listenForm(form, callback) {
    }
 }
 
-export function updateTodoProps(event, todo, prop) {
+export async function updateTodoProps(event, todo, prop) {
+   const { updateTodo } = await import("./data.js");
    const listsArr = getLists();
    const prioritiesArr = [
       {
@@ -247,11 +253,14 @@ export function updateTodoProps(event, todo, prop) {
          title: "High",
       },
    ];
-
    if (prop === todo.priority) {
       createPopupCard(event, todo, prioritiesArr, prop);
    } else if (prop === todo.listId) {
       createPopupCard(event, todo, listsArr, prop)
+   } else if (prop === todo.status) {
+      console.log(todo.status)
+      todo.status = todo.status ? false : true;
+      updateTodo(todo);
    }
 }
 
@@ -281,29 +290,3 @@ async function createPopupCard(event, todo, propsToUpdate, prop) {
    popupOverlay.appendChild(ul);
    event.target.parentElement.appendChild(popupOverlay);
 }
-
-// async function createPrioCard(event, todo) {
-//    const { updateTodo } = await import("./data"); 
-//    const priorities = ["Low", "Medium", "High"];
-//    const popupOverlay = document.createElement("div");
-//    popupOverlay.id = "priority-popup";
-
-//    const ul = document.createElement("ul");
-
-//    priorities.forEach((priority) => {
-//       const li = document.createElement("li");
-//       li.textContent = priority;
-//       li.classList.add("popup-priority-option", priority.toLowerCase());
-
-//       li.addEventListener("click", () => {
-//          todo.priority = priority;
-//          updateTodo(todo);
-//          popupOverlay.remove(); // Remove the popup after selection
-//       });
-
-//       ul.appendChild(li);
-//    });
-
-//    popupOverlay.appendChild(ul);
-//    event.target.parentElement.appendChild(popupOverlay);
-// }

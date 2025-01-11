@@ -1,4 +1,4 @@
-import { manageDB, renderTodos, Todo } from "./barrel";
+import { manageDB, renderLists, renderTodos, Todo, render } from "./barrel";
 import { List } from "./barrel";
 
 const _todos = [];
@@ -55,9 +55,9 @@ export function addTodo(todo) {
 }
 
 export function removeTodo(rmTodo) {
-   const index = _todos.findIndex(todo => todo.id === rmTodo.id);
+   const index = getTodos().findIndex(todo => todo.id === rmTodo.id);
    _todos.splice(index, 1);
-   manageDB(true, "todos", _todos);
+   manageDB(true, "todos", getTodos());
    renderTodos(getTodos());
 }
 
@@ -70,19 +70,22 @@ export function updateTodo(updatedTodo) {
    if (
       !updatedTodo.id ||
       typeof updatedTodo.title !== "string" ||
-      (updatedTodo.dueDate instanceof Date && !iNaN(updatedTodo.dueDate)) ||
+      // (updatedTodo.dueDate instanceof Date && !iNaN(updatedTodo.dueDate)) ||
       !updatedTodo.priority
    ) {
       console.error("Invalid updatedTodo: ", updatedTodo);
       return;
    }
 
-   const index = _todos.findIndex((todo) => todo.id === updateTodo.id);
+   const index = getTodos().findIndex((todo) => todo.id === updatedTodo.id);
+   console.log(_todos)
+   console.log(typeof updatedTodo.id)
    if (index !== -1) {
-      const newTodo = Todo.fromJSON(updatedTodo);
-      _todos[index] = newTodo;
+      _todos[index] = updatedTodo;
+      console.log(getTodos());
       manageDB(true, "todos", getTodos());
       renderTodos(getTodos());
+      console.log(getTodos());
    } else {
       console.warn(`Todo with id ${updatedTodo.id} not found.`);
    }
@@ -103,8 +106,11 @@ export function addList(newList) {
    _lists.push(newList);
 }
 
-export function removeList(index) {
+export function removeList(rmList) {
+   // _lists.splice(index, 1);
+   const index = getLists().findIndex(list => list.id === rmList.id);
    _lists.splice(index, 1);
+   manageDB(true, "lists", getLists());
 }
 
 export function spliceLists(returnedListObj) {
@@ -117,7 +123,7 @@ export function spliceLists(returnedListObj) {
 }
 
 export function updateList(updatedList) {
-   const index = _lists.findIndex((list) => list.id === updateList.id);
+   const index = getLists().findIndex((list) => list.id === updateList.id);
    if (index !== -1) {
       _lists[index] = updatedList;
       //send to storage

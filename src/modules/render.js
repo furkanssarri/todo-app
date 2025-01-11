@@ -1,6 +1,7 @@
 import {
    createListPopup,
    getLists,
+   removeList,
    getTodos,
    removeTodo,
    leftMenu,
@@ -31,15 +32,22 @@ export function renderLists() {
       const li = document.createElement("li");
       const anchorTag = document.createElement("a");
       const iconTag = document.createElement("i");
+      const deleteIcon = document.createElement("i");
 
       iconTag.classList.add("fa-solid", "fa-folder-open");
+      deleteIcon.classList.add("fa-solid", "fa-xmark");
       const listName = formatText(list.title);
       anchorTag.classList.add("filter-todos");
       anchorTag.id = list.id;
 
-      anchorTag.append(iconTag, listName);
+      anchorTag.append(iconTag, listName, deleteIcon);
       li.appendChild(anchorTag);
-
+      deleteIcon.addEventListener("click", e => {
+         if (e.target.classList.contains("fa-xmark")) {
+            removeList(list);
+            location.reload();
+         }
+      });
       return li;
    };
    // Additional "New List" element
@@ -120,6 +128,7 @@ export function renderTodos(todosToRender) {
 
          const taskWrapper = document.createElement("div");
          taskWrapper.classList.add("todo-wrapper");
+         taskWrapper.id = todo.id;
 
          // Left Side
          const taskInfo = document.createElement("div");
@@ -129,7 +138,7 @@ export function renderTodos(todosToRender) {
          checkForm.classList.add("is-checked-form");
 
          const checkBox = document.createElement("input");
-         taskWrapper.id = todo.id;
+         checkBox.classList.add("mark-complete");
          checkBox.setAttribute("type", "checkbox");
 
          const checkboxLabel = document.createElement("label");
@@ -146,8 +155,7 @@ export function renderTodos(todosToRender) {
          for (const key in todo) {
             if (
                !Object.prototype.hasOwnProperty.call(todo, key) ||
-               key === "_id" ||
-               key === "_isComplete"
+               key === "_id"
             ) {
                // Will improve if needed
                continue;
@@ -168,7 +176,23 @@ export function renderTodos(todosToRender) {
 
             const valueSpan = document.createElement("span");
             valueSpan.classList.add("value");
-            valueSpan.textContent = todo[key];
+
+            if (key !== "_listId") {
+               valueSpan.textContent = todo[key];
+            } else {
+               const lists = getLists();
+               const index = lists.findIndex((list) => list.id === todo[key]);
+               if (index !== -1) {
+                  const listIndex = lists[index];
+                  valueSpan.textContent = listIndex.title;
+               }
+            }
+
+            if (key === "_isComplete") {
+               if (todo[key]) {
+                  taskWrapper.classList.add("todo-complete");
+               }
+            }
 
             content.append(keySpan, valueSpan);
             groupDiv.appendChild(content);
@@ -261,6 +285,9 @@ function animateTodoContent(task, detailsWrapper) {
 
 export function filterItems(e) {
    if (!e.target.classList.contains("filter-todos")) {
+      if (e.target.classList.contains("fa-xmark")) {
+         return;
+      }
       console.log("Not filtering...");
       return;
    }
@@ -334,18 +361,21 @@ function cleanupTooltip(target) {
 function handleClick(event) {
    cleanupTooltip(event.target);
    const todos = getTodos();
-   const btnId = event.target.parentElement.id;
+   const eventId = event.target.parentElement.id;
    const todoId = event.target.parentElement.parentElement.parentElement.id;
    const todo = todos.find((todo) => todo.id === todoId);
    if (todo) {
-      if (btnId === "edit") {
+      if (eventId === "edit") {
          createEditTodoForm(todo);
-      } else if (btnId === "flag") {
+      } else if (eventId === "flag") {
          updateTodoProps(event, todo, todo.priority);
-      } else if (btnId === "add-to") {
+      } else if (eventId === "add-to") {
          updateTodoProps(event, todo, todo.listId);
-      } else if (btnId === "delete") {
+      } else if (eventId === "delete") {
          removeTodo(todo);
+      }
+      if (event.target.matches("input")) {
+         updateTodoProps(event, todo, todo.status);
       }
    }
 }
@@ -381,7 +411,10 @@ export function handleOperations() {
       }
    });
    container.addEventListener("click", (event) => {
-      if (event.target.parentElement.classList.contains("control-btn")) {
+      if (
+         event.target.parentElement.classList.contains("control-btn") ||
+         event.target.classList.contains("mark-complete")
+      ) {
          handleClick(event);
       }
    });

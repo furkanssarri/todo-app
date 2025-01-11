@@ -1,6 +1,4 @@
-import { renderLists, renderTodos } from "./barrel";
-import { createDynamicList } from "./barrel";
-import { getSystemDefaultLists, getLists } from "./barrel";
+import { renderLists, createDynamicList, getSystemDefaultLists, container } from "./barrel";
 
 const hamburger = document.querySelector(".fa-bars");
 export const leftMenu = document.createElement("div");
@@ -25,6 +23,7 @@ const toggleLeftMenu = () => {
       leftMenu.classList.add("animate__slideInLeft");
       leftMenu.classList.remove("hide");
       leftMenu.classList.add("show");
+      container.classList.add("shifted");
    } else {
       closeLeftMenu();
    }
@@ -36,6 +35,7 @@ const closeLeftMenu = () => {
    setTimeout(() => {
       leftMenu.classList.remove("show");
       leftMenu.classList.add("hide");
+      container.classList.remove("shifted");
    }, 850);
 };
 
@@ -113,14 +113,5 @@ export function renderTabs() {
 
    renderLists();
 
-   // const filterLists = document.querySelectorAll(".filter-todos");
-   // filterLists.forEach((listItem) => {
-   //    listItem.addEventListener("click", filterItems);
-   // });
-
-   
-
    return toggleMenuBtn;
 }
-
-
