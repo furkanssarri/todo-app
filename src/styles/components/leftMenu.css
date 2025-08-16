@@ -1,7 +1,7 @@
 @layer components {
   .left-menu {
     padding: var(--space-150) var(--space-200);
-    border-right: 1px solid var(--colors-neutral-200);
+    border-right: 1px solid var(--colors-neutral-400);
     flex-shrink: 0;
   }
 
@@ -18,35 +18,20 @@
   .left-menu .left-menu-content nav {
     border-bottom: 1px solid var(--colors-neutral-200);
   }
-
-  .left-menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
   .left-menu ul li {
-    /* padding: var(--space-150); */
     margin-top: var(--space-050);
   }
 
   .left-menu a {
     padding: var(--space-150);
-    text-decoration: none;
-    color: inherit;
     display: inline-block;
     width: 100%;
   }
 
-  a svg {
-    margin-right: var(--space-100);
-  }
-
-  footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-100);
-    width: 100%;
+  .inner-sidebar {
+    padding: var(--space-150) var(--space-200);
+    border-right: 1px solid var(--colors-neutral-200);
+    flex-shrink: 0;
+    border-right: 1px solid var(--colors-neutral-400);
   }
 }

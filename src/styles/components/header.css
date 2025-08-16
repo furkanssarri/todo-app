@@ -1,0 +1,41 @@
+@layer components {
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--space-300) var(--space-400);
+    width: 100%;
+    border-bottom: 1px solid var(--colors-neutral-400);
+  }
+
+  .search-input {
+    padding: 14px 24px;
+    width: 320px;
+    border: 1px solid var(--colors-neutral-400);
+    border-radius: var(--radius-8);
+    background: transparent;
+    color: var(--colors-neutral-400);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .search-input::placeholder {
+    color: #a0a0a0;
+  }
+
+  .search-input:focus {
+    background: #3a3a3a;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .settings-button {
+    background-color: transparent;
+    border: none;
+    margin-left: var(--space-300);
+  }
+
+  .settings-button svg {
+    font-size: var(--fs-24);
+  }
+}
