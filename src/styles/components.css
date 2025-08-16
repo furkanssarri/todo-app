@@ -1,0 +1,24 @@
+@layer components {
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+
+  header .logo {
+    padding: var(--space-200);
+  }
+
+  header .heading {
+    flex: 0.8;
+    display: inherit;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer {
+    text-align: center;
+  }
+}
