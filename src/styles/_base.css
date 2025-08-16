@@ -54,11 +54,11 @@
     --ff-mono: "Source-code-pro", monospace;
 
     /* FONT SIZES*/
-    --fs-24: 1.5rem;
-    --fs-20: 1.25rem;
-    --fs-16: 1rem;
-    --fs-14: 0.875rem;
-    --fs-12: 0.75rem;
+    --fs-24: 1.5rem; /* 24 px */
+    --fs-20: 1.25rem; /* 20 px */
+    --fs-16: 1rem; /* 16 px */
+    --fs-14: 0.875rem; /* 14 px */
+    --fs-12: 0.75rem; /* 12 px */
 
     /* FONT WEIGHTS */
     --fw-regular: 400;
@@ -75,32 +75,32 @@
     --ls-02: -0.0125rem;
 
     /* SPACINGS */
-    --space-0: 0rem;
-    --space-025: 0.125rem;
-    --space-050: 0.25rem;
-    --space-075: 0.375rem;
-    --space-100: 0.5rem;
-    --space-150: 0.75rem;
-    --space-200: 1rem;
-    --space-250: 1.25rem;
-    --space-300: 1.5rem;
-    --space-400: 2rem;
-    --space-500: 2.5rem;
-    --space-600: 3rem;
-    --space-800: 4rem;
-    --space-1000: 5rem;
+    --space-0: 0rem; /* 0 px */
+    --space-025: 0.125rem; /* 2 px */
+    --space-050: 0.25rem; /* 4 px */
+    --space-075: 0.375rem; /* 6 px */
+    --space-100: 0.5rem; /* 8 px */
+    --space-150: 0.75rem; /* 12 px */
+    --space-200: 1rem; /* 16 px */
+    --space-250: 1.25rem; /* 20 px */
+    --space-300: 1.5rem; /* 24 px */
+    --space-400: 2rem; /* 32 px */
+    --space-500: 2.5rem; /* 40 px */
+    --space-600: 3rem; /* 48 px */
+    --space-800: 4rem; /* 64 px */
+    --space-1000: 5rem; /* 80 px */
 
     /* RADIUSES */
-    --radius-0: 0rem;
-    --radius-4: 0.25rem;
-    --radius-6: 0.375rem;
-    --radius-8: 0.5rem;
-    --radius-10: 0.625rem;
-    --radius-12: 0.75rem;
-    --radius-16: 1rem;
-    --radius-20: 1.25rem;
-    --radius-24: 1.5rem;
-    --radius-full: 62.4375rem;
+    --radius-0: 0rem; /* 0 px */
+    --radius-4: 0.25rem; /* 4 px */
+    --radius-6: 0.375rem; /* 6 px */
+    --radius-8: 0.5rem; /* 8 px */
+    --radius-10: 0.625rem; /* 10 px */
+    --radius-12: 0.75rem; /* 12 px */
+    --radius-16: 1rem; /* 16 px */
+    --radius-20: 1.25rem; /* 20 px */
+    --radius-24: 1.5rem; /* 24 px */
+    --radius-full: 62.4375rem; /* 999 px */
 
     /* SHADOWS */
     --small-shadow: 0 0.25rem 0.375rem 0 #f0f0f060;
@@ -141,9 +141,7 @@
   #root {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--colors-green-50);
+    min-height: 100vh;
   }
 
   html,
@@ -155,6 +153,13 @@
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden;
+  }
+
+  #content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
   }
 
   footer {
