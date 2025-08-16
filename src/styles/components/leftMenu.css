@@ -5,9 +5,12 @@
     flex-shrink: 0;
   }
 
-  .left-menu .logo {
-    width: 100%;
+  .left-menu .logo-wrapper {
     padding: var(--space-150);
+  }
+  .left-menu .logo {
+    width: 95px;
+    height: 28px;
   }
 
   .left-menu nav,
@@ -33,6 +36,18 @@
     border-right: 1px solid var(--colors-neutral-200);
     flex-shrink: 0;
     border-right: 1px solid var(--colors-neutral-400);
+  }
+
+  .inner-sidebar .create-note-button {
+    width: 100%;
+    padding: var(--space-150);
+    border-radius: var(--radius-8);
+    background-color: var(--colors-blue-500);
+    color: white;
+  }
+
+  .inner-sidebar ul {
+    margin-left: var(--space-200);
   }
 
   .inner-sidebar ul li {

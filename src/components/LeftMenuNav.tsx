@@ -1,6 +1,7 @@
 import logoUrl from "../assets/images/logo.svg";
 import tags from "../data/tags.json";
 
+import SvgLogo from "./logo/Logo.tsx";
 import SvgIconHome from "./icons/IconHome.tsx";
 import SvgIconArchive from "./icons/IconArchive.tsx";
 import SvgIconTag from "./icons/IconTag.tsx";
@@ -8,8 +9,8 @@ import SvgIconTag from "./icons/IconTag.tsx";
 const LeftMenuNav = () => {
   return (
     <aside className="left-menu">
-      <div className="logo">
-        <img src={logoUrl} alt="Logo" />
+      <div className="logo-wtapper">
+        <SvgLogo className="logo" />
       </div>
       <main className="left-menu-content">
         <nav>
