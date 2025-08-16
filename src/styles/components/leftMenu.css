@@ -18,7 +18,7 @@
   .left-menu .left-menu-content nav {
     border-bottom: 1px solid var(--colors-neutral-200);
   }
-  .left-menu ul li {
+  ul li {
     margin-top: var(--space-050);
   }
 
@@ -33,5 +33,34 @@
     border-right: 1px solid var(--colors-neutral-200);
     flex-shrink: 0;
     border-right: 1px solid var(--colors-neutral-400);
+  }
+
+  .inner-sidebar ul li {
+    border-bottom: 1px solid var(--colors-neutral-400);
+  }
+
+  .inner-sidebar .note-item {
+    padding: var(--space-100);
+  }
+
+  .item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-150);
+    font-size: var(--font-size-100);
+    color: var(--colors-neutral-600);
+  }
+
+  .item-tags {
+    padding: var(--space-150);
+  }
+
+  .item-tag {
+    background-color: var(--colors-neutral-700);
+    padding: var(--space-025) var(--space-075);
+    margin: var(--space-050);
+    border-radius: var(--radius-4);
+    color: white;
   }
 }
