@@ -119,7 +119,7 @@
 
   html {
     font-size: 1rem;
-    font-family: "League Spartan", system-ui, sans-serif;
+    font-family: var(--ff-sans), system-ui, sans-serif;
   }
 
   @media (prefers-reduced-motion: no-preference) {
