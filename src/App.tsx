@@ -1,12 +1,13 @@
 import Footer from "./components/Footer";
-import LeftMenu from "./components/LeftMenu";
+import LeftMenuNav from "./components/LeftMenuNav";
+import MainContent from "./components/MainContent";
 
 function App() {
   return (
     <>
       <div id="content">
-        <LeftMenu />
-        <h1>All Notes</h1>
+        <LeftMenuNav />
+        <MainContent />
       </div>
       <Footer />
     </>

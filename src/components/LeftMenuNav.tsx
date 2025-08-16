@@ -3,9 +3,9 @@ import tags from "../data/tags.json";
 
 import SvgIconHome from "./icons/IconHome.tsx";
 import SvgIconArchive from "./icons/IconArchive.tsx";
-import SvgIconTag from "./icons/IconTag";
+import SvgIconTag from "./icons/IconTag.tsx";
 
-const Sidebar = () => {
+const LeftMenuNav = () => {
   return (
     <aside className="left-menu">
       <div className="logo">
@@ -44,4 +44,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default LeftMenuNav;
