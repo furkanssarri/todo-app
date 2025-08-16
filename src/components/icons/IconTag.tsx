@@ -9,7 +9,7 @@ const SvgIconTag = (props) => (
     {...props}
   >
     <path
-      stroke="#0E121B"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.8}
@@ -17,7 +17,7 @@ const SvgIconTag = (props) => (
       clipRule="evenodd"
     />
     <path
-      stroke="#0E121B"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.8}

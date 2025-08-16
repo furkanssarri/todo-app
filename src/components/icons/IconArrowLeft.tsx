@@ -9,7 +9,7 @@ const SvgIconArrowLeft = (props) => (
     {...props}
   >
     <path
-      fill="#000"
+      fill="currentColor"
       fillRule="evenodd"
       d="M15.75 20.414 7.336 12l8.414-8.414L17.164 5l-7 7 7 7z"
       clipRule="evenodd"
