@@ -2,7 +2,8 @@
   .right-menu {
     padding: var(--space-150) var(--space-200);
     border-left: 1px solid var(--border-color);
-    flex-shrink: 0;
+    flex: 0 1 20%;
+    /* flex-shrink: 0; */
   }
 
   .right-menu .actions {

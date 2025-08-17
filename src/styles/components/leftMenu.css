@@ -31,23 +31,33 @@
     width: 100%;
   }
 
+  /* ___________ INNER SIDEBAR ____________ */
+
   .inner-sidebar {
     padding: var(--space-200);
     border-right: 1px solid var(--border-color);
     flex-shrink: 0;
   }
 
-  .inner-sidebar .create-note-button {
+  .inner-sidebar button {
     width: 100%;
     padding: var(--space-150);
     border: none;
     border-radius: var(--radius-8);
     background-color: var(--colors-blue-500);
     color: white;
+    justify-content: center;
+    gap: 0 !important;
+    font-family: var(--ff-sans) !important;
+    margin-bottom: var(--space-200) !important;
+  }
+
+  .inner-sidebar button svg {
+    color: white;
   }
 
   .inner-sidebar ul {
-    margin-left: var(--space-200);
+    margin-left: var(--space-100);
   }
 
   .inner-sidebar ul li {
@@ -65,10 +75,12 @@
     gap: var(--space-150);
     font-size: var(--font-size-100);
     color: var(--colors-neutral-600);
+    padding-left: var(--space-100);
   }
 
   .item-tags {
     padding: var(--space-150);
+    padding-left: 0;
   }
 
   .item-tag {

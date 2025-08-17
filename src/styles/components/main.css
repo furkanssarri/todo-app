@@ -26,6 +26,33 @@
     flex-direction: column;
     gap: var(--space-100);
     padding: var(--space-250) var(--space-300);
+    padding-left: 0;
     border-bottom: 1px solid var(--border-color);
+  }
+
+  .info-line {
+    max-width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .quick-info svg {
+    margin-right: var(--space-075);
+  }
+
+  .note-body ul li::before {
+    content: "-";
+    margin-right: var(--space-025);
+  }
+
+  .note-body ol {
+    padding-left: var(--space-200);
+    margin-top: var(--space-200);
+  }
+
+  .note-body p {
+    margin: var(--space-200) auto;
   }
 }
