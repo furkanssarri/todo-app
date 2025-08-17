@@ -1,19 +1,26 @@
 import data from "../data/data.json";
-import SvgIconPlus from "./icons/IconPlus";
+// import SvgIconPlus from "./icons/IconPlus";
+
+import Button from "./Button/index.js";
+
+import { format } from "date-fns";
 
 const NotesList = () => {
   return (
     <>
-      <button className="create-note-button text-preset-sans-4">
+      <Button startIcon="plus" color="primary">
+        Create New Note
+      </Button>
+      {/* <button className="create-note-button text-preset-sans-4">
         <SvgIconPlus /> Create New Note
-      </button>
+      </button> */}
       <ul>
         {data &&
           data.map((item) => (
             <li key={item.id}>
               <a href={`#${item.id}`} className="note-item text-preset-sans-3">
                 {item.title}
-                <div className="item-details">
+                <div className="item-details text-preset-sans-6">
                   <div className="item-tags">
                     {item.tags.map((tag) => (
                       <span key={tag} className="item-tag">
@@ -21,7 +28,9 @@ const NotesList = () => {
                       </span>
                     ))}
                   </div>
-                  <span className="item-date">{item.lastEdited}</span>
+                  <span className="item-date">
+                    {format(item.lastEdited, "dd MMM yyyy")}
+                  </span>
                 </div>
               </a>
             </li>
