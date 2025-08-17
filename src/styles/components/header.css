@@ -5,7 +5,7 @@
     justify-content: space-between;
     padding: var(--space-300) var(--space-400);
     width: 100%;
-    border-bottom: 1px solid var(--colors-neutral-400);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .search-input {
@@ -15,7 +15,8 @@
     border-radius: var(--radius-8);
     background: transparent;
     color: var(--colors-neutral-400);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+    box-shadow: var(--shadow-1);
     transition: all 0.3s ease;
   }
 

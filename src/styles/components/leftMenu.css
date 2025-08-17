@@ -1,7 +1,7 @@
 @layer components {
   .left-menu {
     padding: var(--space-150) var(--space-200);
-    border-right: 1px solid var(--colors-neutral-400);
+    border-right: 1px solid var(--border-color);
     flex-shrink: 0;
   }
 
@@ -19,7 +19,7 @@
   }
 
   .left-menu .left-menu-content nav {
-    border-bottom: 1px solid var(--colors-neutral-200);
+    border-bottom: 1px solid var(--border-color);
   }
   ul li {
     margin-top: var(--space-050);
@@ -32,15 +32,15 @@
   }
 
   .inner-sidebar {
-    padding: var(--space-150) var(--space-200);
-    border-right: 1px solid var(--colors-neutral-200);
+    padding: var(--space-200);
+    border-right: 1px solid var(--border-color);
     flex-shrink: 0;
-    border-right: 1px solid var(--colors-neutral-400);
   }
 
   .inner-sidebar .create-note-button {
     width: 100%;
     padding: var(--space-150);
+    border: none;
     border-radius: var(--radius-8);
     background-color: var(--colors-blue-500);
     color: white;
@@ -51,7 +51,7 @@
   }
 
   .inner-sidebar ul li {
-    border-bottom: 1px solid var(--colors-neutral-400);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .inner-sidebar .note-item {

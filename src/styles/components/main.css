@@ -18,7 +18,7 @@
 
   .note-content {
     min-height: 100%;
-    border-bottom: 1px solid var(--colors-neutral-400);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .quick-info {
@@ -26,6 +26,6 @@
     flex-direction: column;
     gap: var(--space-100);
     padding: var(--space-250) var(--space-300);
-    border-bottom: 1px solid var(--colors-neutral-400);
+    border-bottom: 1px solid var(--border-color);
   }
 }

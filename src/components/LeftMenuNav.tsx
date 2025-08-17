@@ -1,4 +1,3 @@
-import logoUrl from "../assets/images/logo.svg";
 import tags from "../data/tags.json";
 
 import SvgLogo from "./logo/Logo.tsx";
