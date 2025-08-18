@@ -1,4 +1,12 @@
 @layer components {
+  header {
+    background-color: var(--colors-neutral-800);
+  }
+
+  main {
+    background-color: var(--color-neutral-800);
+  }
+
   ul {
     list-style-type: none;
     padding: 0;

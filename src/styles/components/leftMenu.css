@@ -14,10 +14,6 @@
     padding: var(--space-150);
     margin: var(--space-150);
   }
-  .left-menu .logo {
-    width: 95px;
-    height: 28px;
-  }
 
   .left-menu nav,
   .left-menu .tags-wrapper {

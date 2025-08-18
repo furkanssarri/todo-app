@@ -1,25 +1,16 @@
-import { IconSettings, IconSearch } from "./icons";
+import Settings from "./Settings";
+import SearchBar from "./SearchBar";
+import MainTitle from "./MainTitle";
 
 const Header = ({ title }: { title: string }) => {
   return (
-    <header>
+    <>
       <section className="heading">
-        <h1>{title}</h1>
+        <MainTitle title={title} />
       </section>
-      <section className="search">
-        <IconSearch className="search-icon" />
-        <input
-          type="text"
-          id="search"
-          name="search"
-          className="search-input"
-          placeholder="Search by title, content or tags..."
-        />
-        <button className="settings-button">
-          <IconSettings />
-        </button>
-      </section>
-    </header>
+      <SearchBar />
+      <Settings />
+    </>
   );
 };
 

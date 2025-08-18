@@ -1,8 +1,8 @@
-const SvgLogo = (props) => (
+const IconLogo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
+    width="95px"
+    height="28px"
     fill="none"
     viewBox="0 0 95 28"
     {...props}
@@ -31,4 +31,4 @@ const SvgLogo = (props) => (
     </defs>
   </svg>
 );
-export default SvgLogo;
+export default IconLogo;
