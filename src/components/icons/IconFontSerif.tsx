@@ -1,5 +1,5 @@
 import * as React from "react";
-const SvgIconFontSerif = (props) => (
+const SvgIconFontSerif = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"

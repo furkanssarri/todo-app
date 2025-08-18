@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import StyledButton from "./styles";
+import StyledButton from "./styles.tsx";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   HomeIcon,
   ShoppingCartIcon,
   ThumbsUpIcon,
-} from "./icons";
+} from "./icons.tsx";
 
 import {
   IconPlus,
@@ -30,12 +30,14 @@ const icons = {
   arrowLeft: <IconArrowLeft />,
 };
 
+type IconName = keyof typeof icons;
+
 type ButtonProps = {
-  variant?: String;
+  variant?: "default" | "outline" | "text";
   disableShadow?: boolean;
   disabled?: boolean;
-  startIcon?: string | React.ReactElement;
-  endIcon?: string | React.ReactElement;
+  startIcon?: IconName | React.ReactElement;
+  endIcon?: IconName | React.ReactElement;
   size?: "sm" | "md" | "lg";
   color?: "default" | "primary" | "secondary" | "danger";
   title?: string;
@@ -55,8 +57,8 @@ const Button = ({
   onClick,
   ...rest
 }: ButtonProps) => {
-  const [startIcon_, setStartIcon] = useState(null);
-  const [endIcon_, setEndIcon] = useState(null);
+  const [startIcon_, setStartIcon] = useState<React.ReactElement | null>(null);
+  const [endIcon_, setEndIcon] = useState<React.ReactElement | null>(null);
 
   useEffect(() => {
     if (startIcon) {
