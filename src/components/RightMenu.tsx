@@ -1,17 +1,25 @@
+import Button from "./Button";
+
 const RightMenu = () => {
   return (
-    <aside className="right-menu">
-      <menu className="actions">
+    <menu className="right-menu">
+      <section className="actions">
         <ul>
-          <li>
-            <a href="#">Delete</a>
+          <li className="action-button">
+            <Button startIcon={"delete"} size={"lg"} variant={"outline"}>
+              {" "}
+              Delete Note
+            </Button>
           </li>
-          <li>
-            <a href="#">Archive</a>
+          <li className="action-button">
+            <Button startIcon={"archive"} size={"lg"} variant={"outline"}>
+              {" "}
+              Archive Note
+            </Button>
           </li>
         </ul>
-      </menu>
-    </aside>
+      </section>
+    </menu>
   );
 };
 

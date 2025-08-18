@@ -6,20 +6,17 @@ import Sidebar from "./Sidebar";
 import Markdown from "react-markdown";
 import { format } from "date-fns";
 
-import SvgIconTag from "./icons/IconTag";
-import SvgIconClock from "./icons/IconClock";
+import { IconTag, IconClock } from "./icons";
 
 import data from "../data/data.json";
 
 const MainContent = () => {
-  const note = data[1];
+  const note = data[0];
   return (
     <main>
       <Header title="All Notes" />
       <div className="main-content-wrapper">
-        <Sidebar>
-          <NotesList />
-        </Sidebar>
+        <NotesList />
 
         <article className="note-details">
           <div className="note-content">
@@ -27,14 +24,14 @@ const MainContent = () => {
             <div className="quick-info">
               <div className="info-line">
                 <span>
-                  <SvgIconTag />
+                  <IconTag />
                   Tags:{" "}
                 </span>{" "}
                 <span>{note.tags.join(", ")}</span>
               </div>
               <div className="info-line">
                 <span>
-                  <SvgIconClock />
+                  <IconClock />
                   Last Edited:{" "}
                 </span>{" "}
                 <span>{format(note.lastEdited, "dd MMM yyyy")}</span>

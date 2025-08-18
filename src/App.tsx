@@ -1,5 +1,5 @@
 import Footer from "./components/Footer";
-import LeftMenuNav from "./components/LeftMenuNav";
+import LeftMenuNav from "./components/LeftMenu";
 import MainContent from "./components/MainContent";
 
 function App() {

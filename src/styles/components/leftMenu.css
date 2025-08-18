@@ -2,11 +2,17 @@
   .left-menu {
     padding: var(--space-150) var(--space-200);
     border-right: 1px solid var(--border-color);
+    flex: 0 1 272px;
     flex-shrink: 0;
+  }
+
+  .left-menu h4 {
+    color: var(--colors-neutral-500);
   }
 
   .left-menu .logo-wrapper {
     padding: var(--space-150);
+    margin: var(--space-150);
   }
   .left-menu .logo {
     width: 95px;
@@ -18,11 +24,23 @@
     padding: var(--space-100) var(--space-200);
   }
 
-  .left-menu .left-menu-content nav {
+  .left-menu .left-menu-content nav:first-of-type {
     border-bottom: 1px solid var(--border-color);
   }
   ul li {
     margin-top: var(--space-050);
+  }
+
+  .left-menu ul li {
+    border-radius: var(--radius-8);
+  }
+
+  .left-menu ul li:hover {
+    background-color: var(--colors-neutral-100);
+  }
+
+  .left-menu ul li:hover svg {
+    color: var(--colors-blue-500);
   }
 
   .left-menu a {

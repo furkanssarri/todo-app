@@ -7,16 +7,40 @@
   }
 
   .right-menu .actions {
-    padding: var(--space-100) var(--space-200);
+    padding: var(--space-100) 0;
   }
 
   .right-menu ul li {
-    margin-top: var(--space-050);
+    margin-bottom: var(--space-150);
   }
 
   .right-menu a {
     padding: var(--space-150);
     display: inline-block;
     width: 100%;
+  }
+
+  .action-button button {
+    width: 100%;
+    color: var(--colors-neutral-600) !important;
+    padding: var(--space-150);
+    box-shadow: none !important;
+  }
+  .action-button button:hover {
+    border: 1px solid transparent !important;
+  }
+
+  .action-button button:hover svg {
+    color: var(--colors-neutral-600) !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .action-button button {
+      color: var(--colors-neutral-100) !important;
+    }
+
+    .action-button button:hover {
+      color: var(--colors-neutral-600) !important;
+    }
   }
 }

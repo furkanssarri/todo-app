@@ -219,7 +219,7 @@
     }
 
     body {
-      background-color: var(--colors-neutral-800);
+      background-color: var(--colors-neutral-950);
       color: var(--colors-neutral-100);
     }
     svg {

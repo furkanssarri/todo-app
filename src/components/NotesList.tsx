@@ -7,8 +7,8 @@ import { format } from "date-fns";
 
 const NotesList = () => {
   return (
-    <>
-      <Button startIcon="plus" color="primary">
+    <nav className="inner-sidebar">
+      <Button startIcon="plus" color="primary" size="lg">
         Create New Note
       </Button>
       {/* <button className="create-note-button text-preset-sans-4">
@@ -36,7 +36,7 @@ const NotesList = () => {
             </li>
           ))}
       </ul>
-    </>
+    </nav>
   );
 };
 

@@ -1,44 +1,44 @@
 import tags from "../data/tags.json";
 
+import { IconHome, IconArchive, IconTag } from "./icons/index.tsx";
+
 import SvgLogo from "./logo/Logo.tsx";
-import SvgIconHome from "./icons/IconHome.tsx";
-import SvgIconArchive from "./icons/IconArchive.tsx";
-import SvgIconTag from "./icons/IconTag.tsx";
 
 const LeftMenuNav = () => {
   return (
-    <aside className="left-menu">
-      <div className="logo-wtapper">
+    <aside className="left-menu text-preset-sans-4">
+      <div className="logo-wrapper">
         <SvgLogo className="logo" />
       </div>
       <main className="left-menu-content">
-        <nav>
+        <nav className="main-filter">
           <ul>
             <li>
               <a href="#">
-                <SvgIconHome /> All Notes
+                <IconHome /> All Notes
               </a>
             </li>
             <li>
               {" "}
               <a href="#">
                 {" "}
-                <SvgIconArchive /> Archived Notes
+                <IconArchive /> Archived Notes
               </a>
             </li>
           </ul>
         </nav>
-        <div className="tags-wrapper">
+        <section className="tags-wrapper">
+          <h4 className="text-preset-sans-4">Tags</h4>
           <ul>
             {tags.map((tag) => (
               <li key={tag}>
                 <a href="#">
-                  <SvgIconTag /> {tag}
+                  <IconTag /> {tag}
                 </a>
               </li>
             ))}
           </ul>
-        </div>
+        </section>
       </main>
     </aside>
   );

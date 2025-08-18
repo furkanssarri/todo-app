@@ -1,4 +1,4 @@
-import SvgIconSettings from "./icons/IconSettings";
+import { IconSettings, IconSearch } from "./icons";
 
 const Header = ({ title }: { title: string }) => {
   return (
@@ -7,6 +7,7 @@ const Header = ({ title }: { title: string }) => {
         <h1>{title}</h1>
       </section>
       <section className="search">
+        <IconSearch className="search-icon" />
         <input
           type="text"
           id="search"
@@ -15,7 +16,7 @@ const Header = ({ title }: { title: string }) => {
           placeholder="Search by title, content or tags..."
         />
         <button className="settings-button">
-          <SvgIconSettings />
+          <IconSettings />
         </button>
       </section>
     </header>
