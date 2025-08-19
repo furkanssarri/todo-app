@@ -2,12 +2,24 @@
   main {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 98%;
+    background-color: var(--colors-neutral-100);
   }
 
   .main-wrapper {
-    border-radius: var(--radius-20);
-    margin-top: 100px;
+    border-top-left-radius: var(--radius-8);
+    border-top-right-radius: var(--radius-8);
+    background-color: white;
+    margin-top: var(--space-100);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    main {
+      background-color: var(--colors-neutral-800);
+    }
+    .main-wrapper {
+      background-color: var(--colors-neutral-950);
+    }
   }
 
   .main-content-wrapper {

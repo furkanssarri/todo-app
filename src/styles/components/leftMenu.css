@@ -1,7 +1,6 @@
 @layer components {
   .left-menu {
     padding: var(--space-150) var(--space-200);
-    border-right: 1px solid var(--border-color);
     flex: 0 1 272px;
     flex-shrink: 0;
   }

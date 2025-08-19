@@ -9,6 +9,18 @@
     border-bottom: 1px solid var(--border-color);
   }
 
+  @media (max-width: 768px) {
+    header {
+      background-color: var(--colors-neutral-100);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      header {
+        background-color: var(--colors-neutral-800);
+      }
+    }
+  }
+
   .search {
     position: relative;
   }
