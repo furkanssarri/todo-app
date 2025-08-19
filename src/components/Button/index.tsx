@@ -14,6 +14,7 @@ import {
   IconArchive,
   IconArrowLeft,
   IconRestore,
+  IconTag,
 } from "../icons/index";
 import "./button.css";
 
@@ -28,6 +29,7 @@ const icons = {
   archive: <IconArchive />,
   refresh: <IconRestore />,
   arrowLeft: <IconArrowLeft />,
+  tag: <IconTag />,
 };
 
 type IconName = keyof typeof icons;

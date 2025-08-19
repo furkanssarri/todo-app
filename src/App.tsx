@@ -14,11 +14,11 @@ function App() {
     throw new Error("Mobilecontext not provided");
   }
   const { isMobile } = context;
-  // const isMobile = useMediaQuery({ maxWidth: "768px" });
 
   useEffect(() => {
     console.log(isMobile);
   }, [isMobile]);
+
   return isMobile ? <MobileLayout /> : <DesktopLayout />;
   return (
     <>

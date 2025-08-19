@@ -6,11 +6,12 @@
     background-color: var(--colors-neutral-100);
   }
 
-  .main-wrapper {
-    border-top-left-radius: var(--radius-8);
-    border-top-right-radius: var(--radius-8);
-    background-color: white;
-    margin-top: var(--space-100);
+  @media (max-width: 768px) {
+    .main-wrapper {
+      border-top-left-radius: var(--radius-20);
+      border-top-right-radius: var(--radius-20);
+      background-color: white;
+    }
   }
 
   @media (prefers-color-scheme: dark) {
@@ -71,5 +72,26 @@
 
   .note-body p {
     margin: var(--space-200) auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-add-note-button {
+    position: relative;
+  }
+  .mobile-add-note-button button {
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    bottom: 2rem;
+    right: var(--space-200);
+    border-radius: 50%;
+    display: block !important;
+    padding: initial !important;
+    font-size: 2rem;
+  }
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
   }
 }

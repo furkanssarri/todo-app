@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
 import NoteBody from "../components/NoteBody";
 import TagsList from "../components/TagsList";
+import { MobileContext } from "../context/MobileContext";
+import Button from "../components/Button";
 
 type View = "home" | "note" | "tags";
 
 const MobileLayout = () => {
+  const context = useContext(MobileContext);
+
+  if (!context) {
+    throw new Error("Mobilecontext not provided");
+  }
+  const { isMobile } = context;
   const [activeView, setActiveView] = useState<View>("home");
+
   return (
     <>
       <header>
@@ -19,13 +28,32 @@ const MobileLayout = () => {
           {activeView === "note" && <NoteBody />}
           {activeView === "tags" && <TagsList />}
         </div>
+        {isMobile && (
+          <span className="mobile-add-note-button">
+            <Button startIcon="plus" color="primary" size="lg" />
+          </span>
+        )}
       </main>
       <nav className="mobile-nav">
-        <button onClick={() => setActiveView("home")}>Home</button>
-        <button onClick={() => setActiveView("note")}>Note</button>
-        <button onClick={() => setActiveView("tags")}>Tags</button>
+        <Button
+          startIcon={"home"}
+          color="primary"
+          size="lg"
+          onClick={() => setActiveView("home")}
+        />
+        <Button
+          startIcon={"archive"}
+          color="primary"
+          size="lg"
+          onClick={() => setActiveView("note")}
+        />
+        <Button
+          startIcon={"tag"}
+          color="primary"
+          size="lg"
+          onClick={() => setActiveView("tags")}
+        />
       </nav>
-      "
     </>
   );
 };

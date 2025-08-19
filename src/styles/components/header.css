@@ -12,6 +12,7 @@
   @media (max-width: 768px) {
     header {
       background-color: var(--colors-neutral-100);
+      border: none;
     }
 
     @media (prefers-color-scheme: dark) {
