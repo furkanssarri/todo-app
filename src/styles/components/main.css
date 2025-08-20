@@ -2,10 +2,13 @@
   main {
     display: flex;
     flex-direction: column;
-    /* width: 98%; */
+    width: 88%;
   }
 
   @media (max-width: 768px) {
+    main {
+      width: auto;
+    }
     .main-wrapper {
       border-top-left-radius: var(--radius-20);
       border-top-right-radius: var(--radius-20);
