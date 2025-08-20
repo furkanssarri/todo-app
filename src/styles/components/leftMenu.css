@@ -106,6 +106,15 @@
     color: white;
   }
 
+  main .main-wrapper .tags-wrapper ul .tag-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-150) 0;
+  }
+
+  main .main-wrapper .tags-wrapper ul .tag-item svg {
+    font-size: 1.2rem;
+  }
+
   @media (max-width: 768px) {
     .inner-sidebar {
       border: none;

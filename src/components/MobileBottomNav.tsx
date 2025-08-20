@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Button from "./Button";
 import { views, type View } from "../constants/mobileViews";
 import { useContext } from "react";
@@ -21,8 +22,8 @@ const MobileBottomNav = ({
           views.map((item, index) => {
             if (item !== "noteBody") {
               return (
-                <>
-                  <li key={item}>
+                <Fragment key={`${item}-${index}`}>
+                  <li>
                     <Button
                       startIcon={item}
                       variant="text"
@@ -30,12 +31,14 @@ const MobileBottomNav = ({
                       size="lg"
                       onClick={() => setActiveView(item)}
                       className={activeView === item ? "active" : ""}
-                    />
+                    >
+                      {isTablet && item.charAt(0).toUpperCase() + item.slice(1)}
+                    </Button>
                   </li>
                   {isTablet && index < views.length - 2 && (
                     <hr className="mobile-nav-line" />
                   )}
-                </>
+                </Fragment>
               );
             }
           })}

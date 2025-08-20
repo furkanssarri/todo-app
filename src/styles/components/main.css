@@ -27,7 +27,7 @@
 
   @media (prefers-color-scheme: dark) {
     main {
-      background-color: var(--colors-neutral-800);
+      background-color: var(--colors-neutral-950);
     }
     .main-wrapper {
       background-color: var(--colors-neutral-950);

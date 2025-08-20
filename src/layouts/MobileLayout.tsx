@@ -10,14 +10,10 @@ import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import { type View } from "../constants/mobileViews";
+import MainTitle from "../components/MainTitle";
 
 const MobileLayout = () => {
-  const context = useContext(MobileContext);
-
-  if (!context) {
-    throw new Error("Mobilecontext not provided");
-  }
-  const { isMobile } = context;
+  const { isMobile } = useContext(MobileContext);
   const [activeView, setActiveView] = useState<View>("home");
 
   return (
@@ -28,7 +24,8 @@ const MobileLayout = () => {
       <main>
         <div className="main-wrapper">
           <div className="mobile-layout-main-heading">
-            <h1>{activeView}</h1> {/* Change this to the desired heading */}
+            <MainTitle title={activeView} />{" "}
+            {/* Change this to the desired heading */}
           </div>
           {activeView === "home" && <NotesList />}
           {activeView === "search" && <SearchPage />}

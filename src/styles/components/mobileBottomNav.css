@@ -2,21 +2,21 @@
   .mobile-nav {
     width: 100%;
     padding: var(--space-100) 0;
-    border-top: 1px solid var(--colors-neutral-200);
+    border-top: 1px solid var(--border-color);
     box-shadow: 0 -8px 12px 0 #f0f0f060;
     background-color: white;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .mobile-nav {
-      background-color: var(--colors-neutral-950);
-      border-top: 1px solid var(--colors-neutral-800);
-      box-shadow: 0 -4px 6px 0 #00000030;
-    }
-  }
-
   .mobile-nav ul {
     justify-content: space-around;
+  }
+
+  .mobile-nav ul li button {
+    display: flex;
+    flex-direction: column;
+    gap: 0 !important;
+    justify-content: center !important;
+    color: var(--colors-neutral-600) !important;
   }
 
   .mobile-nav ul li button svg {
@@ -30,9 +30,32 @@
     background-color: var(--colors-neutral-200);
   }
 
+  nav.mobile-nav .active,
+  nav.mobile-nav ul li button:hover {
+    background-color: var(--colors-blue-50) !important;
+    border-radius: var(--radius-4) !important;
+  }
+  nav.mobile-nav .active svg,
+  nav.mobile-nav ul li:hover svg {
+    color: var(--colors-blue-500);
+  }
+
   @media (prefers-color-scheme: dark) {
+    .mobile-nav {
+      background-color: var(--colors-neutral-950);
+      box-shadow: 0 -4px 6px 0 #00000030;
+    }
     .mobile-nav-line {
       background-color: var(--colors-neutral-800);
+    }
+
+    .mobile-nav ul li button {
+      color: var(--colors-neutral-400) !important;
+    }
+    nav.mobile-nav .active,
+    nav.mobile-nav ul li button:hover {
+      background-color: var(--colors-neutral-700) !important;
+      color: var(--colors-blue-500) !important;
     }
   }
 }
