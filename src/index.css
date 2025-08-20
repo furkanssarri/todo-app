@@ -1,0 +1,10 @@
+@layer base, components, utilities;
+
+@import url("./styles/_base.css");
+@import url("./styles/components/components.css");
+@import url("./styles/components/leftMenu.css");
+@import url("./styles/components/header.css");
+@import url("./styles/components/main.css");
+@import url("./styles/components/mobileBottomNav.css");
+@import url("./styles/components/rightMenu.css");
+@import url("./styles/utilities.css");

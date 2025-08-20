@@ -1,0 +1,112 @@
+@layer components {
+  main {
+    display: flex;
+    flex-direction: column;
+    /* width: 98%; */
+  }
+
+  @media (max-width: 768px) {
+    .main-wrapper {
+      border-top-left-radius: var(--radius-20);
+      border-top-right-radius: var(--radius-20);
+      padding: var(--space-300) var(--space-200);
+    }
+    .main-wrapper .search-area {
+      margin: var(--space-200) auto;
+    }
+    .main-wrapper .search-area .search input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .main-wrapper {
+      padding: var(--space-300) var(--space-200);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    main {
+      background-color: var(--colors-neutral-950);
+    }
+    .main-wrapper {
+      background-color: var(--colors-neutral-950);
+    }
+  }
+
+  .main-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+  }
+
+  .note-details {
+    padding: var(--space-250) var(--space-300);
+    flex: 1;
+  }
+
+  .note-content {
+    min-height: 100%;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .quick-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-100);
+    padding: var(--space-250) var(--space-300);
+    padding-left: 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .info-line {
+    max-width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .quick-info svg {
+    margin-right: var(--space-075);
+  }
+
+  .note-body ul li::before {
+    content: "-";
+    margin-right: var(--space-025);
+  }
+
+  .note-body ol {
+    padding-left: var(--space-200);
+    margin-top: var(--space-200);
+  }
+
+  .note-body p {
+    margin: var(--space-200) auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-add-note-button {
+    position: relative;
+  }
+  .mobile-add-note-button button {
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    bottom: 5rem;
+    right: var(--space-400);
+    border-radius: 50%;
+    display: block !important;
+    padding: initial !important;
+    font-size: 2rem;
+  }
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+  }
+
+  .mobile-nav ul {
+    display: flex;
+  }
+}
