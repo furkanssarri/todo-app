@@ -1,16 +1,27 @@
-@layer {
+@layer components {
   main {
     display: flex;
     flex-direction: column;
-    width: 98%;
-    background-color: var(--colors-neutral-100);
+    /* width: 98%; */
   }
 
   @media (max-width: 768px) {
     .main-wrapper {
       border-top-left-radius: var(--radius-20);
       border-top-right-radius: var(--radius-20);
-      background-color: white;
+      padding: var(--space-300) var(--space-200);
+    }
+    .main-wrapper .search-area {
+      margin: var(--space-200) auto;
+    }
+    .main-wrapper .search-area .search input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .main-wrapper {
+      padding: var(--space-300) var(--space-200);
     }
   }
 

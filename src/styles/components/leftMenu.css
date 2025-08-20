@@ -105,4 +105,11 @@
     border-radius: var(--radius-4);
     color: white;
   }
+
+  @media (max-width: 768px) {
+    .inner-sidebar {
+      border: none;
+      padding: var(--space-200) 0;
+    }
+  }
 }
