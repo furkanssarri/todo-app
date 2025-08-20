@@ -83,8 +83,8 @@
     position: fixed;
     width: 48px;
     height: 48px;
-    bottom: 2rem;
-    right: var(--space-200);
+    bottom: 5rem;
+    right: var(--space-400);
     border-radius: 50%;
     display: block !important;
     padding: initial !important;
@@ -93,5 +93,9 @@
   .mobile-nav {
     position: fixed;
     bottom: 0;
+  }
+
+  .mobile-nav ul {
+    display: flex;
   }
 }

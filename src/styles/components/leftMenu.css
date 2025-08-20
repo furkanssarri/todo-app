@@ -52,7 +52,8 @@
     flex-shrink: 0;
   }
 
-  .inner-sidebar button {
+  .inner-sidebar button,
+  .mobile-add-note-button button {
     width: 100%;
     padding: var(--space-150);
     border: none;
@@ -65,7 +66,8 @@
     margin-bottom: var(--space-200) !important;
   }
 
-  .inner-sidebar button svg {
+  .inner-sidebar button svg,
+  .mobile-add-note-button button svg {
     color: white;
   }
 
