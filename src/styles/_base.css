@@ -1,13 +1,13 @@
 @layer base {
   @font-face {
     font-family: "Inter";
-    src: url("../assets/fonts/inter/Inter-VariableFont_opsz\,wght.ttf")
+    src: url("../assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf")
       format("truetype");
     font-display: swap;
   }
   @font-face {
     font-family: "Noto-serif";
-    src: url("../assets/fonts/noto-serif/NotoSerif-VariableFont_wdth\,wght.ttf")
+    src: url("../assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght.ttf")
       format("truetype");
     font-display: swap;
   }
