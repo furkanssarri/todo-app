@@ -12,9 +12,7 @@ const MobileBottomNav = ({
   activeView,
   setActiveView,
 }: MobileBottomNavProps) => {
-  const context = useContext(MobileContext);
-  if (!context) return new Error("Context not provided");
-  const { isMobile, isTablet } = context;
+  const { isMobile, isTablet } = useContext(MobileContext);
   return (
     <nav className="mobile-nav">
       <ul>
