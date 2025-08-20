@@ -15,21 +15,27 @@ import {
   IconArrowLeft,
   IconRestore,
   IconTag,
+  IconSearch,
+  IconSettings,
 } from "../icons/index";
 import "./button.css";
 
 const icons = {
   local_grocery_store: <ShoppingCartIcon />,
-  home: <HomeIcon />,
   arrow_left: <ArrowLeftIcon />,
   arrow_right: <ArrowRightIcon />,
   thumbs_up: <ThumbsUpIcon />,
-  plus: <IconPlus />,
-  delete: <IconDelete />,
+  // Additional icons
+  home: <HomeIcon />,
+  search: <IconSearch />,
   archive: <IconArchive />,
+  settings: <IconSettings />,
+  delete: <IconDelete />,
+  plus: <IconPlus />,
   refresh: <IconRestore />,
-  arrowLeft: <IconArrowLeft />,
   tag: <IconTag />,
+
+  arrowLeft: <IconArrowLeft />,
 };
 
 type IconName = keyof typeof icons;
@@ -45,7 +51,7 @@ type ButtonProps = {
   title?: string;
   onClick?: () => void;
   children?: React.ReactNode;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
   variant,
