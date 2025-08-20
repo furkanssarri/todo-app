@@ -24,8 +24,9 @@ const MobileLayout = () => {
       <main>
         <div className="main-wrapper">
           <div className="mobile-layout-main-heading">
-            <MainTitle title={activeView} />{" "}
-            {/* Change this to the desired heading */}
+            <MainTitle
+              title={activeView.charAt(0).toUpperCase() + activeView.slice(1)}
+            />
           </div>
           {activeView === "home" && <NotesList />}
           {activeView === "search" && <SearchPage />}
