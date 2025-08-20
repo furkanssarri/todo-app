@@ -3,7 +3,7 @@ import StyledButton from "./styles.tsx";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  HomeIcon,
+  HomeIconDefault,
   ShoppingCartIcon,
   ThumbsUpIcon,
 } from "./icons.tsx";
@@ -17,16 +17,18 @@ import {
   IconTag,
   IconSearch,
   IconSettings,
+  IconHome,
 } from "../icons/index";
 import "./button.css";
 
 const icons = {
+  home_default: <HomeIconDefault />,
   local_grocery_store: <ShoppingCartIcon />,
   arrow_left: <ArrowLeftIcon />,
   arrow_right: <ArrowRightIcon />,
   thumbs_up: <ThumbsUpIcon />,
   // Additional icons
-  home: <HomeIcon />,
+  home: <IconHome />,
   search: <IconSearch />,
   archive: <IconArchive />,
   settings: <IconSettings />,
