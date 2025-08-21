@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "./Logo.tsx";
 import TagsList from "./TagsList.tsx";
 import { IconHome, IconArchive } from "./icons/index.tsx";
@@ -10,16 +11,16 @@ const LeftMenuNav = () => {
         <nav className="main-filter">
           <ul>
             <li>
-              <a href="#">
+              <Link to="/">
                 <IconHome /> All Notes
-              </a>
+              </Link>
             </li>
             <li>
               {" "}
-              <a href="#">
+              <Link to="/archive">
                 {" "}
                 <IconArchive /> Archived Notes
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

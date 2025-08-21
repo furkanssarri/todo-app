@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
 import NoteBody from "../components/NoteBody";
@@ -10,16 +10,12 @@ import TagsList from "../components/TagsList";
 import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
-import { type View } from "../constants/mobileViews";
+import { views, type View } from "../constants/mobileViews";
 import MainTitle from "../components/MainTitle";
 
-type ViewProps = {
-  activeView: View;
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
-};
-
-const MobileLayout = ({ activeView, setActiveView }: ViewProps) => {
+const MobileLayout = () => {
   const { isMobile } = useContext(MobileContext);
+  const [activeView, setActiveView] = useState<View>(views[0]);
 
   return (
     <>

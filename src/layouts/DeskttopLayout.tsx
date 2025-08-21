@@ -5,18 +5,8 @@ import NoteBody from "../components/NoteBody";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import type { View } from "../constants/mobileViews";
-import { useEffect } from "react";
 
-type ViewProps = {
-  activeView: View;
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
-};
-
-const DeskttopLayout = ({ activeView }: ViewProps) => {
-  useEffect(() => {
-    console.log(activeView);
-  }, [activeView]);
+const DeskttopLayout = () => {
   return (
     <>
       <div id="content">

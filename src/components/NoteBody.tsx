@@ -11,7 +11,7 @@ import { useContext } from "react";
 const NoteBody = () => {
   const { id } = useParams();
   const note = data.find((n) => n.id.toString() === id);
-  const { isMobile } = useContext(MobileContext);
+  const { isMobile, isDesktop } = useContext(MobileContext);
 
   if (!id) {
     return (
@@ -56,7 +56,7 @@ const NoteBody = () => {
           </div>
         </div>
       </article>
-      <ActionsMenu />
+      {isDesktop && <ActionsMenu />}
     </>
   );
 };
