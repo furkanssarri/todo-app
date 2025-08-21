@@ -13,12 +13,12 @@ const MobileBottomNav = ({
   activeView,
   setActiveView,
 }: MobileBottomNavProps) => {
-  const { isMobile, isTablet } = useContext(MobileContext);
+  const { isTablet, isDesktop } = useContext(MobileContext);
   return (
     <nav className="mobile-nav">
       <ul>
         {views &&
-          isMobile &&
+          !isDesktop &&
           views.map((item, index) => {
             if (item.view !== "/noteBody") {
               const Icon = item.icon;

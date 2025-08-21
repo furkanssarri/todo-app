@@ -14,7 +14,7 @@ import { views, type View } from "../constants/mobileViews";
 import MainTitle from "../components/MainTitle";
 
 const MobileLayout = () => {
-  const { isMobile } = useContext(MobileContext);
+  const { isMobile, isTablet } = useContext(MobileContext);
   const [activeView, setActiveView] = useState<View>(views[0]);
 
   return (
@@ -36,7 +36,7 @@ const MobileLayout = () => {
             <Route path="/note/:id" element={<NoteBody />} />
           </Routes>
         </div>
-        {isMobile && (
+        {isMobile && isTablet && (
           <span className="mobile-add-note-button">
             <Button startIcon="plus" color="primary" size="lg" />
           </span>

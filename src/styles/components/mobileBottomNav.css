@@ -48,6 +48,12 @@
     color: var(--colors-blue-500);
   }
 
+  @media (max-width: 425px) {
+    nav.mobile-nav ul li a {
+      width: auto;
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     .mobile-nav {
       background-color: var(--colors-neutral-950);
