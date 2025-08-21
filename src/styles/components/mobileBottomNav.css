@@ -1,6 +1,7 @@
 @layer components {
   .mobile-nav {
     width: 100%;
+    max-height: fit-content;
     padding: var(--space-100) 0;
     border-top: 1px solid var(--border-color);
     box-shadow: 0 -8px 12px 0 #f0f0f060;
@@ -11,7 +12,7 @@
     justify-content: space-around;
   }
 
-  .mobile-nav ul li button {
+  .mobile-nav ul li a {
     display: flex;
     flex-direction: column;
     gap: 0 !important;
@@ -19,7 +20,7 @@
     color: var(--colors-neutral-600) !important;
   }
 
-  .mobile-nav ul li button svg {
+  .mobile-nav ul li a svg {
     font-size: 1.5rem;
   }
 
@@ -30,8 +31,15 @@
     background-color: var(--colors-neutral-200);
   }
 
+  nav.mobile-nav ul li a {
+    width: 5.8125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   nav.mobile-nav .active,
-  nav.mobile-nav ul li button:hover {
+  nav.mobile-nav ul li a:hover {
     background-color: var(--colors-blue-50) !important;
     border-radius: var(--radius-4) !important;
   }
@@ -49,11 +57,11 @@
       background-color: var(--colors-neutral-800);
     }
 
-    .mobile-nav ul li button {
+    .mobile-nav ul li a {
       color: var(--colors-neutral-400) !important;
     }
     nav.mobile-nav .active,
-    nav.mobile-nav ul li button:hover {
+    nav.mobile-nav ul li a:hover {
       background-color: var(--colors-neutral-700) !important;
       color: var(--colors-blue-500) !important;
     }

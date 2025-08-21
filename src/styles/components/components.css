@@ -7,6 +7,7 @@
 
   aside {
     border-right: 1px solid var(--border-color);
+    flex: 0 1 272px;
   }
 
   a {
