@@ -4,6 +4,7 @@ import { format } from "date-fns";
 
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
+import { Link } from "react-router-dom";
 
 const NotesList = () => {
   const context = useContext(MobileContext);
@@ -23,7 +24,10 @@ const NotesList = () => {
         {data &&
           data.map((item) => (
             <li key={item.id}>
-              <a href={`#${item.id}`} className="note-item text-preset-sans-3">
+              <Link
+                to={`/note/${item.id}`}
+                className="note-item text-preset-sans-3"
+              >
                 {item.title}
                 <div className="item-details text-preset-sans-6">
                   <div className="item-tags">
@@ -37,7 +41,7 @@ const NotesList = () => {
                     {format(item.lastEdited, "dd MMM yyyy")}
                   </span>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
       </ul>

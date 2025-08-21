@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
 import NoteBody from "../components/NoteBody";
@@ -12,9 +13,13 @@ import MobileBottomNav from "../components/MobileBottomNav";
 import { type View } from "../constants/mobileViews";
 import MainTitle from "../components/MainTitle";
 
-const MobileLayout = () => {
+type ViewProps = {
+  activeView: View;
+  setActiveView: React.Dispatch<React.SetStateAction<View>>;
+};
+
+const MobileLayout = ({ activeView, setActiveView }: ViewProps) => {
   const { isMobile } = useContext(MobileContext);
-  const [activeView, setActiveView] = useState<View>("home");
 
   return (
     <>
@@ -24,16 +29,16 @@ const MobileLayout = () => {
       <main>
         <div className="main-wrapper">
           <div className="mobile-layout-main-heading">
-            <MainTitle
-              title={activeView.charAt(0).toUpperCase() + activeView.slice(1)}
-            />
+            <MainTitle title={activeView.name} />
           </div>
-          {activeView === "home" && <NotesList />}
-          {activeView === "search" && <SearchPage />}
-          {activeView === "archive" && <ArchiveList />}
-          {activeView === "tag" && <TagsList />}
-          {activeView === "settings" && <SettingsPage />}
-          {activeView === "noteBody" && <NoteBody />}
+          <Routes>
+            <Route path="/" element={<NotesList />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/archive" element={<ArchiveList />} />
+            <Route path="/tag" element={<TagsList />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/note/:id" element={<NoteBody />} />
+          </Routes>
         </div>
         {isMobile && (
           <span className="mobile-add-note-button">
@@ -41,6 +46,7 @@ const MobileLayout = () => {
           </span>
         )}
       </main>
+
       <MobileBottomNav activeView={activeView} setActiveView={setActiveView} />
     </>
   );
