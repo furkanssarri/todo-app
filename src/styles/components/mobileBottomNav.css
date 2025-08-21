@@ -25,7 +25,7 @@
 
   .mobile-nav-line {
     border: 0;
-    height: 35px;
+    height: auto;
     width: 1px;
     background-color: var(--colors-neutral-200);
   }
