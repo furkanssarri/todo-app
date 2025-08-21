@@ -1,7 +1,7 @@
 import { MobileContext } from "./context/MobileContext";
 import { useContext } from "react";
 
-import DesktopLayout from "./layouts/DeskttopLayout";
+import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
 
 function App() {
