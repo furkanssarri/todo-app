@@ -51,6 +51,16 @@
   @media (max-width: 425px) {
     nav.mobile-nav ul li a {
       width: auto;
+      padding: var(--space-075) var(--space-200);
+    }
+    nav.mobile-nav ul li a svg {
+      margin: auto;
+    }
+  }
+
+  @media (max-width: 375px) {
+    nav.mobile-nav ul li a {
+      padding: var(--space-075) var(--space-150);
     }
   }
 
