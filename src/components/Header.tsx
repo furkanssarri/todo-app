@@ -8,8 +8,10 @@ const Header = ({ title }: { title: string }) => {
       <section className="heading">
         <MainTitle title={title} />
       </section>
-      <SearchBar />
-      <Settings />
+      <section className="header-right">
+        <SearchBar />
+        <Settings />
+      </section>
     </>
   );
 };

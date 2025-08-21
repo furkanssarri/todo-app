@@ -9,17 +9,11 @@
     border-bottom: 1px solid var(--border-color);
   }
 
-  @media (max-width: 768px) {
-    header {
-      background-color: var(--colors-neutral-100);
-      border: none;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      header {
-        background-color: var(--colors-neutral-800);
-      }
-    }
+  .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-200);
   }
 
   .search {
@@ -64,5 +58,18 @@
 
   .settings-button svg {
     font-size: var(--fs-24);
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    background-color: var(--colors-neutral-100);
+    border: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    header {
+      background-color: var(--colors-neutral-800);
+    }
   }
 }
