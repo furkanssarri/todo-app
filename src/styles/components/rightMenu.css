@@ -34,6 +34,19 @@
     color: var(--colors-neutral-600) !important;
   }
 
+  .mobile-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .mobile-actions ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   @media (prefers-color-scheme: dark) {
     .action-button button {
       color: var(--colors-neutral-100) !important;

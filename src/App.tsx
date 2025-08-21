@@ -9,9 +9,9 @@ function App() {
   if (!context) {
     throw new Error("Mobilecontext not provided");
   }
-  const { isMobile } = context;
+  const { isDesktop } = context;
 
-  return isMobile ? <MobileLayout /> : <DesktopLayout />;
+  return isDesktop ? <DesktopLayout /> : <MobileLayout />;
 }
 
 export default App;

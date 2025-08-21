@@ -2,14 +2,15 @@ import NoteActions from "./NoteActions";
 
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
+import NoteActionsMobile from "./NoteActionsMobile";
 
 const ActionsMenu = () => {
-  const { isMobile } = useContext(MobileContext);
+  const { isMobile, isTablet } = useContext(MobileContext);
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <div className="mobile-actions">
-        <NoteActions />
+        <NoteActionsMobile />
       </div>
     );
   }

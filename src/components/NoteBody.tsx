@@ -11,7 +11,7 @@ import { useContext } from "react";
 const NoteBody = () => {
   const { id } = useParams();
   const note = data.find((n) => n.id.toString() === id);
-  const { isMobile, isDesktop } = useContext(MobileContext);
+  const { isTablet, isMobile, isDesktop } = useContext(MobileContext);
 
   if (!id) {
     return (
@@ -32,7 +32,7 @@ const NoteBody = () => {
   return (
     <>
       <article className="note-details">
-        {isMobile && <ActionsMenu />}
+        {(isTablet || isMobile) && <ActionsMenu />}
         <div className="note-content">
           <h2>{note.title}</h2>
           <div className="quick-info">
