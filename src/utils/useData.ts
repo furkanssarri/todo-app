@@ -29,7 +29,6 @@ export default function useData(url: string) {
         setError(null);
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") {
-          console.log("Aborted");
           setError("Aborted");
           return;
         }
