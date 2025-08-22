@@ -12,8 +12,15 @@ import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import { views, type View } from "../constants/mobileViews";
 import MainTitle from "../components/MainTitle";
+import type { Note } from "../utils/useData";
 
-const MobileLayout = () => {
+type Props = {
+  data: Note[] | null;
+  error: string | null;
+  isLoading: boolean;
+};
+
+const MobileLayout = ({ data, error, isLoading }: Props) => {
   const { isMobile, isTablet } = useContext(MobileContext);
   const [activeView, setActiveView] = useState<View>(views[0]);
 
@@ -28,12 +35,22 @@ const MobileLayout = () => {
             <MainTitle title={activeView.name} />
           </div>
           <Routes>
-            <Route path="/" element={<NotesList />} />
+            <Route
+              path="/"
+              element={
+                <NotesList data={data} error={error} isLoading={isLoading} />
+              }
+            />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/archive" element={<ArchiveList />} />
             <Route path="/tag" element={<TagsList />} />
             <Route path="/settings" element={<SettingsPage />} />
-            <Route path="/note/:id" element={<NoteBody />} />
+            <Route
+              path="/note/:id"
+              element={
+                <NoteBody data={data} error={error} isLoading={isLoading} />
+              }
+            />
           </Routes>
         </div>
         {isMobile && isTablet && (

@@ -2,15 +2,22 @@ import Markdown from "react-markdown";
 import { format } from "date-fns";
 import { IconTag, IconClock } from "./icons";
 import { useParams } from "react-router-dom";
-import data from "../data/data.json";
+
 import ActionsMenu from "./ActionsMenu";
 
 import { MobileContext } from "../context/MobileContext";
 import { useContext } from "react";
+import type { Note } from "../utils/useData";
 
-const NoteBody = () => {
+type Props = {
+  data: Note[] | null;
+  error: string | null;
+  isLoading: boolean;
+};
+
+const NoteBody = ({ data, error, isLoading }: Props) => {
   const { id } = useParams();
-  const note = data.find((n) => n.id.toString() === id);
+  const note = data?.find((n) => n.id.toString() === id);
   const { isTablet, isMobile, isDesktop } = useContext(MobileContext);
 
   if (!id) {
@@ -28,6 +35,10 @@ const NoteBody = () => {
       </article>
     );
   }
+
+  if (error) return <p>{error}</p>;
+
+  if (isLoading) return <p>Loading data...</p>;
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import tags from "../data/tags.json";
+import tags from "../db/tags.json";
 
 import { IconTag } from "./icons/index";
 import { MobileContext } from "../context/MobileContext";

@@ -5,8 +5,15 @@ import NoteBody from "../components/NoteBody";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import type { Note } from "../utils/useData";
 
-const DeskttopLayout = () => {
+type Props = {
+  data: Note[] | null;
+  error: string | null;
+  isLoading: boolean;
+};
+
+const DeskttopLayout = ({ data, error, isLoading }: Props) => {
   return (
     <>
       <div id="content">
@@ -18,10 +25,20 @@ const DeskttopLayout = () => {
             <Header title="All Notes" />
           </header>
           <div className="main-content-wrapper">
-            <NotesList />
+            <NotesList data={data} error={error} isLoading={isLoading} />
             <Routes>
-              <Route path="/" element={<NoteBody />} />
-              <Route path="/note/:id" element={<NoteBody />} />
+              <Route
+                path="/"
+                element={
+                  <NoteBody data={data} error={error} isLoading={isLoading} />
+                }
+              />
+              <Route
+                path="/note/:id"
+                element={
+                  <NoteBody data={data} error={error} isLoading={isLoading} />
+                }
+              />
             </Routes>
           </div>
         </main>

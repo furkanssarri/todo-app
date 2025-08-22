@@ -1,18 +1,29 @@
-import data from "../data/data.json";
 import Button from "./Button/index.js";
 import { format } from "date-fns";
 
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import { Link } from "react-router-dom";
+import type { Note } from "../utils/useData.js";
 
-const NotesList = () => {
+type PropTypes = {
+  data: Note[] | null;
+  error: string | null;
+  isLoading: boolean;
+};
+
+const NotesList = ({ data, error, isLoading }: PropTypes) => {
   const context = useContext(MobileContext);
 
   if (!context) {
     throw new Error("Mobilecontext not provided");
   }
   const { isMobile } = context;
+
+  if (error) return <p>{error}</p>;
+
+  if (isLoading) return <p>Loading data...</p>;
+
   return (
     <section className="inner-sidebar">
       {!isMobile && (
