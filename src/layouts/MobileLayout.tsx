@@ -41,7 +41,12 @@ const MobileLayout = ({ data, error, isLoading }: Props) => {
                 <NotesList data={data} error={error} isLoading={isLoading} />
               }
             />
-            <Route path="/search" element={<SearchPage />} />
+            <Route
+              path="/search"
+              element={
+                <SearchPage data={data} error={error} isLoading={isLoading} />
+              }
+            />
             <Route path="/archive" element={<ArchiveList />} />
             <Route path="/tag" element={<TagsList />} />
             <Route path="/settings" element={<SettingsPage />} />
