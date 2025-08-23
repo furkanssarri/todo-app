@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import { Link } from "react-router-dom";
 import type { Note } from "../utils/useData.js";
+import MainTitle from "./MainTitle.js";
 
 type PropTypes = {
   data: Note[] | null;
@@ -18,7 +19,7 @@ const NotesList = ({ data, error, isLoading }: PropTypes) => {
   if (!context) {
     throw new Error("Mobilecontext not provided");
   }
-  const { isMobile } = context;
+  const { isDesktop } = context;
 
   if (error) return <p>{error}</p>;
 
@@ -26,10 +27,15 @@ const NotesList = ({ data, error, isLoading }: PropTypes) => {
 
   return (
     <section className="inner-sidebar">
-      {!isMobile && (
+      {isDesktop && (
         <Button startIcon="plus" color="primary" size="lg">
           Create New Note
         </Button>
+      )}
+      {!isDesktop && (
+        <div className="mobile-layout-main-heading">
+          <MainTitle title="Home" />
+        </div>
       )}
       <ul>
         {data &&

@@ -11,8 +11,8 @@ import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import { views, type View } from "../constants/mobileViews";
-import MainTitle from "../components/MainTitle";
 import type { Note } from "../utils/useData";
+import CreateNoteForm from "../components/CreateNoteForm";
 
 type Props = {
   data: Note[] | null;
@@ -31,9 +31,6 @@ const MobileLayout = ({ data, error, isLoading }: Props) => {
       </header>
       <main>
         <div className="main-wrapper">
-          <div className="mobile-layout-main-heading">
-            <MainTitle title={activeView.name} />
-          </div>
           <Routes>
             <Route
               path="/"
@@ -41,6 +38,7 @@ const MobileLayout = ({ data, error, isLoading }: Props) => {
                 <NotesList data={data} error={error} isLoading={isLoading} />
               }
             />
+            <Route path="/create" element={<CreateNoteForm />} />
             <Route
               path="/search"
               element={
@@ -48,7 +46,7 @@ const MobileLayout = ({ data, error, isLoading }: Props) => {
               }
             />
             <Route path="/archive" element={<ArchiveList />} />
-            <Route path="/tag" element={<TagsList />} />
+            <Route path="/tag" element={<TagsList activeView={activeView} />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route
               path="/note/:id"
@@ -58,11 +56,12 @@ const MobileLayout = ({ data, error, isLoading }: Props) => {
             />
           </Routes>
         </div>
-        {isMobile && isTablet && (
-          <span className="mobile-add-note-button">
-            <Button startIcon="plus" color="primary" size="lg" />
-          </span>
-        )}
+        {isMobile ||
+          (isTablet && (
+            <span className="mobile-add-note-button">
+              <Button startIcon="plus" color="primary" size="lg" />
+            </span>
+          ))}
       </main>
 
       <MobileBottomNav activeView={activeView} setActiveView={setActiveView} />

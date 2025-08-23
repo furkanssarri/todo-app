@@ -44,6 +44,7 @@ const NoteBody = ({ data, error, isLoading }: Props) => {
     <>
       <article className="note-details">
         {(isTablet || isMobile) && <ActionsMenu />}
+
         <div className="note-content">
           <h2>{note.title}</h2>
           <div className="quick-info">

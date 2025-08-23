@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo.tsx";
 import TagsList from "./TagsList.tsx";
 import { IconHome, IconArchive } from "./icons/index.tsx";
+import type { View } from "../constants/mobileViews.ts";
 
-const LeftMenuNav = () => {
+type Props = {
+  activeView: View;
+};
+
+const LeftMenuNav = ({ activeView }: Props) => {
   return (
     <section className="left-menu">
       <Logo />
@@ -24,7 +29,7 @@ const LeftMenuNav = () => {
             </li>
           </ul>
         </nav>
-        <TagsList />
+        <TagsList activeView={activeView} />
       </main>
     </section>
   );
