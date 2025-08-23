@@ -1,41 +1,41 @@
 @layer utilities {
   /* SANS-SERIF */
-  .text-preset-sans-1 {
+  .text-preset-1 {
     font-family: var(--ff-sans);
     font-size: var(--fs-24);
     line-height: var(--lh-120);
     letter-spacing: var(--ls-05);
     font-weight: var(--fw-bold);
   }
-  .text-preset-sans-2 {
+  .text-preset-2 {
     font-family: var(--ff-sans);
     font-size: var(--fs-20);
     line-height: var(--lh-120);
     letter-spacing: var(--ls-05);
     font-weight: var(--fw-bold);
   }
-  .text-preset-sans-3 {
+  .text-preset-3 {
     font-family: var(--ff-sans);
     font-size: var(--fs-16);
     line-height: var(--lh-120);
     letter-spacing: var(--ls-03);
     font-weight: var(--fw-semibold);
   }
-  .text-preset-sans-4 {
+  .text-preset-4 {
     font-family: var(--ff-sans);
     font-size: var(--fs-14);
     line-height: var(--lh-120);
     letter-spacing: var(--ls-02);
     font-weight: var(--fw-medium);
   }
-  .text-preset-sans-5 {
+  .text-preset-5 {
     font-family: var(--ff-sans);
     font-size: var(--fs-14);
     line-height: var(--lh-120);
     letter-spacing: var(--ls-02);
     font-weight: var(--fw-regular);
   }
-  .text-preset-sans-6 {
+  .text-preset-6 {
     font-family: var(--ff-sans);
     font-size: var(--fs-12);
     line-height: var(--lh-120);
@@ -44,7 +44,7 @@
   }
 
   /* SERIF */
-  .text-preset-serif-1 {
+  /* .text-preset-serif-1 {
     font-family: var(--ff-serif);
     font-size: var(--fs-24);
     line-height: var(--lh-120);
@@ -85,10 +85,10 @@
     line-height: var(--lh-120);
     letter-spacing: var(--ls-02);
     font-weight: var(--fw-gular);
-  }
+  } */
 
   /* MONOSPACE */
-  .text-preset-mono-1 {
+  /* .text-preset-mono-1 {
     font-family: var(--ff-mono);
     font-size: var(--fs-24);
     line-height: var(--lh-120);
@@ -129,5 +129,5 @@
     line-height: var(--lh-120);
     letter-spacing: var(--ls-02);
     font-weight: var(--fw-gular);
-  }
+  } */
 }
