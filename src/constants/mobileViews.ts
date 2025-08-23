@@ -26,4 +26,6 @@ export const btns = [
   { id: 5, view: "save", name: "Save", icon: null },
 ] as const;
 
+export type BtnView = Btn["view"];
+
 export type Btn = (typeof btns)[number];

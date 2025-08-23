@@ -38,6 +38,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-200);
   }
 
   .mobile-actions ul {
@@ -45,6 +48,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  .mobile-actions ul li button:hover {
+    background-color: inherit !important;
   }
 
   @media (prefers-color-scheme: dark) {

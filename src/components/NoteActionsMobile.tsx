@@ -1,28 +1,33 @@
 import { useContext } from "react";
-import { btns, type Btn } from "../constants/mobileViews";
+import { btns, type Btn, type BtnView } from "../constants/mobileViews";
 import { MobileContext } from "../context/MobileContext";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
-const NoteActionsMobile = () => {
+type Props = {
+  exclude?: BtnView[];
+};
+
+const NoteActionsMobile = ({ exclude = [] }: Props) => {
   const { isDesktop } = useContext(MobileContext);
+  const filteredBtns = btns.filter((btn) => !exclude?.includes(btn.view));
 
   const showBackBtn = !isDesktop && btns[0].view === "back";
   const BackIcon = showBackBtn ? btns[0].icon : null;
 
   return (
     <>
-      {!isDesktop && btns[0].view === "back" && (
+      {!isDesktop && filteredBtns[0].view === "back" && (
         <div className="mobile-go-back">
           <Link to="/">
             {BackIcon && <BackIcon />}
-            {btns[0].name}
+            {filteredBtns[0].name}
           </Link>
         </div>
       )}
       <ul>
         {!isDesktop &&
-          btns.map((btn: Btn) => {
+          filteredBtns.map((btn: Btn) => {
             if (
               (btn.view !== "back" && btn.view === "cancel") ||
               btn.view === "save"
