@@ -35,6 +35,9 @@
     --colors-neutral-50: hsl(216, 33%, 97%);
     --colors-neutral-0: hsl(0, 0%, 100%);
 
+    --primary-bg: var(--colors-neutral-0);
+    --primary-foreground: var(--colors-neutral-800);
+
     /* Blue */
     --colors-blue-700: hsl(228, 70%, 48%);
     --colors-blue-500: hsl(228, 100%, 60%);
@@ -140,7 +143,8 @@
     flex-direction: column;
     /* align-items: center; */
     justify-content: center;
-    color: var(--colors-neutral-800);
+    color: var(--primary-foreground);
+    background-color: var(--primary-bg);
   }
 
   #root {
@@ -216,11 +220,13 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --border-color: var(--colors-neutral-700);
+      --primary-bg: var(--colors-neutral-950);
+      --primary-foreground: var(--colors-neutral-100);
     }
 
     body {
-      background-color: var(--colors-neutral-950);
-      color: var(--colors-neutral-100);
+      background-color: var(--primary-bg);
+      color: var(--primary-foreground);
     }
     svg {
       color: var(--colors-neutral-200);
