@@ -4,6 +4,7 @@ import NoteActionsMobile from "./NoteActionsMobile";
 import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
 import type { View } from "../constants/mobileViews";
+import Button from "./Button";
 
 type Props = {
   activeView: View;
@@ -67,17 +68,23 @@ const CreateNoteForm = ({ activeView }: Props) => {
               name="content"
               id="content"
               placeholder="Start typing your note here..."
-              rows={10}
+              rows={28}
               cols={50}
             />
           </div>
-          {isDesktop && (
-            <div className="submitButtons">
-              <button type="submit">Save Note</button>
-              <button type="button">Cancel</button>
-            </div>
-          )}
         </form>
+        {isDesktop && (
+          <div className="submit-buttons">
+            <Button color="primary" size="lg">
+              Save Note
+            </Button>
+            <Button color="default" size="lg">
+              Cancel
+            </Button>
+            {/* <button type="submit">Save Note</button> */}
+            {/* // <button type="button">Cancel</button> */}
+          </div>
+        )}
       </article>
       {isDesktop && <ActionsMenu activeView={activeView} />}
     </>
