@@ -6,16 +6,25 @@ import CreateNoteForm from "../components/CreateNoteForm";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import type { UseDataResult } from "../utils/useData";
+import type { Note, UseDataResult } from "../utils/useData";
 import type { View } from "../constants/mobileViews";
 
 type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+
+  note: Note;
+  setNote: React.Dispatch<React.SetStateAction<Note>>;
 };
 
-const DeskttopLayout = ({ dataObj, activeView, setActiveView }: Props) => {
+const DeskttopLayout = ({
+  dataObj,
+  activeView,
+  setActiveView,
+  note,
+  setNote,
+}: Props) => {
   return (
     <>
       <div id="content">
@@ -41,7 +50,13 @@ const DeskttopLayout = ({ dataObj, activeView, setActiveView }: Props) => {
               />
               <Route
                 path="/create"
-                element={<CreateNoteForm activeView={activeView} />}
+                element={
+                  <CreateNoteForm
+                    activeView={activeView}
+                    note={note}
+                    setNote={setNote}
+                  />
+                }
               />
             </Routes>
           </div>

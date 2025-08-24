@@ -49,36 +49,6 @@ const NoteActionsMobile = ({ exclude = [] }: Props) => {
               );
             })}
         </ul>
-
-        {/* {!isDesktop &&
-          filteredBtns.map((btn: Btn) => {
-            if (
-              (btn.view !== "back" && btn.view === "cancel") ||
-              btn.view === "save"
-            ) {
-              return (
-                <li key={btn.id}>
-                  <Button variant="text" id={btn.view}>
-                    {btn.name}
-                  </Button>
-                </li>
-              );
-            }
-            if (btn.view !== "back") {
-              return (
-                <li key={btn.id}>
-                  <Button
-                    startIcon={btn.icon}
-                    variant="text"
-                    color="primary"
-                    size="lg"
-                    className="btn"
-                    id={btn.view}
-                  ></Button>
-                </li>
-              );
-            }
-          })} */}
       </ul>
     </>
   );

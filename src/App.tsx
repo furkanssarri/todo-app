@@ -1,19 +1,26 @@
 import { MobileContext } from "./context/MobileContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
-import useData from "./utils/useData";
+import useData, { type Note } from "./utils/useData";
 import { type View, views } from "./constants/mobileViews";
 
 function App() {
   const dataObj = useData("/db.json");
 
   const [activeView, setActiveView] = useState<View>(views[0]);
-
-  // const handleAddNewNote = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   console.log(event);
-  // };
+  const [note, setNote] = useState<Note>({
+    id: "",
+    title: "",
+    tags: [],
+    content: "",
+    lastEdited: "",
+    isArchived: false,
+  });
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(note));
+  }, [note]);
 
   const context = useContext(MobileContext);
   if (!context) {
@@ -26,12 +33,16 @@ function App() {
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
+      note={note}
+      setNote={setNote}
     />
   ) : (
     <MobileLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
+      note={note}
+      setNote={setNote}
     />
   );
 }

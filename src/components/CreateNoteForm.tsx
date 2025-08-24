@@ -1,23 +1,60 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
 import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
-import type { View } from "../constants/mobileViews";
+import { type View } from "../constants/mobileViews";
 import Button from "./Button";
+import type { Note } from "../utils/useData";
 
 type Props = {
   activeView: View;
+
+  note: Note;
+  setNote: React.Dispatch<React.SetStateAction<Note>>;
 };
 
-const CreateNoteForm = ({ activeView }: Props) => {
+type FormData = {
+  title: string;
+  tags: string[];
+  content: string;
+  lastEdited: Date;
+  isArchived: boolean;
+};
+
+const CreateNoteForm = ({ activeView, note, setNote }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
+
   const { isDesktop } = useContext(MobileContext);
+
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    tags: [],
+    content: "",
+    lastEdited: new Date(),
+    isArchived: false,
+  });
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newNote = {
+      ...note,
+      id: Date.now().toString(),
+      title: formData.title,
+      tags: formData.tags,
+      content: formData.content,
+      lastEdited: Date.now().toString(),
+      isArchived: false,
+    };
+    setNote(newNote);
+  };
+
   return (
     <>
       <article className="note-details">
@@ -26,7 +63,7 @@ const CreateNoteForm = ({ activeView }: Props) => {
             <NoteActionsMobile exclude={["delete", "archive"]} />
           </div>
         )}
-        <form id="add-new-form">
+        <form id="add-new-form" onSubmit={(e) => handleFormSubmit(e)}>
           <div className="form-row">
             <input
               className="text-preset-1"
@@ -35,6 +72,12 @@ const CreateNoteForm = ({ activeView }: Props) => {
               id="title"
               placeholder="Enter a title..."
               ref={inputRef}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  title: e.target.value,
+                })
+              }
             />
           </div>
           <div className="properties">
@@ -54,6 +97,20 @@ const CreateNoteForm = ({ activeView }: Props) => {
                 name="tags"
                 id="tags"
                 placeholder="Add tags by commas (e.g. Work, Planning)"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    const input = e.currentTarget.value
+                      .split(",")
+                      .map((tag: string) => tag.trim())
+                      .filter((tag: string) => tag.length > 0);
+                    setFormData((prev) => ({
+                      ...prev,
+                      tags: [...prev.tags, ...input],
+                    }));
+                    e.currentTarget.value = "";
+                  }
+                }}
               />
               <input
                 type="text"
@@ -70,12 +127,18 @@ const CreateNoteForm = ({ activeView }: Props) => {
               placeholder="Start typing your note here..."
               rows={27}
               cols={50}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  content: e.target.value,
+                })
+              }
             />
           </div>
         </form>
         {isDesktop && (
           <div className="submit-buttons">
-            <Button color="primary" size="lg">
+            <Button color="primary" size="lg" type="submit" form="add-new-form">
               Save Note
             </Button>
             <Button color="default" size="lg">
