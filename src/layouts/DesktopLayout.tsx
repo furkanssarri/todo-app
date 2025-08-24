@@ -16,7 +16,6 @@ type Props = {
 };
 
 const DeskttopLayout = ({ dataObj, activeView }: Props) => {
-  const { data, error, isLoading } = dataObj;
   return (
     <>
       <div id="content">
@@ -28,19 +27,12 @@ const DeskttopLayout = ({ dataObj, activeView }: Props) => {
             <Header title="All Notes" />
           </header>
           <div className="main-content-wrapper">
-            <NotesList data={data} error={error} isLoading={isLoading} />
+            <NotesList dataObj={dataObj} />
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <NoteBody data={data} error={error} isLoading={isLoading} />
-                }
-              />
+              <Route path="/" element={<NoteBody dataObj={dataObj} />} />
               <Route
                 path="/note/:id"
-                element={
-                  <NoteBody data={data} error={error} isLoading={isLoading} />
-                }
+                element={<NoteBody dataObj={dataObj} />}
               />
               <Route path="/create" element={<CreateNoteForm />} />
             </Routes>
