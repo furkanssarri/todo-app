@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
@@ -29,7 +29,8 @@ const MobileLayout = ({
   activeView,
   setActiveView,
 }: Props) => {
-  const { isMobile, isTablet } = useContext(MobileContext);
+  const navigate = useNavigate();
+  const { isDesktop } = useContext(MobileContext);
 
   return (
     <>
@@ -63,12 +64,16 @@ const MobileLayout = ({
             />
           </Routes>
         </div>
-        {isMobile ||
-          (isTablet && (
-            <span className="mobile-add-note-button">
-              <Button startIcon="plus" color="primary" size="lg" />
-            </span>
-          ))}
+        {!isDesktop && (
+          <span className="mobile-add-note-button">
+            <Button
+              startIcon="plus"
+              color="primary"
+              size="lg"
+              onClick={() => navigate("/create")}
+            />
+          </span>
+        )}
       </main>
 
       <MobileBottomNav activeView={activeView} setActiveView={setActiveView} />

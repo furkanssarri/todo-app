@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import LeftMenu from "../components/LeftMenu";
 import NotesList from "../components/NotesList";
 import NoteBody from "../components/NoteBody";
+import CreateNoteForm from "../components/CreateNoteForm";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -42,6 +43,7 @@ const DeskttopLayout = ({ data, error, isLoading, activeView }: Props) => {
                   <NoteBody data={data} error={error} isLoading={isLoading} />
                 }
               />
+              <Route path="/create" element={<CreateNoteForm />} />
             </Routes>
           </div>
         </main>

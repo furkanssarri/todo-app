@@ -51,7 +51,7 @@ type ButtonProps = {
   size?: "sm" | "md" | "lg";
   color?: "default" | "primary" | "secondary" | "danger";
   title?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 

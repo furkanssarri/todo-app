@@ -11,6 +11,10 @@ function App() {
 
   const [activeView, setActiveView] = useState<View>(views[0]);
 
+  // const handleAddNewNote = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   console.log(event);
+  // };
+
   const context = useContext(MobileContext);
   if (!context) {
     throw new Error("Mobilecontext not provided");

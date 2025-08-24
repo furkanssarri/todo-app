@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { Note } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
 
@@ -14,6 +14,7 @@ type PropTypes = {
 };
 
 const NotesList = ({ data, error, isLoading }: PropTypes) => {
+  const navigate = useNavigate();
   const context = useContext(MobileContext);
 
   if (!context) {
@@ -28,7 +29,12 @@ const NotesList = ({ data, error, isLoading }: PropTypes) => {
   return (
     <section className="inner-sidebar">
       {isDesktop && (
-        <Button startIcon="plus" color="primary" size="lg">
+        <Button
+          startIcon="plus"
+          color="primary"
+          size="lg"
+          onClick={() => navigate("/create")}
+        >
           Create New Note
         </Button>
       )}
