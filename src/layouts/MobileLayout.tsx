@@ -42,7 +42,12 @@ const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
               path="/create"
               element={<CreateNoteForm activeView={activeView} />}
             />
-            <Route path="/search" element={<SearchPage dataObj={dataObj} />} />
+            <Route
+              path="/search"
+              element={
+                <SearchPage dataObj={dataObj} setActiveView={setActiveView} />
+              }
+            />
             <Route
               path="/archive"
               element={<ArchiveList setActiveView={setActiveView} />}
