@@ -35,6 +35,12 @@ const archivedNotes: Note[] = [
   },
 ];
 
+const dummyDataObj = {
+  data: archivedNotes,
+  error: null,
+  isLoading: false,
+};
+
 const ArchiveList = () => {
   const { isDesktop } = useContext(MobileContext);
   return (
@@ -48,7 +54,7 @@ const ArchiveList = () => {
               them anytime.
             </p>
           </div>
-          <NotesList data={archivedNotes} error={null} isLoading={false} />
+          <NotesList dataObj={dummyDataObj} />
         </>
       )}
     </>

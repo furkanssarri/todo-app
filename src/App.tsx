@@ -1,5 +1,5 @@
 import { MobileContext } from "./context/MobileContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
@@ -8,10 +8,6 @@ import { type View, views } from "./constants/mobileViews";
 
 function App() {
   const dataObj = useData("/db.json");
-
-  useEffect(() => {
-    console.log(dataObj);
-  }, [dataObj]);
 
   const [activeView, setActiveView] = useState<View>(views[0]);
 

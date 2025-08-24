@@ -2,20 +2,18 @@ import Header from "./Header";
 import NotesList from "./NotesList";
 import NoteBody from "./NoteBody";
 import ActionsMenu from "./ActionsMenu";
-import type { Note } from "../utils/useData";
+import type { UseDataResult } from "../utils/useData";
 
 type Props = {
-  data: Note[] | null;
-  error: string | null;
-  isLoading: boolean;
+  dataObj: UseDataResult;
 };
-const MainContent = ({ data, error, isLoading }: Props) => {
+const MainContent = ({ dataObj }: Props) => {
   return (
     <main>
       <Header title="All Notes" />
       <div className="main-content-wrapper">
-        <NotesList data={data} error={error} isLoading={isLoading} />
-        <NoteBody data={data} error={error} isLoading={isLoading} />
+        <NotesList dataObj={dataObj} />
+        <NoteBody dataObj={dataObj} />
         <ActionsMenu />
       </div>
     </main>
