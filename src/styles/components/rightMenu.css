@@ -68,6 +68,12 @@
     font-size: large;
   }
 
+  @media (max-width: 425px) {
+    .mobile-actions {
+      padding: var(--space-150) 0;
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     .action-button button {
       color: var(--colors-neutral-100) !important;

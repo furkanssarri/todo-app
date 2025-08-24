@@ -32,13 +32,24 @@ const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
       <main>
         <div className="main-wrapper">
           <Routes>
-            <Route path="/" element={<NotesList dataObj={dataObj} />} />
-            <Route path="/create" element={<CreateNoteForm />} />
+            <Route
+              path="/"
+              element={
+                <NotesList dataObj={dataObj} setActiveView={setActiveView} />
+              }
+            />
+            <Route
+              path="/create"
+              element={<CreateNoteForm activeView={activeView} />}
+            />
             <Route path="/search" element={<SearchPage dataObj={dataObj} />} />
             <Route path="/archive" element={<ArchiveList />} />
             <Route path="/tag" element={<TagsList />} />
             <Route path="/settings" element={<SettingsPage />} />
-            <Route path="/note/:id" element={<NoteBody dataObj={dataObj} />} />
+            <Route
+              path="/note/:id"
+              element={<NoteBody dataObj={dataObj} activeView={activeView} />}
+            />
           </Routes>
         </div>
         {!isDesktop && (

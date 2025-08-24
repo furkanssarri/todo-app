@@ -27,7 +27,9 @@ const DeskttopLayout = ({ dataObj, activeView, setActiveView }: Props) => {
             <Header title="All Notes" />
           </header>
           <div className="main-content-wrapper">
-            <NotesList dataObj={dataObj} setActiveView={setActiveView} />
+            <div className="notes-list-wrapper">
+              <NotesList dataObj={dataObj} setActiveView={setActiveView} />
+            </div>
             <Routes>
               <Route
                 path="/"

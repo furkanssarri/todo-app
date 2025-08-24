@@ -20,7 +20,7 @@ const MobileBottomNav = ({
         {views &&
           !isDesktop &&
           views.map((item, index) => {
-            if (item.view !== "/noteBody") {
+            if (item.view !== "/noteBody" && item.view !== "/create") {
               const Icon = item.icon;
               return (
                 <Fragment key={item.id}>

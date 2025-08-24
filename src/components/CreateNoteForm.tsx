@@ -68,7 +68,7 @@ const CreateNoteForm = ({ activeView }: Props) => {
               name="content"
               id="content"
               placeholder="Start typing your note here..."
-              rows={28}
+              rows={27}
               cols={50}
             />
           </div>
