@@ -3,6 +3,7 @@ import { MobileContext } from "../context/MobileContext";
 import MainTitle from "./MainTitle";
 import NotesList from "./NotesList";
 import type { Note } from "../utils/useData";
+import type { View } from "../constants/mobileViews";
 
 // TEMPORARY FILTER NOTES WILL BE MADE DYNAMIC
 const archivedNotes: Note[] = [
@@ -41,7 +42,11 @@ const dummyDataObj = {
   isLoading: false,
 };
 
-const ArchiveList = () => {
+type Props = {
+  setActiveView: React.Dispatch<React.SetStateAction<View>>;
+};
+
+const ArchiveList = ({ setActiveView }: Props) => {
   const { isDesktop } = useContext(MobileContext);
   return (
     <>
@@ -54,7 +59,7 @@ const ArchiveList = () => {
               them anytime.
             </p>
           </div>
-          <NotesList dataObj={dummyDataObj} />
+          <NotesList dataObj={dummyDataObj} setActiveView={setActiveView} />
         </>
       )}
     </>

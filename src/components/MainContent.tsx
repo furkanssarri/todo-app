@@ -16,8 +16,8 @@ const MainContent = ({ dataObj, activeView, setActiveView }: Props) => {
       <Header title="All Notes" />
       <div className="main-content-wrapper">
         <NotesList dataObj={dataObj} setActiveView={setActiveView} />
-        <NoteBody dataObj={dataObj} />
         <ActionsMenu activeView={activeView} />
+        <NoteBody dataObj={dataObj} activeView={activeView} />
       </div>
     </main>
   );
