@@ -20,12 +20,10 @@ const CreateNoteForm = ({ activeView }: Props) => {
   return (
     <>
       <article className="note-details">
-        {isDesktop ? (
+        {!isDesktop && (
           <div className="mobile-actions">
             <NoteActionsMobile exclude={["delete", "archive"]} />
           </div>
-        ) : (
-          <ActionsMenu activeView={activeView} />
         )}
         <form id="add-new-form">
           <div className="form-row">

@@ -23,7 +23,9 @@ const ActionsMenu = ({ activeView }: Props) => {
   return (
     <menu className="right-menu">
       <section className="actions">
-        <NoteActions activeView={activeView} />
+        {activeView.name !== "Create Note" && (
+          <NoteActions activeView={activeView} />
+        )}
       </section>
     </menu>
   );

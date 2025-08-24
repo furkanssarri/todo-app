@@ -11,6 +11,10 @@ const NoteActions = ({ activeView }: Props) => {
     console.log(activeView);
   }, [activeView]);
 
+  if (activeView.name === "Create Note") {
+    console.log("dont render buttons");
+  }
+
   return (
     <ul>
       <li className="action-button">

@@ -51,6 +51,10 @@
     width: 100%;
   }
 
+  ::placeholder {
+    color: var(--primary-foreground);
+  }
+
   .textarea {
     border-top: 1px solid var(--border-color);
     margin-top: var(--space-200);
