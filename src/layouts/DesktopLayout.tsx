@@ -7,20 +7,17 @@ import CreateNoteForm from "../components/CreateNoteForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import type { UseDataResult } from "../utils/useData";
-import type { View } from "../constants/mobileViews";
 
 type Props = {
   dataObj: UseDataResult;
-  activeView: View;
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const DeskttopLayout = ({ dataObj, activeView }: Props) => {
+const DeskttopLayout = ({ dataObj }: Props) => {
   return (
     <>
       <div id="content">
         <aside>
-          <LeftMenu activeView={activeView} />
+          <LeftMenu />
         </aside>
         <main>
           <header>

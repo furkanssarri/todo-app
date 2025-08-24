@@ -26,11 +26,7 @@ function App() {
   const { isDesktop } = context;
 
   return isDesktop ? (
-    <DesktopLayout
-      dataObj={dataObj}
-      activeView={activeView}
-      setActiveView={setActiveView}
-    />
+    <DesktopLayout dataObj={dataObj} />
   ) : (
     <MobileLayout
       dataObj={dataObj}
