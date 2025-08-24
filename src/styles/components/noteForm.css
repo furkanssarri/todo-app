@@ -1,19 +1,43 @@
 @layer components {
-  .form-group:last-of-type {
-    border-top: 1px solid var(--border-color);
-    margin: var(--space-200);
+  #mobile-form {
+    padding: var(--space-200);
   }
-
   .form-row {
     display: flex;
     justify-content: space-between;
-    gap: 2rem;
   }
 
   @media (max-width: 768px) {
-    .form-row {
-      max-width: 40%;
+    .properties {
+      max-width: 70%;
     }
+  }
+
+  .properties {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .properties-labels,
+  .properties-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    gap: var(--space-100);
+  }
+
+  .properties-inputs {
+    flex: 1;
+  }
+
+  .properties-inputs input {
+    align-self: flex-end;
+    width: 90%;
+  }
+
+  .properties-labels span label {
+    margin-left: var(--space-100);
   }
 
   input,
@@ -24,6 +48,15 @@
     background: transparent;
     color: var(--primary-foreground);
     border: none;
-    flex: 1;
+  }
+
+  .textarea {
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-200);
+  }
+
+  textarea {
+    width: 100%;
+    height: 100%;
   }
 }

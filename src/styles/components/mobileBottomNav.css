@@ -4,7 +4,7 @@
     max-height: fit-content;
     padding: var(--space-100) 0;
     border-top: 1px solid var(--border-color);
-    box-shadow: 0 -8px 12px 0 #f0f0f060;
+    box-shadow: 0 -4px 6px 0 #f0f0f060;
     background-color: white;
   }
 

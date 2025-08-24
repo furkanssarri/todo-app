@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
+import { IconClock, IconTag } from "./icons";
 
 const CreateNoteForm = () => {
   const { isDesktop } = useContext(MobileContext);
@@ -21,18 +22,24 @@ const CreateNoteForm = () => {
             placeholder="Enter a title..."
           />
         </div>
-        <div className="form-group">
-          <div className="form-row">
-            <label htmlFor="tags">Tags</label>
+        <div className="properties">
+          <div className="properties-labels">
+            <span className="tags-label">
+              <IconTag />
+              <label htmlFor="tags">Tags</label>
+            </span>
+            <span className="lastEdited-label">
+              <IconClock />
+              <label htmlFor="lastEdited">Last Edited</label>
+            </span>
+          </div>
+          <div className="properties-inputs">
             <input
               type="text"
               name="tags"
               id="tags"
               placeholder="Add tags by commas (e.g. Work, Planning)"
             />
-          </div>
-          <div className="form-row">
-            <label htmlFor="lastEdited">Last Edited</label>
             <input
               type="text"
               name="lastEdited"
@@ -41,8 +48,7 @@ const CreateNoteForm = () => {
             />
           </div>
         </div>
-
-        <div className="form-group">
+        <div className="textarea">
           <textarea
             name="content"
             id="content"
@@ -51,7 +57,6 @@ const CreateNoteForm = () => {
             cols={50}
           />
         </div>
-
         {isDesktop && (
           <div className="submitButtons">
             <button type="submit">Save Note</button>
