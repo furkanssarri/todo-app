@@ -14,6 +14,7 @@ export const views = [
   { id: 4, view: "/tag", icon: IconTag, name: "Tags" },
   { id: 5, view: "/settings", icon: IconSettings, name: "Settings" },
   { id: 6, view: "/noteBody", icon: IconHome, name: "NoteBody" },
+  { id: 7, view: "/create", icon: IconHome, name: "Create Note" },
 ] as const;
 
 export type View = (typeof views)[number];

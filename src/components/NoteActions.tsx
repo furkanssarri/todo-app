@@ -1,6 +1,16 @@
+import { useEffect } from "react";
+import type { View } from "../constants/mobileViews";
 import Button from "./Button";
 
-const NoteActions = () => {
+type Props = {
+  activeView: View;
+};
+
+const NoteActions = ({ activeView }: Props) => {
+  useEffect(() => {
+    console.log(activeView);
+  }, [activeView]);
+
   return (
     <ul>
       <li className="action-button">

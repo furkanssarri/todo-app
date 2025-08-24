@@ -3,18 +3,21 @@ import NotesList from "./NotesList";
 import NoteBody from "./NoteBody";
 import ActionsMenu from "./ActionsMenu";
 import type { UseDataResult } from "../utils/useData";
+import type { View } from "../constants/mobileViews";
 
 type Props = {
   dataObj: UseDataResult;
+  activeView: View;
+  setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
-const MainContent = ({ dataObj }: Props) => {
+const MainContent = ({ dataObj, activeView, setActiveView }: Props) => {
   return (
     <main>
       <Header title="All Notes" />
       <div className="main-content-wrapper">
-        <NotesList dataObj={dataObj} />
+        <NotesList dataObj={dataObj} setActiveView={setActiveView} />
         <NoteBody dataObj={dataObj} />
-        <ActionsMenu />
+        <ActionsMenu activeView={activeView} />
       </div>
     </main>
   );

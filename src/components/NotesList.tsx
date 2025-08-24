@@ -6,12 +6,14 @@ import { MobileContext } from "../context/MobileContext";
 import { Link, useNavigate } from "react-router-dom";
 import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
+import { views, type View } from "../constants/mobileViews.js";
 
 type PropTypes = {
   dataObj: UseDataResult;
+  setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const NotesList = ({ dataObj }: PropTypes) => {
+const NotesList = ({ dataObj, setActiveView }: PropTypes) => {
   const { data, error, isLoading } = dataObj;
   const navigate = useNavigate();
   const context = useContext(MobileContext);
@@ -32,7 +34,10 @@ const NotesList = ({ dataObj }: PropTypes) => {
           startIcon="plus"
           color="primary"
           size="lg"
-          onClick={() => navigate("/create")}
+          onClick={() => {
+            navigate("/create");
+            setActiveView(views[6]);
+          }}
         >
           Create New Note
         </Button>

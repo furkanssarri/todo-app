@@ -3,8 +3,13 @@ import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
 import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
+import type { View } from "../constants/mobileViews";
 
-const CreateNoteForm = () => {
+type Props = {
+  activeView: View;
+};
+
+const CreateNoteForm = ({ activeView }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (inputRef.current) {
@@ -15,10 +20,12 @@ const CreateNoteForm = () => {
   return (
     <>
       <article className="note-details">
-        {!isDesktop && (
+        {isDesktop ? (
           <div className="mobile-actions">
             <NoteActionsMobile exclude={["delete", "archive"]} />
           </div>
+        ) : (
+          <ActionsMenu activeView={activeView} />
         )}
         <form id="add-new-form">
           <div className="form-row">
@@ -74,7 +81,7 @@ const CreateNoteForm = () => {
           )}
         </form>
       </article>
-      {isDesktop && <ActionsMenu />}
+      {isDesktop && <ActionsMenu activeView={activeView} />}
     </>
   );
 };

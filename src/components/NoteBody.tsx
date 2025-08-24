@@ -8,12 +8,14 @@ import ActionsMenu from "./ActionsMenu";
 import { MobileContext } from "../context/MobileContext";
 import { useContext } from "react";
 import type { UseDataResult } from "../utils/useData";
+import type { View } from "../constants/mobileViews";
 
 type Props = {
   dataObj: UseDataResult;
+  activeView: View;
 };
 
-const NoteBody = ({ dataObj }: Props) => {
+const NoteBody = ({ dataObj, activeView }: Props) => {
   const { data, error, isLoading } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
@@ -42,7 +44,7 @@ const NoteBody = ({ dataObj }: Props) => {
   return (
     <>
       <article className="note-details">
-        {(isTablet || isMobile) && <ActionsMenu />}
+        {(isTablet || isMobile) && <ActionsMenu activeView={activeView} />}
 
         <div className="note-content">
           <h2>{note.title}</h2>
@@ -67,7 +69,7 @@ const NoteBody = ({ dataObj }: Props) => {
           </div>
         </div>
       </article>
-      {isDesktop && <ActionsMenu />}
+      {isDesktop && <ActionsMenu activeView={activeView} />}
     </>
   );
 };
