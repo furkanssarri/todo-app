@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
 import NoteBody from "../components/NoteBody";
@@ -10,7 +10,7 @@ import TagsList from "../components/TagsList";
 import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
-import { views, type View } from "../constants/mobileViews";
+import { type View } from "../constants/mobileViews";
 import type { Note } from "../utils/useData";
 import CreateNoteForm from "../components/CreateNoteForm";
 
@@ -18,11 +18,18 @@ type Props = {
   data: Note[] | null;
   error: string | null;
   isLoading: boolean;
+  activeView: View;
+  setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const MobileLayout = ({ data, error, isLoading }: Props) => {
+const MobileLayout = ({
+  data,
+  error,
+  isLoading,
+  activeView,
+  setActiveView,
+}: Props) => {
   const { isMobile, isTablet } = useContext(MobileContext);
-  const [activeView, setActiveView] = useState<View>(views[0]);
 
   return (
     <>

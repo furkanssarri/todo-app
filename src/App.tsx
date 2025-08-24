@@ -1,12 +1,15 @@
 import { MobileContext } from "./context/MobileContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
 import useData from "./utils/useData";
+import { type View, views } from "./constants/mobileViews";
 
 function App() {
   const { data, error, isLoading } = useData("/db.json");
+
+  const [activeView, setActiveView] = useState<View>(views[0]);
 
   const context = useContext(MobileContext);
   if (!context) {
@@ -15,9 +18,21 @@ function App() {
   const { isDesktop } = context;
 
   return isDesktop ? (
-    <DesktopLayout data={data} error={error} isLoading={isLoading} />
+    <DesktopLayout
+      data={data}
+      error={error}
+      isLoading={isLoading}
+      activeView={activeView}
+      setActiveView={setActiveView}
+    />
   ) : (
-    <MobileLayout data={data} error={error} isLoading={isLoading} />
+    <MobileLayout
+      data={data}
+      error={error}
+      isLoading={isLoading}
+      activeView={activeView}
+      setActiveView={setActiveView}
+    />
   );
 }
 
