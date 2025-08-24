@@ -11,24 +11,16 @@ import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import { type View } from "../constants/mobileViews";
-import type { Note } from "../utils/useData";
+import type { UseDataResult } from "../utils/useData";
 import CreateNoteForm from "../components/CreateNoteForm";
 
 type Props = {
-  data: Note[] | null;
-  error: string | null;
-  isLoading: boolean;
+  dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const MobileLayout = ({
-  data,
-  error,
-  isLoading,
-  activeView,
-  setActiveView,
-}: Props) => {
+const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
 
@@ -40,28 +32,13 @@ const MobileLayout = ({
       <main>
         <div className="main-wrapper">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <NotesList data={data} error={error} isLoading={isLoading} />
-              }
-            />
+            <Route path="/" element={<NotesList dataObj={dataObj} />} />
             <Route path="/create" element={<CreateNoteForm />} />
-            <Route
-              path="/search"
-              element={
-                <SearchPage data={data} error={error} isLoading={isLoading} />
-              }
-            />
+            <Route path="/search" element={<SearchPage dataObj={dataObj} />} />
             <Route path="/archive" element={<ArchiveList />} />
             <Route path="/tag" element={<TagsList activeView={activeView} />} />
             <Route path="/settings" element={<SettingsPage />} />
-            <Route
-              path="/note/:id"
-              element={
-                <NoteBody data={data} error={error} isLoading={isLoading} />
-              }
-            />
+            <Route path="/note/:id" element={<NoteBody dataObj={dataObj} />} />
           </Routes>
         </div>
         {!isDesktop && (

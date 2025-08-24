@@ -1,15 +1,13 @@
-import type { Note } from "../utils/useData";
+import type { UseDataResult } from "../utils/useData";
 import MainTitle from "./MainTitle";
 import NotesList from "./NotesList";
 import SearchBar from "./SearchBar";
 
 type Props = {
-  data: Note[] | null;
-  error: string | null;
-  isLoading: boolean;
+  dataObj: UseDataResult;
 };
 
-const SearchPage = ({ data, error, isLoading }: Props) => {
+const SearchPage = ({ dataObj }: Props) => {
   return (
     <>
       <div className="mobile-layout-main-heading">
@@ -19,7 +17,7 @@ const SearchPage = ({ data, error, isLoading }: Props) => {
         <SearchBar />
       </section>
       <section className="notes-list">
-        <NotesList data={data} error={error} isLoading={isLoading} />
+        <NotesList dataObj={dataObj} />
       </section>
     </>
   );

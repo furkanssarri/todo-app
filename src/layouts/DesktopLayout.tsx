@@ -6,18 +6,17 @@ import CreateNoteForm from "../components/CreateNoteForm";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import type { Note } from "../utils/useData";
+import type { UseDataResult } from "../utils/useData";
 import type { View } from "../constants/mobileViews";
 
 type Props = {
-  data: Note[] | null;
-  error: string | null;
-  isLoading: boolean;
+  dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const DeskttopLayout = ({ data, error, isLoading, activeView }: Props) => {
+const DeskttopLayout = ({ dataObj, activeView }: Props) => {
+  const { data, error, isLoading } = dataObj;
   return (
     <>
       <div id="content">

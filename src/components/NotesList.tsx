@@ -4,16 +4,15 @@ import { format } from "date-fns";
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import { Link, useNavigate } from "react-router-dom";
-import type { Note } from "../utils/useData.js";
+import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
 
 type PropTypes = {
-  data: Note[] | null;
-  error: string | null;
-  isLoading: boolean;
+  dataObj: UseDataResult;
 };
 
-const NotesList = ({ data, error, isLoading }: PropTypes) => {
+const NotesList = ({ dataObj }: PropTypes) => {
+  const { data, error, isLoading } = dataObj;
   const navigate = useNavigate();
   const context = useContext(MobileContext);
 

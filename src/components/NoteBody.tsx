@@ -7,15 +7,14 @@ import ActionsMenu from "./ActionsMenu";
 
 import { MobileContext } from "../context/MobileContext";
 import { useContext } from "react";
-import type { Note } from "../utils/useData";
+import type { UseDataResult } from "../utils/useData";
 
 type Props = {
-  data: Note[] | null;
-  error: string | null;
-  isLoading: boolean;
+  dataObj: UseDataResult;
 };
 
-const NoteBody = ({ data, error, isLoading }: Props) => {
+const NoteBody = ({ dataObj }: Props) => {
+  const { data, error, isLoading } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
   const { isTablet, isMobile, isDesktop } = useContext(MobileContext);

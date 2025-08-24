@@ -8,8 +8,13 @@ export type Note = {
   lastEdited: string;
   isArchived: boolean;
 };
+export type UseDataResult = {
+  data: Note[] | null;
+  error: string | null;
+  isLoading: boolean;
+};
 
-export default function useData(url: string) {
+export default function useData(url: string): UseDataResult {
   const [data, setData] = useState<Note[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
