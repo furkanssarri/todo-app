@@ -48,6 +48,7 @@
     background: transparent;
     color: var(--primary-foreground);
     border: none;
+    width: 100%;
   }
 
   .textarea {

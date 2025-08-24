@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
 import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
 
 const CreateNoteForm = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
   const { isDesktop } = useContext(MobileContext);
   return (
     <>
@@ -22,6 +28,7 @@ const CreateNoteForm = () => {
               name="title"
               id="title"
               placeholder="Enter a title..."
+              ref={inputRef}
             />
           </div>
           <div className="properties">
