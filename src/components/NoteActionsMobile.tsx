@@ -26,7 +26,31 @@ const NoteActionsMobile = ({ exclude = [] }: Props) => {
         </div>
       )}
       <ul>
-        {!isDesktop &&
+        <ul>
+          {!isDesktop &&
+            filteredBtns.map((btn: Btn) => {
+              if (btn.view === "back") return null;
+
+              const isTextOnly = btn.view === "cancel" || btn.view === "save";
+
+              return (
+                <li key={btn.id}>
+                  <Button
+                    variant="text"
+                    color={isTextOnly ? undefined : "primary"}
+                    size={isTextOnly ? undefined : "lg"}
+                    className={isTextOnly ? undefined : "btn"}
+                    startIcon={isTextOnly ? undefined : btn.icon}
+                    id={btn.view}
+                  >
+                    {isTextOnly && btn.name}
+                  </Button>
+                </li>
+              );
+            })}
+        </ul>
+
+        {/* {!isDesktop &&
           filteredBtns.map((btn: Btn) => {
             if (
               (btn.view !== "back" && btn.view === "cancel") ||
@@ -34,7 +58,9 @@ const NoteActionsMobile = ({ exclude = [] }: Props) => {
             ) {
               return (
                 <li key={btn.id}>
-                  <Button variant="text">{btn.name}</Button>
+                  <Button variant="text" id={btn.view}>
+                    {btn.name}
+                  </Button>
                 </li>
               );
             }
@@ -47,11 +73,12 @@ const NoteActionsMobile = ({ exclude = [] }: Props) => {
                     color="primary"
                     size="lg"
                     className="btn"
+                    id={btn.view}
                   ></Button>
                 </li>
               );
             }
-          })}
+          })} */}
       </ul>
     </>
   );

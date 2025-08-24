@@ -40,7 +40,8 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: var(--space-200);
+    padding: var(--space-200);
+    padding-top: 0;
   }
 
   .mobile-actions ul {
@@ -50,8 +51,21 @@
     justify-content: flex-end;
   }
 
-  .mobile-actions ul li button:hover {
+  .mobile-actions ul li button {
+    color: var(--primary-foreground) !important;
+  }
+
+  .mobile-actions ul li:last-child button {
+    color: var(--colors-blue-500) !important;
+  }
+
+  .mobile-actions ul li button#cancel,
+  .mobile-actions ul li button#save:hover {
     background-color: inherit !important;
+  }
+
+  .mobile-actions ul li button svg {
+    font-size: large;
   }
 
   @media (prefers-color-scheme: dark) {
