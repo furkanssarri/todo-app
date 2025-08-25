@@ -8,6 +8,9 @@ export type Note = {
   lastEdited: string;
   isArchived: boolean;
 };
+
+export type Notes = Note[];
+
 export type UseDataResult = {
   data: Note[] | null;
   error: string | null;

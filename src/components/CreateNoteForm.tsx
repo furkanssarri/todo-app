@@ -5,46 +5,43 @@ import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
 import { type View } from "../constants/mobileViews";
 import Button from "./Button";
-import type { Note } from "../utils/useData";
+import type { Notes } from "../utils/useData";
 
 type Props = {
   activeView: View;
-
-  note: Note;
-  setNote: React.Dispatch<React.SetStateAction<Note>>;
+  setNotes: React.Dispatch<React.SetStateAction<Notes>>;
 };
 
 type FormData = {
   title: string;
   tags: string[];
   content: string;
-  lastEdited: Date;
+  lastEdited: string;
   isArchived: boolean;
 };
 
-const CreateNoteForm = ({ activeView, note, setNote }: Props) => {
+const CreateNoteForm = ({ activeView, setNotes }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { isDesktop } = useContext(MobileContext);
 
+  // Form Title element auto focus
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
 
-  const { isDesktop } = useContext(MobileContext);
-
   const [formData, setFormData] = useState<FormData>({
     title: "",
     tags: [],
     content: "",
-    lastEdited: new Date(),
+    lastEdited: "",
     isArchived: false,
   });
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newNote = {
-      ...note,
       id: Date.now().toString(),
       title: formData.title,
       tags: formData.tags,
@@ -52,7 +49,15 @@ const CreateNoteForm = ({ activeView, note, setNote }: Props) => {
       lastEdited: Date.now().toString(),
       isArchived: false,
     };
-    setNote(newNote);
+    setNotes((prev) => [...prev, newNote]);
+    setFormData({
+      title: "",
+      tags: [],
+      content: "",
+      lastEdited: "",
+      isArchived: false,
+    });
+    inputRef.current?.focus();
   };
 
   return (
@@ -72,6 +77,7 @@ const CreateNoteForm = ({ activeView, note, setNote }: Props) => {
               id="title"
               placeholder="Enter a title..."
               ref={inputRef}
+              value={formData.title}
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -127,6 +133,7 @@ const CreateNoteForm = ({ activeView, note, setNote }: Props) => {
               placeholder="Start typing your note here..."
               rows={27}
               cols={50}
+              value={formData.content}
               onChange={(e) =>
                 setFormData({
                   ...formData,
@@ -144,7 +151,7 @@ const CreateNoteForm = ({ activeView, note, setNote }: Props) => {
             <Button color="default" size="lg">
               Cancel
             </Button>
-            {/* <button type="submit">Save Note</button> */}
+            {/* <button type="submit">Save Notes</button> */}
             {/* // <button type="button">Cancel</button> */}
           </div>
         )}

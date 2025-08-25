@@ -3,46 +3,38 @@ import { useContext, useEffect, useState } from "react";
 
 import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
-import useData, { type Note } from "./utils/useData";
+import useData, { type Notes } from "./utils/useData";
 import { type View, views } from "./constants/mobileViews";
 
 function App() {
+  const context = useContext(MobileContext);
+  const { isDesktop } = context;
+
   const dataObj = useData("/db.json");
 
   const [activeView, setActiveView] = useState<View>(views[0]);
-  const [note, setNote] = useState<Note>({
-    id: "",
-    title: "",
-    tags: [],
-    content: "",
-    lastEdited: "",
-    isArchived: false,
+  const [notes, setNotes] = useState<Notes>(() => {
+    const saved = localStorage.getItem("notes");
+    return saved ? JSON.parse(saved) : [];
   });
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(note));
-  }, [note]);
 
-  const context = useContext(MobileContext);
-  if (!context) {
-    throw new Error("Mobilecontext not provided");
-  }
-  const { isDesktop } = context;
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   return isDesktop ? (
     <DesktopLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
-      note={note}
-      setNote={setNote}
+      setNotes={setNotes}
     />
   ) : (
     <MobileLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
-      note={note}
-      setNote={setNote}
+      setNotes={setNotes}
     />
   );
 }

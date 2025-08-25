@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { View } from "../constants/mobileViews";
 import Button from "./Button";
 
@@ -7,12 +6,8 @@ type Props = {
 };
 
 const NoteActions = ({ activeView }: Props) => {
-  useEffect(() => {
-    console.log(activeView);
-  }, [activeView]);
-
   if (activeView.name === "Create Note") {
-    console.log("dont render buttons");
+    return;
   }
 
   return (

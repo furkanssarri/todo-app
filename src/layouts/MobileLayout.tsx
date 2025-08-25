@@ -11,24 +11,21 @@ import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import { type View } from "../constants/mobileViews";
-import type { Note, UseDataResult } from "../utils/useData";
+import type { Notes, UseDataResult } from "../utils/useData";
 import CreateNoteForm from "../components/CreateNoteForm";
 
 type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
-
-  note: Note;
-  setNote: React.Dispatch<React.SetStateAction<Note>>;
+  setNotes: React.Dispatch<React.SetStateAction<Notes>>;
 };
 
 const MobileLayout = ({
   dataObj,
   activeView,
   setActiveView,
-  note,
-  setNote,
+  setNotes,
 }: Props) => {
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
@@ -50,11 +47,7 @@ const MobileLayout = ({
             <Route
               path="/create"
               element={
-                <CreateNoteForm
-                  activeView={activeView}
-                  note={note}
-                  setNote={setNote}
-                />
+                <CreateNoteForm activeView={activeView} setNotes={setNotes} />
               }
             />
             <Route

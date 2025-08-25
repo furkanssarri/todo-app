@@ -41,6 +41,8 @@ const NoteActionsMobile = ({ exclude = [] }: Props) => {
                     size={isTextOnly ? undefined : "lg"}
                     className={isTextOnly ? undefined : "btn"}
                     startIcon={isTextOnly ? undefined : btn.icon}
+                    type={btn.view === "save" ? "submit" : "button"}
+                    form={btn.view === "save" ? "add-new-form" : undefined}
                     id={btn.view}
                   >
                     {isTextOnly && btn.name}
