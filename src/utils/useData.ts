@@ -19,7 +19,14 @@ export type UseDataResult = {
 };
 
 export default function useData(source: string): UseDataResult {
-  const [data, setData] = useState<Notes>([]);
+  const [data, setData] = useState<Notes>(() => {
+    try {
+      const saved = localStorage.getItem("notes");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

@@ -2,7 +2,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
-import NoteBody from "../components/NoteBody";
 import SearchPage from "../components/SearchPage";
 import ArchiveList from "../components/ArchiveList";
 import SettingsPage from "../components/SettingsPage";
@@ -58,7 +57,9 @@ const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
             <Route path="/settings" element={<SettingsPage />} />
             <Route
               path="/note/:id"
-              element={<NoteBody dataObj={dataObj} activeView={activeView} />}
+              element={
+                <CreateNoteForm dataObj={dataObj} activeView={activeView} />
+              }
             />
           </Routes>
         </div>

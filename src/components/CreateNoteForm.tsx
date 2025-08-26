@@ -7,6 +7,7 @@ import { type View } from "../constants/mobileViews";
 import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
 import { formatISO } from "date-fns";
+import { useParams } from "react-router";
 
 type Props = {
   dataObj: UseDataResult;
@@ -24,7 +25,27 @@ type FormData = {
 const CreateNoteForm = ({ dataObj, activeView }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isDesktop } = useContext(MobileContext);
-  const { setData } = dataObj;
+  const { data, setData } = dataObj;
+  const { id } = useParams();
+  const note = data?.find((n) => n.id.toString() === id);
+
+  const [formData, setFormData] = useState<FormData>(() => {
+    return note
+      ? {
+          title: note.title,
+          tags: note.tags,
+          content: note.content,
+          lastEdited: note.lastEdited,
+          isArchived: note.isArchived,
+        }
+      : {
+          title: "",
+          tags: [],
+          content: "",
+          lastEdited: "",
+          isArchived: false,
+        };
+  });
 
   // Form Title element auto focus
   useEffect(() => {
@@ -33,13 +54,25 @@ const CreateNoteForm = ({ dataObj, activeView }: Props) => {
     }
   }, []);
 
-  const [formData, setFormData] = useState<FormData>({
-    title: "",
-    tags: [],
-    content: "",
-    lastEdited: "",
-    isArchived: false,
-  });
+  useEffect(() => {
+    setFormData(() => {
+      return note
+        ? {
+            title: note.title,
+            tags: note.tags,
+            content: note.content,
+            lastEdited: note.lastEdited,
+            isArchived: note.isArchived,
+          }
+        : {
+            title: "",
+            tags: [],
+            content: "",
+            lastEdited: "",
+            isArchived: false,
+          };
+    });
+  }, [note]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

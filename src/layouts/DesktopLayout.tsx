@@ -37,7 +37,9 @@ const DeskttopLayout = ({ dataObj, activeView, setActiveView }: Props) => {
               />
               <Route
                 path="/note/:id"
-                element={<NoteBody dataObj={dataObj} activeView={activeView} />}
+                element={
+                  <CreateNoteForm dataObj={dataObj} activeView={activeView} />
+                }
               />
               <Route
                 path="/create"
