@@ -14,17 +14,23 @@ function App() {
 
   const [activeView, setActiveView] = useState<View>(views[0]);
 
+  const handleDeleteNote = (id: string) => {
+    dataObj.setData((prev) => prev.filter((n) => n.id !== id));
+  };
+
   return isDesktop ? (
     <DesktopLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
+      handleDeleteNote={handleDeleteNote}
     />
   ) : (
     <MobileLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
+      handleDeleteNote={handleDeleteNote}
     />
   );
 }

@@ -13,9 +13,15 @@ type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+  handleDeleteNote: (id: string) => void;
 };
 
-const DeskttopLayout = ({ dataObj, activeView, setActiveView }: Props) => {
+const DeskttopLayout = ({
+  dataObj,
+  activeView,
+  setActiveView,
+  handleDeleteNote,
+}: Props) => {
   return (
     <>
       <div id="content">
@@ -33,18 +39,33 @@ const DeskttopLayout = ({ dataObj, activeView, setActiveView }: Props) => {
             <Routes>
               <Route
                 path="/"
-                element={<NoteBody dataObj={dataObj} activeView={activeView} />}
+                element={
+                  <NoteBody
+                    dataObj={dataObj}
+                    activeView={activeView}
+                    handleDeleteNote={handleDeleteNote}
+                  />
+                }
               />
               <Route
                 path="/note/:id"
                 element={
-                  <CreateNoteForm dataObj={dataObj} activeView={activeView} />
+                  // TODO: this will be replaced with a note body-type form component for design fidelity.
+                  <CreateNoteForm
+                    dataObj={dataObj}
+                    activeView={activeView}
+                    handleDeleteNote={handleDeleteNote}
+                  />
                 }
               />
               <Route
                 path="/create"
                 element={
-                  <CreateNoteForm dataObj={dataObj} activeView={activeView} />
+                  <CreateNoteForm
+                    dataObj={dataObj}
+                    activeView={activeView}
+                    handleDeleteNote={handleDeleteNote}
+                  />
                 }
               />
             </Routes>

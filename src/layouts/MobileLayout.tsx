@@ -17,9 +17,15 @@ type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+  handleDeleteNote: (id: string) => void;
 };
 
-const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
+const MobileLayout = ({
+  dataObj,
+  activeView,
+  setActiveView,
+  handleDeleteNote,
+}: Props) => {
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
 
@@ -40,7 +46,11 @@ const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
             <Route
               path="/create"
               element={
-                <CreateNoteForm dataObj={dataObj} activeView={activeView} />
+                <CreateNoteForm
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  handleDeleteNote={handleDeleteNote}
+                />
               }
             />
             <Route
@@ -58,7 +68,12 @@ const MobileLayout = ({ dataObj, activeView, setActiveView }: Props) => {
             <Route
               path="/note/:id"
               element={
-                <CreateNoteForm dataObj={dataObj} activeView={activeView} />
+                // TODO: this will be replaced with a note body-type form component for design fidelity.
+                <CreateNoteForm
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  handleDeleteNote={handleDeleteNote}
+                />
               }
             />
           </Routes>

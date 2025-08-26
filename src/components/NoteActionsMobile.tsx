@@ -6,14 +6,32 @@ import Button from "./Button";
 
 type Props = {
   exclude?: BtnView[];
+  handleDeleteNote: (id: string) => void;
+  noteId: string | undefined;
 };
 
-const NoteActionsMobile = ({ exclude = [] }: Props) => {
+const NoteActionsMobile = ({
+  exclude = [],
+  handleDeleteNote,
+  noteId,
+}: Props) => {
   const { isDesktop } = useContext(MobileContext);
   const filteredBtns = btns.filter((btn) => !exclude?.includes(btn.view));
 
   const showBackBtn = !isDesktop && btns[0].view === "back";
   const BackIcon = showBackBtn ? btns[0].icon : null;
+
+  const onAction = (view: BtnView) => {
+    switch (view) {
+      case "delete":
+        if (noteId) return handleDeleteNote(noteId);
+        break;
+
+      default:
+        console.log("unhandled");
+        break;
+    }
+  };
 
   return (
     <>
@@ -44,6 +62,7 @@ const NoteActionsMobile = ({ exclude = [] }: Props) => {
                     type={btn.view === "save" ? "submit" : "button"}
                     form={btn.view === "save" ? "add-new-form" : undefined}
                     id={btn.view}
+                    onClick={() => onAction(btn.view)}
                   >
                     {isTextOnly && btn.name}
                   </Button>

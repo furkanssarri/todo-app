@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 type Props = {
   dataObj: UseDataResult;
   activeView: View;
+  handleDeleteNote: (id: string) => void;
 };
 
 type FormData = {
@@ -22,7 +23,7 @@ type FormData = {
   isArchived: boolean;
 };
 
-const CreateNoteForm = ({ dataObj, activeView }: Props) => {
+const CreateNoteForm = ({ dataObj, activeView, handleDeleteNote }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isDesktop } = useContext(MobileContext);
   const { data, setData } = dataObj;
@@ -100,7 +101,12 @@ const CreateNoteForm = ({ dataObj, activeView }: Props) => {
       <article className="note-details">
         {!isDesktop && (
           <div className="mobile-actions">
-            <NoteActionsMobile exclude={["delete", "archive"]} />
+            <NoteActionsMobile
+              // TODO: this will be re-implemented as a "note-body" type of form in the future.
+              // exclude={["delete", "archive"]}
+              handleDeleteNote={handleDeleteNote}
+              noteId={id}
+            />
           </div>
         )}
         <form id="add-new-form" onSubmit={(e) => handleFormSubmit(e)}>
@@ -186,12 +192,16 @@ const CreateNoteForm = ({ dataObj, activeView }: Props) => {
             <Button color="default" size="lg">
               Cancel
             </Button>
-            {/* <button type="submit">Save Notes</button> */}
-            {/* // <button type="button">Cancel</button> */}
           </div>
         )}
       </article>
-      {isDesktop && <ActionsMenu activeView={activeView} />}
+      {isDesktop && (
+        <ActionsMenu
+          activeView={activeView}
+          handleDeleteNote={handleDeleteNote}
+          noteId={id!}
+        />
+      )}
     </>
   );
 };

@@ -7,15 +7,20 @@ import type { View } from "../constants/mobileViews";
 
 type Props = {
   activeView: View;
+  handleDeleteNote: (id: string) => void;
+  noteId: string;
 };
 
-const ActionsMenu = ({ activeView }: Props) => {
+const ActionsMenu = ({ activeView, handleDeleteNote, noteId }: Props) => {
   const { isMobile, isTablet } = useContext(MobileContext);
 
   if (isMobile || isTablet) {
     return (
       <div className="mobile-actions">
-        <NoteActionsMobile />
+        <NoteActionsMobile
+          handleDeleteNote={handleDeleteNote}
+          noteId={noteId}
+        />
       </div>
     );
   }
@@ -24,7 +29,11 @@ const ActionsMenu = ({ activeView }: Props) => {
     <menu className="right-menu">
       <section className="actions">
         {activeView.name !== "Create Note" && (
-          <NoteActions activeView={activeView} />
+          <NoteActions
+            activeView={activeView}
+            handleDeleteNote={handleDeleteNote}
+            noteId={noteId}
+          />
         )}
       </section>
     </menu>

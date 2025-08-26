@@ -13,9 +13,10 @@ import type { View } from "../constants/mobileViews";
 type Props = {
   dataObj: UseDataResult;
   activeView: View;
+  handleDeleteNote: (id: string) => void;
 };
 
-const NoteBody = ({ dataObj, activeView }: Props) => {
+const NoteBody = ({ dataObj, activeView, handleDeleteNote }: Props) => {
   const { data, error, isLoading } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
@@ -44,7 +45,13 @@ const NoteBody = ({ dataObj, activeView }: Props) => {
   return (
     <>
       <article className="note-details">
-        {(isTablet || isMobile) && <ActionsMenu activeView={activeView} />}
+        {(isTablet || isMobile) && (
+          <ActionsMenu
+            activeView={activeView}
+            handleDeleteNote={handleDeleteNote}
+            noteId={id!}
+          />
+        )}
 
         <div className="note-content">
           <h2>{note.title}</h2>
@@ -69,7 +76,13 @@ const NoteBody = ({ dataObj, activeView }: Props) => {
           </div>
         </div>
       </article>
-      {isDesktop && <ActionsMenu activeView={activeView} />}
+      {isDesktop && (
+        <ActionsMenu
+          activeView={activeView}
+          handleDeleteNote={handleDeleteNote}
+          noteId={id}
+        />
+      )}
     </>
   );
 };
