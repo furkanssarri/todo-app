@@ -10,7 +10,7 @@ function App() {
   const context = useContext(MobileContext);
   const { isDesktop } = context;
 
-  const dataObj = useData("/db.json");
+  const dataObj = useData("local");
 
   const [activeView, setActiveView] = useState<View>(views[0]);
   const [notes, setNotes] = useState<Notes>(() => {

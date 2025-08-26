@@ -5,11 +5,12 @@ import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
 import { type View } from "../constants/mobileViews";
 import Button from "./Button";
-import type { Notes } from "../utils/useData";
+import type { UseDataResult } from "../utils/useData";
+import { formatISO } from "date-fns";
 
 type Props = {
+  dataObj: UseDataResult;
   activeView: View;
-  setNotes: React.Dispatch<React.SetStateAction<Notes>>;
 };
 
 type FormData = {
@@ -20,9 +21,10 @@ type FormData = {
   isArchived: boolean;
 };
 
-const CreateNoteForm = ({ activeView, setNotes }: Props) => {
+const CreateNoteForm = ({ dataObj, activeView }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isDesktop } = useContext(MobileContext);
+  const { setData } = dataObj;
 
   // Form Title element auto focus
   useEffect(() => {
@@ -46,10 +48,10 @@ const CreateNoteForm = ({ activeView, setNotes }: Props) => {
       title: formData.title,
       tags: formData.tags,
       content: formData.content,
-      lastEdited: Date.now().toString(),
+      lastEdited: formatISO(Date.now()),
       isArchived: false,
     };
-    setNotes((prev) => [...prev, newNote]);
+    setData((prev) => [...prev, newNote]);
     setFormData({
       title: "",
       tags: [],

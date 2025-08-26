@@ -16,12 +16,7 @@ type PropTypes = {
 const NotesList = ({ dataObj, setActiveView }: PropTypes) => {
   const { data, error, isLoading } = dataObj;
   const navigate = useNavigate();
-  const context = useContext(MobileContext);
-
-  if (!context) {
-    throw new Error("Mobilecontext not provided");
-  }
-  const { isDesktop } = context;
+  const { isDesktop } = useContext(MobileContext);
 
   if (error) return <p>{error}</p>;
 

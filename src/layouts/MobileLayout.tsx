@@ -47,7 +47,11 @@ const MobileLayout = ({
             <Route
               path="/create"
               element={
-                <CreateNoteForm activeView={activeView} setNotes={setNotes} />
+                <CreateNoteForm
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  setNotes={setNotes}
+                />
               }
             />
             <Route
