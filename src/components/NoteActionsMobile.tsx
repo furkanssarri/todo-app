@@ -6,13 +6,13 @@ import Button from "./Button";
 
 type Props = {
   exclude?: BtnView[];
-  handleDeleteNote: (id: string) => void;
+  handleNoteActions: (id: string, action: string) => void;
   noteId: string | undefined;
 };
 
 const NoteActionsMobile = ({
   exclude = [],
-  handleDeleteNote,
+  handleNoteActions,
   noteId,
 }: Props) => {
   const { isDesktop } = useContext(MobileContext);
@@ -24,9 +24,11 @@ const NoteActionsMobile = ({
   const onAction = (view: BtnView) => {
     switch (view) {
       case "delete":
-        if (noteId) return handleDeleteNote(noteId);
+        if (noteId) return handleNoteActions(noteId, "delete");
         break;
-
+      case "archive":
+        if (noteId) return handleNoteActions(noteId, "archive");
+        break;
       default:
         console.log("unhandled");
         break;

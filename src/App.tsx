@@ -14,8 +14,27 @@ function App() {
 
   const [activeView, setActiveView] = useState<View>(views[0]);
 
+  const handleNoteActions = (id: string, action: string) => {
+    if (action === "delete") {
+      handleDeleteNote(id);
+    } else if (action === "archive") {
+      handleArchiveNote(id);
+    }
+  };
+
   const handleDeleteNote = (id: string) => {
     dataObj.setData((prev) => prev.filter((n) => n.id !== id));
+  };
+
+  const handleArchiveNote = (id: string) => {
+    dataObj.setData((prev) =>
+      prev.map((n) => {
+        if (n.id === id) {
+          return { ...n, isArchived: true };
+        }
+        return n;
+      }),
+    );
   };
 
   return isDesktop ? (
@@ -23,14 +42,14 @@ function App() {
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
-      handleDeleteNote={handleDeleteNote}
+      handleNoteActions={handleNoteActions}
     />
   ) : (
     <MobileLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
-      handleDeleteNote={handleDeleteNote}
+      handleNoteActions={handleNoteActions}
     />
   );
 }

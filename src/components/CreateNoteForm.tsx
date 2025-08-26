@@ -12,7 +12,7 @@ import { useParams } from "react-router";
 type Props = {
   dataObj: UseDataResult;
   activeView: View;
-  handleDeleteNote: (id: string) => void;
+  handleNoteActions: (id: string, action: string) => void;
 };
 
 type FormData = {
@@ -23,7 +23,7 @@ type FormData = {
   isArchived: boolean;
 };
 
-const CreateNoteForm = ({ dataObj, activeView, handleDeleteNote }: Props) => {
+const CreateNoteForm = ({ dataObj, activeView, handleNoteActions }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isDesktop } = useContext(MobileContext);
   const { data, setData } = dataObj;
@@ -104,7 +104,7 @@ const CreateNoteForm = ({ dataObj, activeView, handleDeleteNote }: Props) => {
             <NoteActionsMobile
               // TODO: this will be re-implemented as a "note-body" type of form in the future.
               // exclude={["delete", "archive"]}
-              handleDeleteNote={handleDeleteNote}
+              handleNoteActions={handleNoteActions}
               noteId={id}
             />
           </div>
@@ -198,7 +198,7 @@ const CreateNoteForm = ({ dataObj, activeView, handleDeleteNote }: Props) => {
       {isDesktop && (
         <ActionsMenu
           activeView={activeView}
-          handleDeleteNote={handleDeleteNote}
+          handleNoteActions={handleNoteActions}
           noteId={id!}
         />
       )}

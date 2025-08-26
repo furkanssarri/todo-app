@@ -10,13 +10,20 @@ import { views, type View } from "../constants/mobileViews.js";
 
 type PropTypes = {
   dataObj: UseDataResult;
+  activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const NotesList = ({ dataObj, setActiveView }: PropTypes) => {
-  const { data, error, isLoading } = dataObj;
+const NotesList = ({ dataObj, activeView, setActiveView }: PropTypes) => {
+  const { error, isLoading } = dataObj;
+  let data = dataObj.data;
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
+
+  if (activeView.view === "/archive") {
+    const archivedData = data.filter((note) => note.isArchived);
+    data = archivedData;
+  }
 
   if (error) return <p>{error}</p>;
 

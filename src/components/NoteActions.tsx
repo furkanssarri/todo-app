@@ -3,11 +3,11 @@ import Button from "./Button";
 
 type Props = {
   activeView: View;
-  handleDeleteNote: (id: string) => void;
+  handleNoteActions: (id: string, action: string) => void;
   noteId?: string;
 };
 
-const NoteActions = ({ activeView, handleDeleteNote, noteId }: Props) => {
+const NoteActions = ({ activeView, handleNoteActions, noteId }: Props) => {
   if (activeView.name === "Create Note") {
     return;
   }
@@ -20,7 +20,7 @@ const NoteActions = ({ activeView, handleDeleteNote, noteId }: Props) => {
           size={"lg"}
           variant={"outline"}
           onClick={() => {
-            if (noteId) return handleDeleteNote(noteId);
+            if (noteId) return handleNoteActions(noteId, "delete");
           }}
         >
           {" "}
@@ -28,7 +28,14 @@ const NoteActions = ({ activeView, handleDeleteNote, noteId }: Props) => {
         </Button>
       </li>
       <li className="action-button">
-        <Button startIcon={"archive"} size={"lg"} variant={"outline"}>
+        <Button
+          startIcon={"archive"}
+          size={"lg"}
+          variant={"outline"}
+          onClick={() => {
+            if (noteId) return handleNoteActions(noteId, "archive");
+          }}
+        >
           {" "}
           Archive Note
         </Button>

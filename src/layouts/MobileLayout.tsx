@@ -3,7 +3,6 @@ import { useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
 import SearchPage from "../components/SearchPage";
-import ArchiveList from "../components/ArchiveList";
 import SettingsPage from "../components/SettingsPage";
 import TagsList from "../components/TagsList";
 import { MobileContext } from "../context/MobileContext";
@@ -17,14 +16,14 @@ type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
-  handleDeleteNote: (id: string) => void;
+  handleNoteActions: (id: string, action: string) => void;
 };
 
 const MobileLayout = ({
   dataObj,
   activeView,
   setActiveView,
-  handleDeleteNote,
+  handleNoteActions,
 }: Props) => {
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
@@ -40,7 +39,11 @@ const MobileLayout = ({
             <Route
               path="/"
               element={
-                <NotesList dataObj={dataObj} setActiveView={setActiveView} />
+                <NotesList
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  setActiveView={setActiveView}
+                />
               }
             />
             <Route
@@ -49,7 +52,7 @@ const MobileLayout = ({
                 <CreateNoteForm
                   dataObj={dataObj}
                   activeView={activeView}
-                  handleDeleteNote={handleDeleteNote}
+                  handleNoteActions={handleNoteActions}
                 />
               }
             />
@@ -61,7 +64,13 @@ const MobileLayout = ({
             />
             <Route
               path="/archive"
-              element={<ArchiveList setActiveView={setActiveView} />}
+              element={
+                <NotesList
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  setActiveView={setActiveView}
+                />
+              }
             />
             <Route path="/tag" element={<TagsList />} />
             <Route path="/settings" element={<SettingsPage />} />
@@ -72,7 +81,7 @@ const MobileLayout = ({
                 <CreateNoteForm
                   dataObj={dataObj}
                   activeView={activeView}
-                  handleDeleteNote={handleDeleteNote}
+                  handleNoteActions={handleNoteActions}
                 />
               }
             />

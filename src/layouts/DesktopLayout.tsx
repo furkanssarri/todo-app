@@ -13,20 +13,21 @@ type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
-  handleDeleteNote: (id: string) => void;
+  handleNoteActions: (id: string, action: string) => void;
 };
 
 const DeskttopLayout = ({
   dataObj,
   activeView,
   setActiveView,
-  handleDeleteNote,
+
+  handleNoteActions,
 }: Props) => {
   return (
     <>
       <div id="content">
         <aside>
-          <LeftMenu />
+          <LeftMenu setActiveView={setActiveView} />
         </aside>
         <main>
           <header>
@@ -34,7 +35,11 @@ const DeskttopLayout = ({
           </header>
           <div className="main-content-wrapper">
             <div className="notes-list-wrapper">
-              <NotesList dataObj={dataObj} setActiveView={setActiveView} />
+              <NotesList
+                dataObj={dataObj}
+                activeView={activeView}
+                setActiveView={setActiveView}
+              />
             </div>
             <Routes>
               <Route
@@ -43,7 +48,7 @@ const DeskttopLayout = ({
                   <NoteBody
                     dataObj={dataObj}
                     activeView={activeView}
-                    handleDeleteNote={handleDeleteNote}
+                    handleNoteActions={handleNoteActions}
                   />
                 }
               />
@@ -54,7 +59,7 @@ const DeskttopLayout = ({
                   <CreateNoteForm
                     dataObj={dataObj}
                     activeView={activeView}
-                    handleDeleteNote={handleDeleteNote}
+                    handleNoteActions={handleNoteActions}
                   />
                 }
               />
@@ -64,7 +69,7 @@ const DeskttopLayout = ({
                   <CreateNoteForm
                     dataObj={dataObj}
                     activeView={activeView}
-                    handleDeleteNote={handleDeleteNote}
+                    handleNoteActions={handleNoteActions}
                   />
                 }
               />
