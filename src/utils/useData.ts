@@ -12,14 +12,14 @@ export type Note = {
 export type Notes = Note[];
 
 export type UseDataResult = {
-  data: Note[] | null;
+  data: Note[];
   setData: React.Dispatch<React.SetStateAction<Notes>>;
   error: string | null;
   isLoading: boolean;
 };
 
 export default function useData(source: string): UseDataResult {
-  const [data, setData] = useState<Notes | null>(null);
+  const [data, setData] = useState<Notes>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,7 +45,7 @@ export default function useData(source: string): UseDataResult {
             const response = await fetch(source, { signal: controller.signal });
             if (!response.ok) {
               setError("Error: cannot find the product");
-              setData(null);
+              setData([]);
               return;
             }
             const json: Note[] = await response.json();
@@ -56,7 +56,7 @@ export default function useData(source: string): UseDataResult {
               setError("Aborted");
               return;
             }
-            setData(null);
+            setData([]);
             setError(err instanceof Error ? err.message : String(err));
             console.log(err);
           } finally {

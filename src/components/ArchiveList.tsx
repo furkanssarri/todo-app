@@ -38,6 +38,7 @@ const archivedNotes: Note[] = [
 
 const dummyDataObj = {
   data: archivedNotes,
+  setData: () => {},
   error: null,
   isLoading: false,
 };
