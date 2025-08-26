@@ -59,7 +59,11 @@ const MobileLayout = ({
             <Route
               path="/search"
               element={
-                <SearchPage dataObj={dataObj} setActiveView={setActiveView} />
+                <SearchPage
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  setActiveView={setActiveView}
+                />
               }
             />
             <Route

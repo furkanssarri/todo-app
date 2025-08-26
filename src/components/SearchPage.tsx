@@ -6,10 +6,11 @@ import SearchBar from "./SearchBar";
 
 type Props = {
   dataObj: UseDataResult;
+  activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
 };
 
-const SearchPage = ({ dataObj, setActiveView }: Props) => {
+const SearchPage = ({ dataObj, activeView, setActiveView }: Props) => {
   return (
     <>
       <div className="mobile-layout-main-heading">
@@ -19,7 +20,11 @@ const SearchPage = ({ dataObj, setActiveView }: Props) => {
         <SearchBar />
       </section>
       <section className="notes-list">
-        <NotesList dataObj={dataObj} setActiveView={setActiveView} />
+        <NotesList
+          dataObj={dataObj}
+          activeView={activeView}
+          setActiveView={setActiveView}
+        />
       </section>
     </>
   );
