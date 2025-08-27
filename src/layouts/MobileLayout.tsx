@@ -17,6 +17,8 @@ type Props = {
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
   handleNoteActions: (id: string, action: string) => void;
+  selectedTag: string | null;
+  setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const MobileLayout = ({
@@ -24,6 +26,8 @@ const MobileLayout = ({
   activeView,
   setActiveView,
   handleNoteActions,
+  selectedTag,
+  setSelectedTag,
 }: Props) => {
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
@@ -43,6 +47,7 @@ const MobileLayout = ({
                   dataObj={dataObj}
                   activeView={activeView}
                   setActiveView={setActiveView}
+                  selectedTag={selectedTag}
                 />
               }
             />
@@ -73,10 +78,16 @@ const MobileLayout = ({
                   dataObj={dataObj}
                   activeView={activeView}
                   setActiveView={setActiveView}
+                  selectedTag={selectedTag}
                 />
               }
             />
-            <Route path="/tag" element={<TagsList dataObj={dataObj} />} />
+            <Route
+              path="/tag"
+              element={
+                <TagsList dataObj={dataObj} setSelectedTag={setSelectedTag} />
+              }
+            />
             <Route path="/settings" element={<SettingsPage />} />
             <Route
               path="/note/:id"
@@ -107,6 +118,7 @@ const MobileLayout = ({
         <MobileBottomNav
           activeView={activeView}
           setActiveView={setActiveView}
+          setSelectedTag={setSelectedTag}
         />
       </footer>
     </>

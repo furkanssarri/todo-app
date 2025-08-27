@@ -7,11 +7,13 @@ import { MobileContext } from "../context/MobileContext";
 type MobileBottomNavProps = {
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+  setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const MobileBottomNav = ({
   activeView,
   setActiveView,
+  setSelectedTag,
 }: MobileBottomNavProps) => {
   const { isTablet, isDesktop } = useContext(MobileContext);
   return (
@@ -27,7 +29,10 @@ const MobileBottomNav = ({
                   <li>
                     <Link
                       to={item.view}
-                      onClick={() => setActiveView(item)}
+                      onClick={() => {
+                        setActiveView(item);
+                        setSelectedTag(null);
+                      }}
                       className={`${activeView === item ? "active" : ""}`}
                     >
                       <Icon />

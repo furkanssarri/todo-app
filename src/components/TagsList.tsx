@@ -7,9 +7,10 @@ import type { UseDataResult } from "../utils/useData";
 
 type Props = {
   dataObj: UseDataResult;
+  setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const TagsList = ({ dataObj }: Props) => {
+const TagsList = ({ dataObj, setSelectedTag }: Props) => {
   const { isDesktop } = useContext(MobileContext);
 
   const uniqueTags = useMemo(() => {
@@ -31,7 +32,11 @@ const TagsList = ({ dataObj }: Props) => {
       <ul>
         {uniqueTags.map((tag, index) => (
           <li key={`${tag}-${index}`} className="tag-item">
-            <a href="#" className="text-preset-sans-4">
+            <a
+              href="#"
+              className="text-preset-sans-4"
+              onClick={() => setSelectedTag(tag)}
+            >
               <IconTag /> {tag.charAt(0).toUpperCase() + tag.slice(1)}
             </a>
           </li>

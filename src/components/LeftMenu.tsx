@@ -8,9 +8,10 @@ import type { UseDataResult } from "../utils/useData.ts";
 type Props = {
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
   dataObj: UseDataResult;
+  setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const LeftMenuNav = ({ setActiveView, dataObj }: Props) => {
+const LeftMenuNav = ({ setActiveView, dataObj, setSelectedTag }: Props) => {
   return (
     <section className="left-menu">
       <Logo />
@@ -18,20 +19,32 @@ const LeftMenuNav = ({ setActiveView, dataObj }: Props) => {
         <nav className="main-filter">
           <ul>
             <li>
-              <Link to="/" onClick={() => setActiveView(views[0])}>
+              <Link
+                to="/"
+                onClick={() => {
+                  setActiveView(views[0]);
+                  setSelectedTag(null);
+                }}
+              >
                 <IconHome /> All Notes
               </Link>
             </li>
             <li>
               {" "}
-              <Link to="/archive" onClick={() => setActiveView(views[2])}>
+              <Link
+                to="/archive"
+                onClick={() => {
+                  setActiveView(views[2]);
+                  setSelectedTag(null);
+                }}
+              >
                 {" "}
                 <IconArchive /> Archived Notes
               </Link>
             </li>
           </ul>
         </nav>
-        <TagsList dataObj={dataObj} />
+        <TagsList dataObj={dataObj} setSelectedTag={setSelectedTag} />
       </main>
     </section>
   );

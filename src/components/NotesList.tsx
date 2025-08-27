@@ -12,9 +12,15 @@ type PropTypes = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+  selectedTag: string | null;
 };
 
-const NotesList = ({ dataObj, activeView, setActiveView }: PropTypes) => {
+const NotesList = ({
+  dataObj,
+  activeView,
+  setActiveView,
+  selectedTag,
+}: PropTypes) => {
   const { error, isLoading } = dataObj;
   let data = dataObj.data;
   const navigate = useNavigate();
@@ -23,6 +29,10 @@ const NotesList = ({ dataObj, activeView, setActiveView }: PropTypes) => {
   if (activeView.view === "/archive") {
     const archivedData = data.filter((note) => note.isArchived);
     data = archivedData;
+  }
+
+  if (selectedTag !== null) {
+    data = data.filter((note) => note.tags.includes(selectedTag));
   }
 
   if (error) return <p>{error}</p>;

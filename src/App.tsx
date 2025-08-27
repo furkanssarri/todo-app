@@ -1,5 +1,5 @@
 import { MobileContext } from "./context/MobileContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
@@ -12,7 +12,18 @@ function App() {
 
   const dataObj = useData("local");
 
-  const [activeView, setActiveView] = useState<View>(views[0]);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  const [activeView, setActiveView] = useState<View>(() => {
+    const savedView = localStorage.getItem("view");
+    return savedView ? (JSON.parse(savedView) as View) : views[0];
+  });
+
+  useEffect(() => {
+    if (activeView) {
+      localStorage.setItem("view", JSON.stringify(activeView));
+    }
+  }, [activeView]);
 
   const handleNoteActions = (id: string, action: string) => {
     if (action === "delete") {
@@ -37,12 +48,18 @@ function App() {
     );
   };
 
+  useEffect(() => {
+    console.log(activeView);
+  }, [activeView]);
+
   return isDesktop ? (
     <DesktopLayout
       dataObj={dataObj}
       activeView={activeView}
       setActiveView={setActiveView}
       handleNoteActions={handleNoteActions}
+      selectedTag={selectedTag}
+      setSelectedTag={setSelectedTag}
     />
   ) : (
     <MobileLayout
@@ -50,6 +67,8 @@ function App() {
       activeView={activeView}
       setActiveView={setActiveView}
       handleNoteActions={handleNoteActions}
+      selectedTag={selectedTag}
+      setSelectedTag={setSelectedTag}
     />
   );
 }

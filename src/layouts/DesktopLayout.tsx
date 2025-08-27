@@ -14,20 +14,27 @@ type Props = {
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
   handleNoteActions: (id: string, action: string) => void;
+  selectedTag: string | null;
+  setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const DeskttopLayout = ({
   dataObj,
   activeView,
   setActiveView,
-
   handleNoteActions,
+  selectedTag,
+  setSelectedTag,
 }: Props) => {
   return (
     <>
       <div id="content">
         <aside>
-          <LeftMenu setActiveView={setActiveView} dataObj={dataObj} />
+          <LeftMenu
+            setActiveView={setActiveView}
+            dataObj={dataObj}
+            setSelectedTag={setSelectedTag}
+          />
         </aside>
         <main>
           <header>
@@ -39,6 +46,7 @@ const DeskttopLayout = ({
                 dataObj={dataObj}
                 activeView={activeView}
                 setActiveView={setActiveView}
+                selectedTag={selectedTag}
               />
             </div>
             <Routes>
