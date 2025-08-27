@@ -66,6 +66,9 @@ const NotesList = ({
               <Link
                 to={`/note/${item.id}`}
                 className="note-item text-preset-sans-3"
+                onClick={() => {
+                  setActiveView(views[5]);
+                }}
               >
                 {item.title}
                 <div className="item-details text-preset-sans-6">
