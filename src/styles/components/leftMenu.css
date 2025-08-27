@@ -11,6 +11,11 @@
     margin: var(--space-200);
   }
 
+  .logo-wrapper .logo-wrapper-link {
+    padding: 0;
+    margin: 0;
+  }
+
   .left-menu .left-menu-content nav:first-of-type {
     border-bottom: 1px solid var(--border-color);
   }

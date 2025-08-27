@@ -48,6 +48,18 @@
     color: var(--colors-blue-500);
   }
 
+  @media (max-width: 768px) {
+    footer {
+      flex-direction: column;
+      position: fixed;
+      bottom: 0;
+    }
+
+    .mobile-nav ul {
+      display: flex;
+    }
+  }
+
   @media (max-width: 425px) {
     nav.mobile-nav ul li a {
       width: auto;

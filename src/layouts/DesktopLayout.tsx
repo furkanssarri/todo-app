@@ -27,7 +27,7 @@ const DeskttopLayout = ({
     <>
       <div id="content">
         <aside>
-          <LeftMenu setActiveView={setActiveView} />
+          <LeftMenu setActiveView={setActiveView} dataObj={dataObj} />
         </aside>
         <main>
           <header>

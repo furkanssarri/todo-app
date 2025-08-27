@@ -1,12 +1,24 @@
-import { useContext } from "react";
-import tags from "../db/tags.json";
+import { useContext, useMemo } from "react";
 
 import { IconTag } from "./icons/index";
 import { MobileContext } from "../context/MobileContext";
 import MainTitle from "./MainTitle";
+import type { UseDataResult } from "../utils/useData";
 
-const TagsList = () => {
+type Props = {
+  dataObj: UseDataResult;
+};
+
+const TagsList = ({ dataObj }: Props) => {
   const { isDesktop } = useContext(MobileContext);
+
+  const uniqueTags = useMemo(() => {
+    const data = dataObj?.data ?? []; // Fallback
+    const tagSet = new Set<string>();
+    data.forEach((note) => note.tags.forEach((tag) => tagSet.add(tag)));
+    return Array.from(tagSet);
+  }, [dataObj?.data]);
+
   return (
     <section className="tags-wrapper">
       {isDesktop !== true ? (
@@ -17,10 +29,10 @@ const TagsList = () => {
         <h4 className="text-preset-sans-4">Tags</h4>
       )}
       <ul>
-        {tags.map((tag) => (
-          <li key={tag} className="tag-item">
+        {uniqueTags.map((tag, index) => (
+          <li key={`${tag}-${index}`} className="tag-item">
             <a href="#" className="text-preset-sans-4">
-              <IconTag /> {tag}
+              <IconTag /> {tag.charAt(0).toUpperCase() + tag.slice(1)}
             </a>
           </li>
         ))}

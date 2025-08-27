@@ -73,14 +73,6 @@
     padding: initial !important;
     font-size: 2rem;
   }
-  .mobile-nav {
-    position: fixed;
-    bottom: 0;
-  }
-
-  .mobile-nav ul {
-    display: flex;
-  }
 }
 
 @media (max-width: 768px) {

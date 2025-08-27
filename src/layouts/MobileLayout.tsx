@@ -76,7 +76,7 @@ const MobileLayout = ({
                 />
               }
             />
-            <Route path="/tag" element={<TagsList />} />
+            <Route path="/tag" element={<TagsList dataObj={dataObj} />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route
               path="/note/:id"
@@ -103,7 +103,12 @@ const MobileLayout = ({
         )}
       </main>
 
-      <MobileBottomNav activeView={activeView} setActiveView={setActiveView} />
+      <footer>
+        <MobileBottomNav
+          activeView={activeView}
+          setActiveView={setActiveView}
+        />
+      </footer>
     </>
   );
 };

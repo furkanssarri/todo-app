@@ -3,12 +3,14 @@ import Logo from "./Logo.tsx";
 import TagsList from "./TagsList.tsx";
 import { IconHome, IconArchive } from "./icons/index.tsx";
 import { views, type View } from "../constants/mobileViews.ts";
+import type { UseDataResult } from "../utils/useData.ts";
 
 type Props = {
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+  dataObj: UseDataResult;
 };
 
-const LeftMenuNav = ({ setActiveView }: Props) => {
+const LeftMenuNav = ({ setActiveView, dataObj }: Props) => {
   return (
     <section className="left-menu">
       <Logo />
@@ -29,7 +31,7 @@ const LeftMenuNav = ({ setActiveView }: Props) => {
             </li>
           </ul>
         </nav>
-        <TagsList />
+        <TagsList dataObj={dataObj} />
       </main>
     </section>
   );
