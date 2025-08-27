@@ -60,6 +60,7 @@
 
   .notes-list-wrapper {
     height: 88vh;
+    flex: 0 1 290px;
   }
 
   .inner-sidebar {

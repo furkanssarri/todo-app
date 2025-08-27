@@ -19,6 +19,7 @@
   .note-content {
     min-height: 100%;
     border-bottom: 1px solid var(--border-color);
+    flex: 0 1 588px;
   }
 
   .quick-info {
