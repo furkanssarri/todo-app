@@ -13,6 +13,7 @@ function App() {
   const dataObj = useData("local");
 
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const [activeView, setActiveView] = useState<View>(() => {
     const savedView = localStorage.getItem("view");
@@ -60,6 +61,8 @@ function App() {
       handleNoteActions={handleNoteActions}
       selectedTag={selectedTag}
       setSelectedTag={setSelectedTag}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
     />
   ) : (
     <MobileLayout
@@ -69,6 +72,8 @@ function App() {
       handleNoteActions={handleNoteActions}
       selectedTag={selectedTag}
       setSelectedTag={setSelectedTag}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
     />
   );
 }

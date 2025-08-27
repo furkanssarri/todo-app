@@ -19,6 +19,8 @@ type Props = {
   handleNoteActions: (id: string, action: string) => void;
   selectedTag: string | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const MobileLayout = ({
@@ -28,6 +30,8 @@ const MobileLayout = ({
   handleNoteActions,
   selectedTag,
   setSelectedTag,
+  searchQuery,
+  setSearchQuery,
 }: Props) => {
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
@@ -48,6 +52,8 @@ const MobileLayout = ({
                   activeView={activeView}
                   setActiveView={setActiveView}
                   selectedTag={selectedTag}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
                 />
               }
             />
@@ -69,6 +75,8 @@ const MobileLayout = ({
                   activeView={activeView}
                   setActiveView={setActiveView}
                   selectedTag={selectedTag}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
                 />
               }
             />
@@ -80,6 +88,8 @@ const MobileLayout = ({
                   activeView={activeView}
                   setActiveView={setActiveView}
                   selectedTag={selectedTag}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
                 />
               }
             />

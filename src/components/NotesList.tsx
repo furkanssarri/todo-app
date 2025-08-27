@@ -14,6 +14,8 @@ type PropTypes = {
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
   selectedTag: string | null;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const NotesList = ({
@@ -21,6 +23,8 @@ const NotesList = ({
   activeView,
   setActiveView,
   selectedTag,
+  searchQuery,
+  setSearchQuery,
 }: PropTypes) => {
   const { error, isLoading } = dataObj;
   let data = dataObj.data;
@@ -39,6 +43,19 @@ const NotesList = ({
   if (error) return <p>{error}</p>;
 
   if (isLoading) return <p>Loading data...</p>;
+
+  if (searchQuery !== "") {
+    data = data.filter((note) => {
+      const title = note.title.toLowerCase();
+      const content = note.content.toLowerCase();
+      const tags = note.tags.join(" ").toLowerCase();
+      return (
+        title.includes(searchQuery) ||
+        content.includes(searchQuery) ||
+        tags.includes(searchQuery)
+      );
+    });
+  }
 
   return (
     <section className="inner-sidebar">
@@ -64,11 +81,15 @@ const NotesList = ({
       {activeView.view === "/search" && (
         <>
           <section className="search-area">
-            <SearchBar />
-            {/* TODO: actually get a searchparam variable for this. */}
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
           </section>
           <p className="text-preset-5 search-bar-desc">
-            All notes matching <b>"SEARCH PARAM"</b> are displayed here.
+            All notes matching{" "}
+            <b>{!searchQuery ? "your search term" : searchQuery}</b> are
+            displayed here.
           </p>
         </>
       )}
@@ -83,12 +104,12 @@ const NotesList = ({
                   setActiveView(views[5]);
                 }}
               >
-                {item.title}
+                {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
                 <div className="item-details text-preset-sans-6">
                   <div className="item-tags">
                     {item.tags.map((tag) => (
                       <span key={tag} className="item-tag">
-                        {tag}
+                        {tag.charAt(0).toUpperCase() + tag.slice(1)}
                       </span>
                     ))}
                   </div>

@@ -1,6 +1,11 @@
 import { IconSearch } from "./icons/index";
 
-const SearchBar = () => {
+type Props = {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SearchBar = ({ searchQuery, setSearchQuery }: Props) => {
   return (
     <section className="search">
       <IconSearch className="search-icon" />
@@ -10,6 +15,8 @@ const SearchBar = () => {
         name="search"
         className="search-input"
         placeholder="Search by title, content or tags..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
     </section>
   );

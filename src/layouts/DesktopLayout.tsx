@@ -16,6 +16,8 @@ type Props = {
   handleNoteActions: (id: string, action: string) => void;
   selectedTag: string | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const DeskttopLayout = ({
@@ -25,6 +27,8 @@ const DeskttopLayout = ({
   handleNoteActions,
   selectedTag,
   setSelectedTag,
+  searchQuery,
+  setSearchQuery,
 }: Props) => {
   return (
     <>
@@ -38,7 +42,11 @@ const DeskttopLayout = ({
         </aside>
         <main>
           <header>
-            <Header title={activeView.name} />
+            <Header
+              title={activeView.name}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
           </header>
           <div className="main-content-wrapper">
             <div className="notes-list-wrapper">
@@ -47,6 +55,8 @@ const DeskttopLayout = ({
                 activeView={activeView}
                 setActiveView={setActiveView}
                 selectedTag={selectedTag}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
               />
             </div>
             <Routes>
