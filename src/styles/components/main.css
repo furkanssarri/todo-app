@@ -11,6 +11,11 @@
     flex: 1;
   }
 
+  .search-bar-desc {
+    margin: var(--space-200) 0;
+    color: var(--colors-neutral-300);
+  }
+
   .note-details {
     padding: var(--space-250) var(--space-300);
     flex: 1;

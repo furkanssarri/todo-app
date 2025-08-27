@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
 import { views, type View } from "../constants/mobileViews.js";
+import SearchBar from "./SearchBar.js";
 
 type PropTypes = {
   dataObj: UseDataResult;
@@ -56,8 +57,20 @@ const NotesList = ({
       )}
       {!isDesktop && (
         <div className="mobile-layout-main-heading">
-          <MainTitle title="Home" />
+          <MainTitle title={activeView.name} />
         </div>
+      )}
+
+      {activeView.view === "/search" && (
+        <>
+          <section className="search-area">
+            <SearchBar />
+            {/* TODO: actually get a searchparam variable for this. */}
+          </section>
+          <p className="text-preset-5 search-bar-desc">
+            All notes matching <b>"SEARCH PARAM"</b> are displayed here.
+          </p>
+        </>
       )}
       <ul>
         {data &&

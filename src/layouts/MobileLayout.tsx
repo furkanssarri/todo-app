@@ -2,7 +2,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import Logo from "../components/Logo";
 import NotesList from "../components/NotesList";
-import SearchPage from "../components/SearchPage";
+
 import SettingsPage from "../components/SettingsPage";
 import TagsList from "../components/TagsList";
 import { MobileContext } from "../context/MobileContext";
@@ -64,7 +64,7 @@ const MobileLayout = ({
             <Route
               path="/search"
               element={
-                <SearchPage
+                <NotesList
                   dataObj={dataObj}
                   activeView={activeView}
                   setActiveView={setActiveView}

@@ -38,7 +38,7 @@ const DeskttopLayout = ({
         </aside>
         <main>
           <header>
-            <Header title="All Notes" />
+            <Header title={activeView.name} />
           </header>
           <div className="main-content-wrapper">
             <div className="notes-list-wrapper">
