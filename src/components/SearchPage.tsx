@@ -8,9 +8,15 @@ type Props = {
   dataObj: UseDataResult;
   activeView: View;
   setActiveView: React.Dispatch<React.SetStateAction<View>>;
+  selectedTag: string | null;
 };
 
-const SearchPage = ({ dataObj, activeView, setActiveView }: Props) => {
+const SearchPage = ({
+  dataObj,
+  activeView,
+  setActiveView,
+  selectedTag,
+}: Props) => {
   return (
     <>
       <div className="mobile-layout-main-heading">
@@ -24,6 +30,7 @@ const SearchPage = ({ dataObj, activeView, setActiveView }: Props) => {
           dataObj={dataObj}
           activeView={activeView}
           setActiveView={setActiveView}
+          selectedTag={selectedTag}
         />
       </section>
     </>

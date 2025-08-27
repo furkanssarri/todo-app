@@ -68,6 +68,7 @@ const MobileLayout = ({
                   dataObj={dataObj}
                   activeView={activeView}
                   setActiveView={setActiveView}
+                  selectedTag={selectedTag}
                 />
               }
             />
