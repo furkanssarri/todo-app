@@ -172,7 +172,7 @@ const CreateNoteForm = ({ dataObj, activeView, handleNoteActions }: Props) => {
               name="content"
               id="content"
               placeholder="Start typing your note here..."
-              rows={27}
+              rows={21}
               cols={50}
               value={formData.content}
               onChange={(e) =>

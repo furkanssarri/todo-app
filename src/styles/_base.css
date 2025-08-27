@@ -156,7 +156,7 @@
   html,
   body,
   #root {
-    min-height: 100vh;
+    height: 95vh;
     /* width: 98%; */
     margin: 0;
     padding: 0;
