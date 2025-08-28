@@ -10,7 +10,6 @@ import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import type { UseDataResult } from "../utils/useData";
 import CreateNoteForm from "../components/CreateNoteForm";
-import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
@@ -30,7 +29,6 @@ const MobileLayout = ({
   setSearchQuery,
 }: Props) => {
   const navigate = useNavigate();
-  const activeView = useActiveView();
   const { isDesktop } = useContext(MobileContext);
 
   return (
@@ -57,7 +55,6 @@ const MobileLayout = ({
               element={
                 <CreateNoteForm
                   dataObj={dataObj}
-                  activeView={activeView}
                   handleNoteActions={handleNoteActions}
                 />
               }
@@ -108,7 +105,6 @@ const MobileLayout = ({
                 // TODO: this will be replaced with a note body-type form component for design fidelity.
                 <CreateNoteForm
                   dataObj={dataObj}
-                  activeView={activeView}
                   handleNoteActions={handleNoteActions}
                 />
               }
