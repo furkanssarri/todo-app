@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import type { UseDataResult } from "../utils/useData";
 import type { View } from "../constants/mobileViews";
+import SettingsPage from "../components/SettingsPage";
 
 type Props = {
   dataObj: UseDataResult;
@@ -91,6 +92,7 @@ const DeskttopLayout = ({
                   />
                 }
               />
+              <Route path="/settings" element={<SettingsPage />} />
             </Routes>
           </div>
         </main>

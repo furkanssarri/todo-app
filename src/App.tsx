@@ -5,11 +5,12 @@ import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
 import useData from "./utils/useData";
 import { type View, views } from "./constants/mobileViews";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const context = useContext(MobileContext);
   const { isDesktop } = context;
-
+  const location = useLocation();
   const dataObj = useData("local");
 
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -25,6 +26,12 @@ function App() {
       localStorage.setItem("view", JSON.stringify(activeView));
     }
   }, [activeView]);
+
+  useEffect(() => {
+    if (!location.pathname.startsWith("/search")) {
+      setSearchQuery("");
+    }
+  }, [location, setSearchQuery]);
 
   const handleNoteActions = (id: string, action: string) => {
     if (action === "delete") {
@@ -48,10 +55,6 @@ function App() {
       }),
     );
   };
-
-  useEffect(() => {
-    console.log(activeView);
-  }, [activeView]);
 
   return isDesktop ? (
     <DesktopLayout

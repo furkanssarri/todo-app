@@ -74,7 +74,11 @@ const NotesList = ({
       )}
       {!isDesktop && (
         <div className="mobile-layout-main-heading">
-          <MainTitle title={activeView.name} />
+          {searchQuery === "" ? (
+            <MainTitle title={activeView.name} />
+          ) : (
+            <MainTitle title={`Showing results for: ${searchQuery}`} />
+          )}
         </div>
       )}
 

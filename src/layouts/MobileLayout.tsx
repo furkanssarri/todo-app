@@ -94,9 +94,22 @@ const MobileLayout = ({
               }
             />
             <Route
-              path="/tag"
+              path="/tags"
               element={
                 <TagsList dataObj={dataObj} setSelectedTag={setSelectedTag} />
+              }
+            />
+            <Route
+              path="/tags/:tag"
+              element={
+                <NotesList
+                  dataObj={dataObj}
+                  activeView={activeView}
+                  setActiveView={setActiveView}
+                  selectedTag={selectedTag}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />
               }
             />
             <Route path="/settings" element={<SettingsPage />} />

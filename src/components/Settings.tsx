@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import { IconSettings } from "./icons";
 
 const Settings = () => {
   return (
     <button className="settings-button">
-      <IconSettings />
+      <Link to="/settings">
+        <IconSettings />
+      </Link>
     </button>
   );
 };
