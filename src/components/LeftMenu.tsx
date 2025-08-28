@@ -23,10 +23,10 @@ const LeftMenuNav = ({ dataObj, setSelectedTag }: Props) => {
             </li>
             <li>
               {" "}
-              <Link to="/archive" onClick={() => setSelectedTag(null)}>
+              <a href="#" onClick={() => setSelectedTag(null)}>
                 {" "}
                 <IconArchive /> Archived Notes
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>

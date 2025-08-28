@@ -1,14 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import LeftMenu from "../components/LeftMenu";
 import NotesList from "../components/NotesList";
-import NoteBody from "../components/NoteBody";
-import CreateNoteForm from "../components/CreateNoteForm";
-
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import type { UseDataResult } from "../utils/useData";
-import SettingsPage from "../components/SettingsPage";
 import { useActiveView } from "../utils/useActiveView";
+import { desktopRoutes } from "../routes/routeConfig";
 
 type Props = {
   dataObj: UseDataResult;
@@ -52,35 +49,18 @@ const DeskttopLayout = ({
               />
             </div>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <NoteBody
-                    dataObj={dataObj}
-                    handleNoteActions={handleNoteActions}
-                  />
-                }
-              />
-              <Route
-                path="/note/:id"
-                element={
-                  // TODO: this will be replaced with a note body-type form component for design fidelity.
-                  <CreateNoteForm
-                    dataObj={dataObj}
-                    handleNoteActions={handleNoteActions}
-                  />
-                }
-              />
-              <Route
-                path="/create"
-                element={
-                  <CreateNoteForm
-                    dataObj={dataObj}
-                    handleNoteActions={handleNoteActions}
-                  />
-                }
-              />
-              <Route path="/settings" element={<SettingsPage />} />
+              {desktopRoutes.map(({ path, element: Component }) => (
+                <Route
+                  key={path}
+                  path={path}
+                  element={
+                    <Component
+                      dataObj={dataObj}
+                      handleNoteActions={handleNoteActions}
+                    />
+                  }
+                />
+              ))}
             </Routes>
           </div>
         </main>

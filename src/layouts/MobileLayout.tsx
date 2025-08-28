@@ -1,15 +1,11 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import Logo from "../components/Logo";
-import NotesList from "../components/NotesList";
-
-import SettingsPage from "../components/SettingsPage";
-import TagsList from "../components/TagsList";
 import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import type { UseDataResult } from "../utils/useData";
-import CreateNoteForm from "../components/CreateNoteForm";
+import { mobileRoutes } from "../routes/routeConfig";
 
 type Props = {
   dataObj: UseDataResult;
@@ -39,67 +35,24 @@ const MobileLayout = ({
       <main>
         <div className="main-wrapper">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <NotesList
-                  dataObj={dataObj}
-                  selectedTag={selectedTag}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />
-              }
-            />
-            <Route
-              path="/create"
-              element={
-                <CreateNoteForm
-                  dataObj={dataObj}
-                  handleNoteActions={handleNoteActions}
-                />
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <NotesList
-                  dataObj={dataObj}
-                  selectedTag={selectedTag}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />
-              }
-            />
-            <Route
-              path="/archive"
-              element={
-                <NotesList
-                  dataObj={dataObj}
-                  selectedTag={selectedTag}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />
-              }
-            />
-            <Route
-              path="/tags"
-              element={
-                <TagsList dataObj={dataObj} setSelectedTag={setSelectedTag} />
-              }
-            />
-            <Route
-              path="/tags/:tag"
-              element={
-                <NotesList
-                  dataObj={dataObj}
-                  selectedTag={selectedTag}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />
-              }
-            />
-            <Route path="/settings" element={<SettingsPage />} />
-            <Route
+            {mobileRoutes.map(({ path, element: Component }) => (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  <Component
+                    dataObj={dataObj}
+                    handleNoteActions={handleNoteActions}
+                    selectedTag={selectedTag}
+                    setSelectedTag={setSelectedTag}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                  />
+                }
+              />
+            ))}
+          </Routes>
+          {/* <Route
               path="/note/:id"
               element={
                 // TODO: this will be replaced with a note body-type form component for design fidelity.
@@ -108,8 +61,7 @@ const MobileLayout = ({
                   handleNoteActions={handleNoteActions}
                 />
               }
-            />
-          </Routes>
+            /> */}
         </div>
         {!isDesktop && (
           <span className="mobile-add-note-button">
