@@ -6,13 +6,11 @@ import { MobileContext } from "../context/MobileContext";
 import { Link, useNavigate } from "react-router-dom";
 import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
-import { views, type View } from "../constants/mobileViews.js";
 import SearchBar from "./SearchBar.js";
+import { useActiveView } from "../utils/useActiveView.js";
 
 type PropTypes = {
   dataObj: UseDataResult;
-  activeView: View;
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
   selectedTag: string | null;
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -20,8 +18,6 @@ type PropTypes = {
 
 const NotesList = ({
   dataObj,
-  activeView,
-  setActiveView,
   selectedTag,
   searchQuery,
   setSearchQuery,
@@ -30,6 +26,7 @@ const NotesList = ({
   let data = dataObj.data;
   const navigate = useNavigate();
   const { isDesktop } = useContext(MobileContext);
+  const activeView = useActiveView();
 
   if (activeView.view === "/archive") {
     const archivedData = data.filter((note) => note.isArchived);
@@ -64,10 +61,7 @@ const NotesList = ({
           startIcon="plus"
           color="primary"
           size="lg"
-          onClick={() => {
-            navigate("/create");
-            setActiveView(views[6]);
-          }}
+          onClick={() => navigate("/create")}
         >
           Create New Note
         </Button>
@@ -104,9 +98,6 @@ const NotesList = ({
               <Link
                 to={`/note/${item.id}`}
                 className="note-item text-preset-sans-3"
-                onClick={() => {
-                  setActiveView(views[5]);
-                }}
               >
                 {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
                 <div className="item-details text-preset-sans-6">

@@ -13,7 +13,7 @@ export const views = [
   { id: 3, view: "/archive", icon: IconArchive, name: "Archive" },
   { id: 4, view: "/tags", icon: IconTag, name: "Tags" },
   { id: 5, view: "/settings", icon: IconSettings, name: "Settings" },
-  { id: 6, view: "/noteBody", icon: IconHome, name: "NoteBody" },
+  { id: 6, view: "/note", icon: IconHome, name: "Note" },
   { id: 7, view: "/create", icon: IconHome, name: "Create Note" },
 ] as const;
 

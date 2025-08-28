@@ -7,13 +7,11 @@ import CreateNoteForm from "../components/CreateNoteForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import type { UseDataResult } from "../utils/useData";
-import type { View } from "../constants/mobileViews";
 import SettingsPage from "../components/SettingsPage";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
-  activeView: View;
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
   handleNoteActions: (id: string, action: string) => void;
   selectedTag: string | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
@@ -23,23 +21,18 @@ type Props = {
 
 const DeskttopLayout = ({
   dataObj,
-  activeView,
-  setActiveView,
   handleNoteActions,
   selectedTag,
   setSelectedTag,
   searchQuery,
   setSearchQuery,
 }: Props) => {
+  const activeView = useActiveView();
   return (
     <>
       <div id="content">
         <aside>
-          <LeftMenu
-            setActiveView={setActiveView}
-            dataObj={dataObj}
-            setSelectedTag={setSelectedTag}
-          />
+          <LeftMenu dataObj={dataObj} setSelectedTag={setSelectedTag} />
         </aside>
         <main>
           <header>
@@ -53,8 +46,6 @@ const DeskttopLayout = ({
             <div className="notes-list-wrapper">
               <NotesList
                 dataObj={dataObj}
-                activeView={activeView}
-                setActiveView={setActiveView}
                 selectedTag={selectedTag}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
@@ -66,7 +57,6 @@ const DeskttopLayout = ({
                 element={
                   <NoteBody
                     dataObj={dataObj}
-                    activeView={activeView}
                     handleNoteActions={handleNoteActions}
                   />
                 }
@@ -77,7 +67,6 @@ const DeskttopLayout = ({
                   // TODO: this will be replaced with a note body-type form component for design fidelity.
                   <CreateNoteForm
                     dataObj={dataObj}
-                    activeView={activeView}
                     handleNoteActions={handleNoteActions}
                   />
                 }
@@ -87,7 +76,6 @@ const DeskttopLayout = ({
                 element={
                   <CreateNoteForm
                     dataObj={dataObj}
-                    activeView={activeView}
                     handleNoteActions={handleNoteActions}
                   />
                 }

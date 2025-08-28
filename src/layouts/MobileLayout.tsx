@@ -8,14 +8,12 @@ import TagsList from "../components/TagsList";
 import { MobileContext } from "../context/MobileContext";
 import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
-import { type View } from "../constants/mobileViews";
 import type { UseDataResult } from "../utils/useData";
 import CreateNoteForm from "../components/CreateNoteForm";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
-  activeView: View;
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
   handleNoteActions: (id: string, action: string) => void;
   selectedTag: string | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
@@ -25,8 +23,6 @@ type Props = {
 
 const MobileLayout = ({
   dataObj,
-  activeView,
-  setActiveView,
   handleNoteActions,
   selectedTag,
   setSelectedTag,
@@ -34,6 +30,7 @@ const MobileLayout = ({
   setSearchQuery,
 }: Props) => {
   const navigate = useNavigate();
+  const activeView = useActiveView();
   const { isDesktop } = useContext(MobileContext);
 
   return (
@@ -49,8 +46,6 @@ const MobileLayout = ({
               element={
                 <NotesList
                   dataObj={dataObj}
-                  activeView={activeView}
-                  setActiveView={setActiveView}
                   selectedTag={selectedTag}
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
@@ -72,8 +67,6 @@ const MobileLayout = ({
               element={
                 <NotesList
                   dataObj={dataObj}
-                  activeView={activeView}
-                  setActiveView={setActiveView}
                   selectedTag={selectedTag}
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
@@ -85,8 +78,6 @@ const MobileLayout = ({
               element={
                 <NotesList
                   dataObj={dataObj}
-                  activeView={activeView}
-                  setActiveView={setActiveView}
                   selectedTag={selectedTag}
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
@@ -104,8 +95,6 @@ const MobileLayout = ({
               element={
                 <NotesList
                   dataObj={dataObj}
-                  activeView={activeView}
-                  setActiveView={setActiveView}
                   selectedTag={selectedTag}
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
@@ -139,11 +128,7 @@ const MobileLayout = ({
       </main>
 
       <footer>
-        <MobileBottomNav
-          activeView={activeView}
-          setActiveView={setActiveView}
-          setSelectedTag={setSelectedTag}
-        />
+        <MobileBottomNav setSelectedTag={setSelectedTag} />
       </footer>
     </>
   );

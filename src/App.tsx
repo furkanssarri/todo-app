@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
 import useData from "./utils/useData";
-import { type View, views } from "./constants/mobileViews";
 import { useLocation } from "react-router-dom";
 
 function App() {
@@ -15,17 +14,6 @@ function App() {
 
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const [activeView, setActiveView] = useState<View>(() => {
-    const savedView = localStorage.getItem("view");
-    return savedView ? (JSON.parse(savedView) as View) : views[0];
-  });
-
-  useEffect(() => {
-    if (activeView) {
-      localStorage.setItem("view", JSON.stringify(activeView));
-    }
-  }, [activeView]);
 
   useEffect(() => {
     if (!location.pathname.startsWith("/search")) {
@@ -59,8 +47,6 @@ function App() {
   return isDesktop ? (
     <DesktopLayout
       dataObj={dataObj}
-      activeView={activeView}
-      setActiveView={setActiveView}
       handleNoteActions={handleNoteActions}
       selectedTag={selectedTag}
       setSelectedTag={setSelectedTag}
@@ -70,8 +56,6 @@ function App() {
   ) : (
     <MobileLayout
       dataObj={dataObj}
-      activeView={activeView}
-      setActiveView={setActiveView}
       handleNoteActions={handleNoteActions}
       selectedTag={selectedTag}
       setSelectedTag={setSelectedTag}

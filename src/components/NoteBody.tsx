@@ -8,19 +8,19 @@ import ActionsMenu from "./ActionsMenu";
 import { MobileContext } from "../context/MobileContext";
 import { useContext } from "react";
 import type { UseDataResult } from "../utils/useData";
-import type { View } from "../constants/mobileViews";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
-  activeView: View;
   handleNoteActions: (id: string, action: string) => void;
 };
 
-const NoteBody = ({ dataObj, activeView, handleNoteActions }: Props) => {
+const NoteBody = ({ dataObj, handleNoteActions }: Props) => {
   const { data, error, isLoading } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
   const { isTablet, isMobile, isDesktop } = useContext(MobileContext);
+  const activeView = useActiveView();
 
   if (!id) {
     return (

@@ -2,16 +2,14 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo.tsx";
 import TagsList from "./TagsList.tsx";
 import { IconHome, IconArchive } from "./icons/index.tsx";
-import { views, type View } from "../constants/mobileViews.ts";
 import type { UseDataResult } from "../utils/useData.ts";
 
 type Props = {
-  setActiveView: React.Dispatch<React.SetStateAction<View>>;
   dataObj: UseDataResult;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const LeftMenuNav = ({ setActiveView, dataObj, setSelectedTag }: Props) => {
+const LeftMenuNav = ({ dataObj, setSelectedTag }: Props) => {
   return (
     <section className="left-menu">
       <Logo />
@@ -19,25 +17,13 @@ const LeftMenuNav = ({ setActiveView, dataObj, setSelectedTag }: Props) => {
         <nav className="main-filter">
           <ul>
             <li>
-              <Link
-                to="/"
-                onClick={() => {
-                  setActiveView(views[0]);
-                  setSelectedTag(null);
-                }}
-              >
+              <Link to="/" onClick={() => setSelectedTag(null)}>
                 <IconHome /> All Notes
               </Link>
             </li>
             <li>
               {" "}
-              <Link
-                to="/archive"
-                onClick={() => {
-                  setActiveView(views[2]);
-                  setSelectedTag(null);
-                }}
-              >
+              <Link to="/archive" onClick={() => setSelectedTag(null)}>
                 {" "}
                 <IconArchive /> Archived Notes
               </Link>

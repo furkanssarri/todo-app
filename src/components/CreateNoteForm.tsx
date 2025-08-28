@@ -3,15 +3,14 @@ import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
 import { IconClock, IconTag } from "./icons";
 import ActionsMenu from "./ActionsMenu";
-import { type View } from "../constants/mobileViews";
 import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
 import { formatISO } from "date-fns";
 import { useParams } from "react-router";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
-  activeView: View;
   handleNoteActions: (id: string, action: string) => void;
 };
 
@@ -23,12 +22,13 @@ type FormData = {
   isArchived: boolean;
 };
 
-const CreateNoteForm = ({ dataObj, activeView, handleNoteActions }: Props) => {
+const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isDesktop } = useContext(MobileContext);
   const { data, setData } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
+  const activeView = useActiveView();
 
   const [formData, setFormData] = useState<FormData>(() => {
     return note
