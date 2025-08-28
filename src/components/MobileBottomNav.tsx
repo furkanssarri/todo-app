@@ -12,6 +12,7 @@ type MobileBottomNavProps = {
 const MobileBottomNav = ({ setSelectedTag }: MobileBottomNavProps) => {
   const { isTablet, isDesktop } = useContext(MobileContext);
   const activeView = useActiveView();
+
   return (
     <nav className="mobile-nav">
       <ul>
@@ -26,7 +27,9 @@ const MobileBottomNav = ({ setSelectedTag }: MobileBottomNavProps) => {
                     <Link
                       to={item.view}
                       onClick={() => setSelectedTag(null)}
-                      className={`${activeView === item ? "active" : ""}`}
+                      className={`${
+                        activeView.view === item.view ? "active" : ""
+                      }`}
                     >
                       <Icon />
                       {isTablet && item.name}
