@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
-export type FontTheme = "sans-serif" | "serif" | "monospace";
+export type FontsTheme = "sans-serif" | "serif" | "monospace";
 
 type FontThemeContextType = {
-  fontTheme: FontTheme;
-  setFontTheme: (fontTheme: FontTheme) => void;
+  fontTheme: FontsTheme;
+  setFontTheme: (fontTheme: FontsTheme) => void;
 };
 
 export const FontThemeContext = createContext<FontThemeContextType | null>(

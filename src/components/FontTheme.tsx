@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { FontThemeContext, type FontTheme } from "../context/fontThemeContext";
+import { FontThemeContext, type FontsTheme } from "../context/fontThemeContext";
 import { IconFontMonospace, IconFontSansSerif, IconFontSerif } from "./icons";
 import Button from "./Button";
 
@@ -28,8 +28,8 @@ const fontThemes = [
 ];
 
 const FontTheme = () => {
-  const [selectedFontTheme, setSelectedFontTheme] = useState<FontTheme>(() => {
-    return (localStorage.getItem("font-theme") as FontTheme) || "sans-serif";
+  const [selectedFontTheme, setSelectedFontTheme] = useState<FontsTheme>(() => {
+    return (localStorage.getItem("font-theme") as FontsTheme) || "sans-serif";
   });
   const fontThemeCtx = useContext(FontThemeContext);
   if (!fontThemeCtx) {
