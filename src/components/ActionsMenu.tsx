@@ -3,7 +3,7 @@ import NoteActions from "./NoteActions";
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
-import type { View } from "../constants/mobileViews";
+import type { View } from "../constants/pageViews";
 
 type Props = {
   activeView: View;

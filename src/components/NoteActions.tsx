@@ -1,4 +1,4 @@
-import type { View } from "../constants/mobileViews";
+import type { View } from "../constants/pageViews";
 import Button from "./Button";
 
 type Props = {

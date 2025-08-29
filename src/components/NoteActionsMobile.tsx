@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { btns, type Btn, type BtnView } from "../constants/mobileViews";
+import { btns, type Btn, type BtnView } from "../constants/pageViews";
 import { MobileContext } from "../context/MobileContext";
 import { Link } from "react-router-dom";
 import Button from "./Button";

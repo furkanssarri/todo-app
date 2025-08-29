@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { views } from "../constants/mobileViews";
+import { views } from "../constants/pageViews";
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import { useActiveView } from "../utils/useActiveView";
@@ -19,16 +19,16 @@ const MobileBottomNav = ({ setSelectedTag }: MobileBottomNavProps) => {
         {views &&
           !isDesktop &&
           views.map((item, index) => {
-            if (item.view !== "/note" && item.view !== "/create") {
+            if (item.path !== "/note" && item.path !== "/create") {
               const Icon = item.icon;
               return (
                 <Fragment key={item.id}>
                   <li>
                     <Link
-                      to={item.view}
+                      to={item.path}
                       onClick={() => setSelectedTag(null)}
                       className={`${
-                        activeView.view === item.view ? "active" : ""
+                        activeView.path === item.path ? "active" : ""
                       }`}
                     >
                       <Icon />
