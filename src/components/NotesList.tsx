@@ -8,6 +8,7 @@ import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
 import SearchBar from "./SearchBar.js";
 import { useActiveView } from "../utils/useActiveView.js";
+import SettingsList from "./SettingsList.js";
 
 type PropTypes = {
   dataObj: UseDataResult;
@@ -28,7 +29,7 @@ const NotesList = ({
   const { isDesktop } = useContext(MobileContext);
   const activeView = useActiveView();
 
-  if (activeView.view === "/archive") {
+  if (activeView.path === "/archive") {
     const archivedData = data.filter((note) => note.isArchived);
     data = archivedData;
   }
@@ -56,7 +57,7 @@ const NotesList = ({
 
   return (
     <section className="inner-sidebar">
-      {isDesktop && (
+      {isDesktop && activeView.path !== "/settings" && (
         <Button
           startIcon="plus"
           color="primary"
@@ -80,7 +81,7 @@ const NotesList = ({
         </div>
       )}
 
-      {activeView.view === "/search" && (
+      {activeView.path === "/search" && (
         <>
           <section className="search-area">
             <SearchBar
@@ -95,31 +96,35 @@ const NotesList = ({
           </p>
         </>
       )}
-      <ul>
-        {data &&
-          data.map((item) => (
-            <li key={item.id}>
-              <Link
-                to={`/note/${item.id}`}
-                className="note-item text-preset-sans-3"
-              >
-                {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
-                <div className="item-details text-preset-sans-6">
-                  <div className="item-tags">
-                    {item.tags.map((tag) => (
-                      <span key={tag} className="item-tag">
-                        {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                      </span>
-                    ))}
+      {activeView.path === "/settings" ? (
+        <SettingsList />
+      ) : (
+        <ul>
+          {data &&
+            data.map((item) => (
+              <li key={item.id}>
+                <Link
+                  to={`/note/${item.id}`}
+                  className="note-item text-preset-sans-3"
+                >
+                  {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
+                  <div className="item-details text-preset-sans-6">
+                    <div className="item-tags">
+                      {item.tags.map((tag) => (
+                        <span key={tag} className="item-tag">
+                          {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="item-date">
+                      {format(item.lastEdited, "dd MMM yyyy")}
+                    </span>
                   </div>
-                  <span className="item-date">
-                    {format(item.lastEdited, "dd MMM yyyy")}
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-      </ul>
+                </Link>
+              </li>
+            ))}
+        </ul>
+      )}
     </section>
   );
 };

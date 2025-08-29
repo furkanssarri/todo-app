@@ -1,8 +1,8 @@
 import NotesList from "../components/NotesList";
 import CreateNoteForm from "../components/CreateNoteForm";
 import TagsList from "../components/TagsList";
-import SettingsPage from "../components/SettingsPage";
 import NoteBody from "../components/NoteBody";
+import SettingsPage from "../components/SettingsPage";
 
 export const mobileRoutes = [
   { path: "/", element: NotesList },
@@ -11,7 +11,7 @@ export const mobileRoutes = [
   { path: "/archive", element: NotesList },
   { path: "/tags", element: TagsList },
   { path: "/tags/:tag", element: NotesList },
-  { path: "/settings", element: SettingsPage },
+  { path: "/settings", element: NotesList },
   { path: "/note/:id", element: CreateNoteForm },
 ];
 
@@ -20,4 +20,5 @@ export const desktopRoutes = [
   { path: "/note/:id", element: CreateNoteForm },
   { path: "/create", element: CreateNoteForm },
   { path: "/settings", element: SettingsPage },
+  { path: "/settings/:setting", element: SettingsPage },
 ];
