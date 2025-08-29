@@ -8,7 +8,7 @@
     gap: var(--space-200);
     border: none;
     padding: var(--space-300) var(--space-100);
-    max-width: 80%;
+    width: 80%;
   }
 
   .setting-selector .setting-item {
@@ -96,5 +96,11 @@
 
   .active {
     background-color: var(--border-color);
+  }
+
+  @media (max-width: 768px) {
+    .setting-selector {
+      width: auto;
+    }
   }
 }

@@ -13,6 +13,7 @@ export const mobileRoutes = [
   { path: "/tags/:tag", element: NotesList },
   { path: "/settings", element: NotesList },
   { path: "/note/:id", element: CreateNoteForm },
+  { path: "/settings/:setting", element: SettingsPage },
 ];
 
 export const desktopRoutes = [
