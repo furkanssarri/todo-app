@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { FontThemeContext, type FontTheme } from "./fontThemeContext";
+import { FontThemeContext, type FontsTheme } from "./fontThemeContext";
 
 export function FontThemeProvider({ children }: { children: React.ReactNode }) {
-  const [fontTheme, setFontTheme] = useState<FontTheme>(() => {
-    return (localStorage.getItem("font-theme") as FontTheme) || "sans-serif";
+  const [fontTheme, setFontTheme] = useState<FontsTheme>(() => {
+    return (localStorage.getItem("font-theme") as FontsTheme) || "sans-serif";
   });
 
   useEffect(() => {
