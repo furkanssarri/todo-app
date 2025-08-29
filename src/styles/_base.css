@@ -114,6 +114,22 @@
     --large-shadow: 0 0.5rem 0.75rem 0 #f0f0f060;
   }
 
+  :root[data-theme="light"] {
+    --primary-bg: var(--colors-neutral-0);
+    --primary-foreground: var(--colors-neutral-800);
+    --border-color: var(--colors-neutral-200);
+    --hover-bg: var(--colors-neutral-100);
+    --svg-color: var(--colors-neutral-700);
+  }
+
+  :root[data-theme="dark"] {
+    --primary-bg: var(--colors-neutral-950);
+    --primary-foreground: var(--colors-neutral-100);
+    --border-color: var(--colors-neutral-700);
+    --hover-bg: var(--colors-neutral-800);
+    --svg-color: var(--colors-neutral-200);
+  }
+
   *,
   *::before,
   *::after {
@@ -185,10 +201,6 @@
     max-width: 100%;
   }
 
-  svg {
-    color: var(--colors-neutral-700);
-  }
-
   input,
   button,
   textarea,
@@ -216,21 +228,5 @@
   h5,
   h6 {
     text-wrap: balance;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --border-color: var(--colors-neutral-700);
-      --primary-bg: var(--colors-neutral-950);
-      --primary-foreground: var(--colors-neutral-100);
-    }
-
-    body {
-      background-color: var(--primary-bg);
-      color: var(--primary-foreground);
-    }
-    svg {
-      color: var(--colors-neutral-200);
-    }
   }
 }

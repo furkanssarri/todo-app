@@ -3,16 +3,16 @@ import NoteActions from "./NoteActions";
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
 import NoteActionsMobile from "./NoteActionsMobile";
-import type { View } from "../constants/pageViews";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
-  activeView: View;
-  handleNoteActions: (id: string, action: string) => void;
-  noteId: string;
+  handleNoteActions?: (id: string, action: string) => void;
+  noteId?: string;
 };
 
-const ActionsMenu = ({ activeView, handleNoteActions, noteId }: Props) => {
+const ActionsMenu = ({ handleNoteActions, noteId }: Props) => {
   const { isMobile, isTablet } = useContext(MobileContext);
+  const activeView = useActiveView();
 
   if (isMobile || isTablet) {
     return (

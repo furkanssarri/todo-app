@@ -7,7 +7,6 @@ import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
 import { formatISO } from "date-fns";
 import { useParams } from "react-router";
-import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
@@ -28,7 +27,6 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
   const { data, setData } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
-  const activeView = useActiveView();
 
   const [formData, setFormData] = useState<FormData>(() => {
     return note
@@ -196,11 +194,7 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
         )}
       </article>
       {isDesktop && (
-        <ActionsMenu
-          activeView={activeView}
-          handleNoteActions={handleNoteActions}
-          noteId={id!}
-        />
+        <ActionsMenu handleNoteActions={handleNoteActions} noteId={id!} />
       )}
     </>
   );

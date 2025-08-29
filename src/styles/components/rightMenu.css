@@ -22,16 +22,13 @@
 
   .action-button button {
     width: 100%;
-    color: var(--colors-neutral-600) !important;
+    color: var(--primary-foreground) !important;
     padding: var(--space-150);
     box-shadow: none !important;
   }
   .action-button button:hover {
     border: 1px solid transparent !important;
-  }
-
-  .action-button button:hover svg {
-    color: var(--colors-neutral-600) !important;
+    background-color: var(--hover-bg) !important;
   }
 
   .mobile-actions {
@@ -71,16 +68,6 @@
   @media (max-width: 425px) {
     .mobile-actions {
       padding: var(--space-150) 0;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .action-button button {
-      color: var(--colors-neutral-100) !important;
-    }
-
-    .action-button button:hover {
-      color: var(--colors-neutral-600) !important;
     }
   }
 }

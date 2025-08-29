@@ -3,8 +3,9 @@
     padding: var(--space-150) var(--space-200);
   }
 
-  .left-menu h4 {
+  .left-menu .tags-wrapper h4 {
     color: var(--colors-neutral-500);
+    margin: var(--space-100);
   }
 
   .left-menu .logo-wrapper {
@@ -44,7 +45,7 @@
   }
 
   .left-menu ul li a:hover {
-    background-color: var(--colors-neutral-100);
+    background-color: var(--hover-bg);
   }
 
   .left-menu ul li a:hover svg {
@@ -55,10 +56,6 @@
     padding: var(--space-150);
     display: inline-block;
     width: 100%;
-  }
-
-  .left-menu .tags-wrapper h4 {
-    margin: var(--space-100);
   }
 
   /* ___________ INNER SIDEBAR ____________ */
@@ -81,7 +78,7 @@
     width: 100%;
     padding: var(--space-150);
     border: none;
-    border-radius: var(--radius-8);
+    border-radius: 50% !important;
     background-color: var(--colors-blue-500);
     color: white;
     justify-content: center;
@@ -92,7 +89,10 @@
 
   .inner-sidebar button svg,
   .mobile-add-note-button button svg {
+    /* HARDCODED BECAUSE FIXED */
     color: white;
+    font-size: 1.5rem;
+    vertical-align: middle;
   }
 
   .inner-sidebar ul {
@@ -107,13 +107,13 @@
     padding: var(--space-100);
   }
 
-  .item-details {
+  .inner-sidebar .item-details {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: var(--space-150);
     font-size: var(--font-size-100);
-    color: var(--colors-neutral-600);
+    color: var(--primary-foreground);
     padding-left: var(--space-100);
   }
 
@@ -131,7 +131,7 @@
   }
 
   .inner-sidebar .settings-menu li:hover {
-    background-color: var(--colors-neutral-800);
+    background-color: var(--hover-bg);
   }
 
   .inner-sidebar .settings-menu li:hover a::after {
@@ -158,6 +158,7 @@
   }
 
   .item-tag {
+    /* HARDCODED BECAUSE FIXED */
     background-color: var(--colors-neutral-700);
     padding: var(--space-025) var(--space-075);
     margin: var(--space-050);
@@ -172,12 +173,6 @@
 
   main .main-wrapper .tags-wrapper ul .tag-item svg {
     font-size: 1.2rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .left-menu ul li a:hover {
-      background-color: var(--colors-neutral-800);
-    }
   }
 
   @media (max-width: 768px) {

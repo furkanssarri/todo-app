@@ -63,13 +63,7 @@
 
 @media (max-width: 768px) {
   header {
-    background-color: var(--colors-neutral-100);
+    background-color: var(--hover-bg);
     border: none;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    header {
-      background-color: var(--colors-neutral-800);
-    }
   }
 }

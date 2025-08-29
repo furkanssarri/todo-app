@@ -13,7 +13,6 @@
 
   .search-bar-desc {
     margin: var(--space-200) 0;
-    color: var(--colors-neutral-300);
   }
 
   .note-details {
@@ -61,55 +60,45 @@
   .note-body p {
     margin: var(--space-200) auto;
   }
-}
+  @media (max-width: 768px) {
+    .mobile-add-note-button {
+      position: relative;
+    }
+    .mobile-add-note-button button {
+      position: fixed;
+      width: 48px;
+      height: 48px;
+      bottom: 5rem;
+      right: var(--space-400);
+      border-radius: 50%;
+      display: block !important;
+      padding: initial !important;
+      font-size: 2rem;
+    }
+  }
 
-@media (max-width: 768px) {
-  .mobile-add-note-button {
-    position: relative;
+  @media (max-width: 768px) {
+    main {
+      width: auto;
+    }
+    .main-wrapper {
+      border-top-left-radius: var(--radius-20);
+      border-top-right-radius: var(--radius-20);
+      padding: var(--space-250) var(--space-200);
+    }
+    .main-wrapper .search-area {
+      margin: var(--space-200) auto;
+    }
+    .main-wrapper .search-area .search input {
+      width: 100%;
+    }
   }
-  .mobile-add-note-button button {
-    position: fixed;
-    width: 48px;
-    height: 48px;
-    bottom: 5rem;
-    right: var(--space-400);
-    border-radius: 50%;
-    display: block !important;
-    padding: initial !important;
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  main {
-    width: auto;
-  }
-  .main-wrapper {
-    border-top-left-radius: var(--radius-20);
-    border-top-right-radius: var(--radius-20);
-    padding: var(--space-250) var(--space-200);
-  }
-  .main-wrapper .search-area {
-    margin: var(--space-200) auto;
-  }
-  .main-wrapper .search-area .search input {
-    width: 100%;
-  }
-}
-@media (max-width: 425px) {
-  .main-wrapper {
-    padding: var(--space-200);
-  }
-  .note-details {
-    padding: 0;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  main {
-    background-color: var(--colors-neutral-950);
-  }
-  .main-wrapper {
-    background-color: var(--colors-neutral-950);
+  @media (max-width: 425px) {
+    .main-wrapper {
+      padding: var(--space-200);
+    }
+    .note-details {
+      padding: 0;
+    }
   }
 }

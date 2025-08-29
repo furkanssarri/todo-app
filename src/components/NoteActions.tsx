@@ -3,7 +3,7 @@ import Button from "./Button";
 
 type Props = {
   activeView: View;
-  handleNoteActions: (id: string, action: string) => void;
+  handleNoteActions?: (id: string, action: string) => void;
   noteId?: string;
 };
 
@@ -15,30 +15,34 @@ const NoteActions = ({ activeView, handleNoteActions, noteId }: Props) => {
   return (
     <ul>
       <li className="action-button">
-        <Button
-          startIcon={"delete"}
-          size={"lg"}
-          variant={"outline"}
-          onClick={() => {
-            if (noteId) return handleNoteActions(noteId, "delete");
-          }}
-        >
-          {" "}
-          Delete Note
-        </Button>
+        {handleNoteActions && (
+          <Button
+            startIcon={"delete"}
+            size={"lg"}
+            variant={"outline"}
+            onClick={() => {
+              if (noteId) return handleNoteActions(noteId, "delete");
+            }}
+          >
+            {" "}
+            Delete Note
+          </Button>
+        )}
       </li>
       <li className="action-button">
-        <Button
-          startIcon={"archive"}
-          size={"lg"}
-          variant={"outline"}
-          onClick={() => {
-            if (noteId) return handleNoteActions(noteId, "archive");
-          }}
-        >
-          {" "}
-          Archive Note
-        </Button>
+        {handleNoteActions && (
+          <Button
+            startIcon={"archive"}
+            size={"lg"}
+            variant={"outline"}
+            onClick={() => {
+              if (noteId) return handleNoteActions(noteId, "archive");
+            }}
+          >
+            {" "}
+            Archive Note
+          </Button>
+        )}
       </li>
     </ul>
   );

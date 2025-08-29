@@ -6,8 +6,8 @@ import Button from "./Button";
 
 type Props = {
   exclude?: BtnView[];
-  handleNoteActions: (id: string, action: string) => void;
-  noteId: string | undefined;
+  handleNoteActions?: (id: string, action: string) => void;
+  noteId?: string | undefined;
 };
 
 const NoteActionsMobile = ({
@@ -24,10 +24,12 @@ const NoteActionsMobile = ({
   const onAction = (view: BtnView) => {
     switch (view) {
       case "delete":
-        if (noteId) return handleNoteActions(noteId, "delete");
+        if (noteId && handleNoteActions)
+          return handleNoteActions(noteId, "delete");
         break;
       case "archive":
-        if (noteId) return handleNoteActions(noteId, "archive");
+        if (noteId && handleNoteActions)
+          return handleNoteActions(noteId, "archive");
         break;
       default:
         console.log("unhandled");
