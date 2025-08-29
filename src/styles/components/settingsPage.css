@@ -24,7 +24,7 @@
   }
 
   .setting-item:hover {
-    background-color: var(--colors-neutral-200);
+    background-color: var(--border-color);
   }
 
   .setting-selector .setting-item input[type="radio"] {
@@ -70,7 +70,7 @@
   }
 
   .setting-selector .setting-item .setting-icon {
-    background-color: var(--colors-neutral-950);
+    background-color: var(--primary-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-12);
     padding: var(--space-100);
@@ -95,14 +95,6 @@
   }
 
   .active {
-    background-color: var(--colors-neutral-200);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .setting-selector .setting-item:hover,
-    .active {
-      background-color: var(--colors-neutral-700);
-      color: var(--primary-foreground);
-    }
+    background-color: var(--border-color);
   }
 }

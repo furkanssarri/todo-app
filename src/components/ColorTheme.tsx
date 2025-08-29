@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import { IconMoon, IconSun, IconSystemTheme } from "./icons";
 import { ThemeContext, type Theme } from "../context/themeContext";
@@ -31,13 +31,16 @@ const colorThemes = [
 ];
 
 const ColorTheme = () => {
-  const [selectedTheme, setSelectedTheme] = useState<Theme>("system");
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(() => {
+    return (localStorage.getItem("theme") as Theme) || "system";
+  });
 
   const themeCtx = useContext(ThemeContext);
   if (!themeCtx) {
-    return null;
+    throw new Error("ColorTheme must be used within a ThemeProvider.");
   }
   const { setTheme } = themeCtx;
+
   return (
     <>
       <h2 className="setting-heading">Color Theme</h2>
@@ -73,7 +76,10 @@ const ColorTheme = () => {
           <Button
             color="primary"
             size="lg"
-            onClick={() => setTheme(selectedTheme)}
+            onClick={() => {
+              setTheme(selectedTheme);
+              localStorage.setItem("theme", selectedTheme);
+            }}
           >
             Apply Changes
           </Button>
