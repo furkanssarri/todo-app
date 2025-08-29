@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Button from "./Button";
 import { IconMoon, IconSun, IconSystemTheme } from "./icons";
 import { ThemeContext, type Theme } from "../context/themeContext";
