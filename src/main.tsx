@@ -4,18 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import MobileContextProvider from "./context/MobileContextProvider.tsx";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "./context/ThemeContextProvider.tsx";
-import { FontThemeProvider } from "./context/FontThemeProvider.tsx";
+import { UIProvider } from "./context/UIProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <MobileContextProvider>
-        <ThemeProvider>
-          <FontThemeProvider>
-            <App />
-          </FontThemeProvider>
-        </ThemeProvider>
+        <UIProvider>
+          <App />
+        </UIProvider>
       </MobileContextProvider>
     </BrowserRouter>
   </StrictMode>,
