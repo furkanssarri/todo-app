@@ -78,7 +78,7 @@
     width: 100%;
     padding: var(--space-150);
     border: none;
-    border-radius: 50% !important;
+    border-radius: var(--radius-8) !important;
     background-color: var(--colors-blue-500);
     color: white;
     justify-content: center;
