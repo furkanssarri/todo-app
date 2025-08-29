@@ -130,6 +130,22 @@
     --svg-color: var(--colors-neutral-200);
   }
 
+  :root[data-font="sans-serif"] {
+    --font-family-base: var(--ff-sans);
+  }
+
+  :root[data-font="serif"] {
+    --font-family-base: var(--ff-serif);
+  }
+
+  :root[data-font="monospace"] {
+    --font-family-base: var(--ff-mono);
+  }
+
+  html {
+    font-family: var(--font-family-base);
+  }
+
   *,
   *::before,
   *::after {
@@ -142,7 +158,6 @@
 
   html {
     font-size: 1rem;
-    font-family: var(--ff-sans), system-ui, sans-serif;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -157,7 +172,6 @@
     -webkit-font-smoothing: antialiased;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
     color: var(--primary-foreground);
     background-color: var(--primary-bg);

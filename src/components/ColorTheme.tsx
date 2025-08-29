@@ -10,7 +10,6 @@ const colorThemes = [
     title: "Light Mode",
     description: "Pick a clean and classic light theme",
     icon: IconSun,
-    isActive: false,
   },
   {
     id: 2,
@@ -18,7 +17,6 @@ const colorThemes = [
     title: "Dark Mode",
     description: "Select a sleek and modern dark theme",
     icon: IconMoon,
-    isActive: false,
   },
   {
     id: 3,
@@ -26,7 +24,6 @@ const colorThemes = [
     title: "System",
     description: "Adapts to your device's theme",
     icon: IconSystemTheme,
-    isActive: false,
   },
 ];
 
