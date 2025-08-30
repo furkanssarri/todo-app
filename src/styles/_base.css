@@ -186,7 +186,7 @@
   html,
   body,
   #root {
-    height: 100vh;
+    height: 99vh;
     /* width: 98%; */
     margin: 0;
     padding: 0;
