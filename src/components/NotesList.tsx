@@ -1,9 +1,9 @@
 import Button from "./Button/index.js";
 import { format } from "date-fns";
 
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
 import SearchBar from "./SearchBar.js";
@@ -23,6 +23,7 @@ const NotesList = ({
   searchQuery,
   setSearchQuery,
 }: PropTypes) => {
+  const location = useLocation();
   const { error, isLoading } = dataObj;
   let data = dataObj.data;
   const navigate = useNavigate();
@@ -54,6 +55,8 @@ const NotesList = ({
       );
     });
   }
+
+  console.log(activeView.path);
 
   return (
     <section className="inner-sidebar">
@@ -101,28 +104,35 @@ const NotesList = ({
       ) : (
         <ul>
           {data &&
-            data.map((item) => (
-              <li key={item.id}>
-                <Link
-                  to={`/note/${item.id}`}
-                  className="note-item text-preset-sans-3"
-                >
-                  {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
-                  <div className="item-details text-preset-sans-6">
-                    <div className="item-tags">
-                      {item.tags.map((tag) => (
-                        <span key={tag} className="item-tag">
-                          {tag.charAt(0).toUpperCase() + tag.slice(1)}
+            data.map((item, index) => {
+              const isActive = location.pathname === `/note/${item.id}`;
+              return (
+                <Fragment key={item.id}>
+                  <li
+                    className={`note-item text-preset-sans-3 ${
+                      isActive ? "active" : ""
+                    }`}
+                  >
+                    <Link to={`/note/${item.id}`}>
+                      {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
+                      <div className="item-details text-preset-sans-6">
+                        <div className="item-tags">
+                          {item.tags.map((tag) => (
+                            <span key={tag} className="item-tag">
+                              {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                            </span>
+                          ))}
+                        </div>
+                        <span className="item-date">
+                          {format(item.lastEdited, "dd MMM yyyy")}
                         </span>
-                      ))}
-                    </div>
-                    <span className="item-date">
-                      {format(item.lastEdited, "dd MMM yyyy")}
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
+                      </div>
+                    </Link>
+                  </li>
+                  {index !== data.length - 1 && <hr />}
+                </Fragment>
+              );
+            })}
         </ul>
       )}
     </section>

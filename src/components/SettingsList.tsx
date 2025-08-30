@@ -1,5 +1,6 @@
 import { settingsViews } from "../constants/pageViews";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Fragment } from "react/jsx-runtime";
 
 const SettingsList = () => {
   return (
@@ -7,15 +8,21 @@ const SettingsList = () => {
       {/* TODO: fix the class name to a more meaningful one or refactor existing left-menu styling to fiti; */}
 
       <ul className="settings-menu">
-        {settingsViews.map((view) => {
+        {settingsViews.map((view, index) => {
           const Icon = view.icon;
           return (
-            <li key={view.id}>
-              <Link to={`/settings/${view.path}`}>
-                <Icon />
-                {view.name}
-              </Link>
-            </li>
+            <Fragment key={view.id}>
+              {index === settingsViews.length - 1 && <hr />}
+              <li>
+                <NavLink
+                  to={`/settings/${view.path}`}
+                  className={({ isActive }) => ` ${isActive ? "active" : ""}`}
+                >
+                  <Icon />
+                  {view.name}
+                </NavLink>
+              </li>
+            </Fragment>
           );
         })}
       </ul>

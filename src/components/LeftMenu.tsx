@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "./Logo.tsx";
 import TagsList from "./TagsList.tsx";
 import { IconHome, IconArchive } from "./icons/index.tsx";
 import type { UseDataResult } from "../utils/useData.ts";
+import { useActiveView } from "../utils/useActiveView.ts";
 
 type Props = {
   dataObj: UseDataResult;
+  selectedTag: string | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const LeftMenuNav = ({ dataObj, setSelectedTag }: Props) => {
+const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
+  const activeView = useActiveView();
   return (
     <section className="left-menu">
       <Logo />
@@ -17,20 +20,36 @@ const LeftMenuNav = ({ dataObj, setSelectedTag }: Props) => {
         <nav className="main-filter">
           <ul>
             <li>
-              <Link to="/" onClick={() => setSelectedTag(null)}>
+              <NavLink
+                className={
+                  activeView.path === "/" || activeView.path === "/note"
+                    ? "active"
+                    : ""
+                }
+                to="/"
+                onClick={() => setSelectedTag(null)}
+              >
                 <IconHome /> All Notes
-              </Link>
+              </NavLink>
             </li>
             <li>
               {" "}
-              <a href="#" onClick={() => setSelectedTag(null)}>
+              <NavLink
+                to="/archive"
+                className={({ isActive }) => ` ${isActive ? "active" : ""}`}
+                onClick={() => setSelectedTag(null)}
+              >
                 {" "}
                 <IconArchive /> Archived Notes
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
-        <TagsList dataObj={dataObj} setSelectedTag={setSelectedTag} />
+        <TagsList
+          dataObj={dataObj}
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+        />
       </main>
     </section>
   );

@@ -4,14 +4,15 @@ import { IconTag } from "./icons/index";
 import { MobileContext } from "../context/MobileContext";
 import MainTitle from "./MainTitle";
 import type { UseDataResult } from "../utils/useData";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 type Props = {
   dataObj: UseDataResult;
+  selectedTag: string | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const TagsList = ({ dataObj, setSelectedTag }: Props) => {
+const TagsList = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
   const { isDesktop } = useContext(MobileContext);
 
   const uniqueTags = useMemo(() => {
@@ -34,17 +35,21 @@ const TagsList = ({ dataObj, setSelectedTag }: Props) => {
         {uniqueTags.map((tag, index) => (
           <li key={`${tag}-${index}`} className="tag-item">
             {!isDesktop ? (
-              <Link
+              <NavLink
                 to={`/tags/${tag.toLowerCase()}`}
-                className="text-preset-sans-4"
+                className={({ isActive }) =>
+                  `text-preset-sans-4 ${isActive ? "active" : ""}`
+                }
                 onClick={() => setSelectedTag(tag)}
               >
                 <IconTag /> {tag.charAt(0).toUpperCase() + tag.slice(1)}
-              </Link>
+              </NavLink>
             ) : (
               <a
                 href="#"
-                className="text-preset-sans-4"
+                className={`text-preset-sans-4 ${
+                  selectedTag === tag ? "active" : ""
+                }`}
                 onClick={() => setSelectedTag(tag)}
               >
                 <IconTag /> {tag.charAt(0).toUpperCase() + tag.slice(1)}

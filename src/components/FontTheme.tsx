@@ -46,27 +46,37 @@ const FontTheme = () => {
         {fontThemes.map((font) => {
           const Icon = font.icon;
           return (
-            <div className="setting-item" key={font.id}>
-              <span className="setting-icon">
-                <Icon />
-              </span>
-              <label className="text-preset-4" htmlFor={font.name}>
-                {font.title}
-                <p className="text-preset-6">{font.description}</p>
-              </label>
-              <input
-                type="radio"
-                name="font-theme"
-                id={font.name}
-                value={font.name}
-                checked={selectedFontTheme === font.name}
-                onChange={(e) =>
-                  setSelectedFontTheme(
-                    e.target.value as "sans-serif" | "serif" | "monospace",
-                  )
-                }
-              />
-            </div>
+            <label
+              htmlFor={font.name}
+              className={`setting-item ${
+                selectedFontTheme === font.name ? "active" : ""
+              }`}
+              key={font.id}
+            >
+              <div className="text-preset-4 setting-item-inner">
+                <div className="item-middle">
+                  <span className="setting-icon">
+                    <Icon />
+                  </span>
+                  <div>
+                    {font.title}
+                    <p className="text-preset-6">{font.description}</p>
+                  </div>
+                </div>
+                <input
+                  type="radio"
+                  name="font-theme"
+                  id={font.name}
+                  value={font.name}
+                  checked={selectedFontTheme === font.name}
+                  onChange={(e) =>
+                    setSelectedFontTheme(
+                      e.target.value as "sans-serif" | "serif" | "monospace",
+                    )
+                  }
+                />
+              </div>
+            </label>
           );
         })}
         <div className="submit-button">

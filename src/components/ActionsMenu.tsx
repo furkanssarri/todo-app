@@ -26,7 +26,11 @@ const ActionsMenu = ({ handleNoteActions, noteId }: Props) => {
   }
 
   return (
-    <menu className="right-menu">
+    <menu
+      className={`right-menu ${
+        activeView.path === `/settings` ? "border-transparent" : ""
+      }`}
+    >
       <section className="actions">
         {activeView.name !== "Create Note" && (
           <NoteActions

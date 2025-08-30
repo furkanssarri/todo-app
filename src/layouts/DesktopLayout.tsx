@@ -29,7 +29,11 @@ const DeskttopLayout = ({
     <>
       <div id="content">
         <aside>
-          <LeftMenu dataObj={dataObj} setSelectedTag={setSelectedTag} />
+          <LeftMenu
+            dataObj={dataObj}
+            selectedTag={selectedTag}
+            setSelectedTag={setSelectedTag}
+          />
         </aside>
         <main>
           <header>

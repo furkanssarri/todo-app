@@ -18,6 +18,7 @@ export const mobileRoutes = [
 
 export const desktopRoutes = [
   { path: "/", element: NoteBody },
+  { path: "/archive", element: NoteBody },
   { path: "/note/:id", element: CreateNoteForm },
   { path: "/create", element: CreateNoteForm },
   { path: "/settings", element: SettingsPage },

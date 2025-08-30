@@ -46,27 +46,37 @@ const ColorTheme = () => {
         {colorThemes.map((theme) => {
           const Icon = theme.icon;
           return (
-            <div className="setting-item" key={theme.id}>
-              <span className="setting-icon">
-                <Icon />
-              </span>
-              <label className="text-preset-4" htmlFor={theme.name}>
-                {theme.title}
-                <p className="text-preset-6">{theme.description}</p>
-              </label>
-              <input
-                type="radio"
-                name="theme"
-                id={theme.name}
-                value={theme.name}
-                checked={selectedTheme === theme.name}
-                onChange={(e) =>
-                  setSelectedTheme(
-                    e.target.value as "light" | "dark" | "system",
-                  )
-                }
-              />
-            </div>
+            <label
+              htmlFor={theme.name}
+              className={`setting-item ${
+                selectedTheme === theme.name ? "active" : ""
+              }`}
+              key={theme.id}
+            >
+              <div className="text-preset-4 setting-item-inner">
+                <div className="item-middle">
+                  <span className="setting-icon">
+                    <Icon />
+                  </span>
+                  <div>
+                    {theme.title}
+                    <p className="text-preset-6">{theme.description}</p>
+                  </div>
+                </div>
+                <input
+                  type="radio"
+                  name="theme"
+                  id={theme.name}
+                  value={theme.name}
+                  checked={selectedTheme === theme.name}
+                  onChange={(e) =>
+                    setSelectedTheme(
+                      e.target.value as "light" | "dark" | "system",
+                    )
+                  }
+                />
+              </div>
+            </label>
           );
         })}
         <div className="submit-button">

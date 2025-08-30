@@ -21,7 +21,7 @@
     border-bottom: 1px solid var(--border-color);
   }
   ul li {
-    margin-top: var(--space-050);
+    margin: var(--space-050) 0;
   }
 
   .left-menu ul li a {
@@ -99,12 +99,23 @@
     margin-left: var(--space-100);
   }
 
-  .inner-sidebar ul li {
-    border-bottom: 1px solid var(--border-color);
+  .inner-sidebar ul hr {
+    border: none;
+    width: auto;
+    height: 1px;
+    background-color: var(--border-color);
   }
 
-  .inner-sidebar .note-item {
+  .inner-sidebar ul li {
+    /* border-bottom: 1px solid var(--border-color); */
     padding: var(--space-100);
+    border-radius: var(--radius-6);
+    height: 8.75rem;
+  }
+
+  .inner-sidebar ul li:hover {
+    background-color: var(--hover-bg);
+    border-radius: var(--radius-6);
   }
 
   .inner-sidebar .item-details {
@@ -125,9 +136,23 @@
 
   .inner-sidebar .settings-menu li {
     border: none;
-    padding: var(--space-100);
+    margin-top: var(--space-100);
     border-radius: var(--radius-8);
     cursor: pointer;
+  }
+
+  .inner-sidebar .settings-menu hr {
+    margin-top: var(--space-100);
+    background-color: var(--border-color);
+    height: 1px;
+    width: auto;
+    border: 0;
+  }
+
+  .inner-sidebar .settings-menu li a {
+    padding: var(--space-100);
+    border-radius: var(--radius-8);
+    display: block;
   }
 
   .inner-sidebar .settings-menu li:hover {
