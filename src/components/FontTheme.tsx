@@ -1,7 +1,14 @@
 import { useContext, useState } from "react";
 import { FontThemeContext, type FontsTheme } from "../context/fontThemeContext";
-import { IconFontMonospace, IconFontSansSerif, IconFontSerif } from "./icons";
+import {
+  IconArrowLeft,
+  IconFontMonospace,
+  IconFontSansSerif,
+  IconFontSerif,
+} from "./icons";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
+import { MobileContext } from "../context/MobileContext";
 
 const fontThemes = [
   {
@@ -31,6 +38,11 @@ const FontTheme = () => {
   const [selectedFontTheme, setSelectedFontTheme] = useState<FontsTheme>(() => {
     return (localStorage.getItem("font-theme") as FontsTheme) || "sans-serif";
   });
+
+  const navigate = useNavigate();
+
+  const { isMobile, isTablet } = useContext(MobileContext);
+
   const fontThemeCtx = useContext(FontThemeContext);
   if (!fontThemeCtx) {
     throw new Error("FontTheme must be used within a ThemeProvider.");
@@ -40,6 +52,16 @@ const FontTheme = () => {
 
   return (
     <>
+      {(isTablet || isMobile) && (
+        <div className="mobile-actions">
+          <div className="mobile-go-back">
+            <a href="#" onClick={() => navigate(-1)}>
+              <IconArrowLeft />
+              Settings
+            </a>
+          </div>
+        </div>
+      )}
       <h2 className="setting-heading">Font Theme</h2>
       <fieldset className="setting-selector">
         <legend>Choose your font theme:</legend>

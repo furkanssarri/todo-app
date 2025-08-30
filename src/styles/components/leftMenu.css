@@ -34,11 +34,11 @@
     margin-top: var(--space-050);
   }
 
-  .left-menu ul li:active a::after {
+  /* .left-menu ul li:active a::after {
     content: ">";
     float: right;
     margin-top: var(--space-050);
-  }
+  } */
 
   .left-menu ul li svg {
     font-size: 1.2rem;
@@ -216,6 +216,9 @@
     .inner-sidebar {
       border: none;
       padding: var(--space-200) 0;
+    }
+    li .active::after {
+      content: "";
     }
   }
 }

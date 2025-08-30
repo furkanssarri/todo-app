@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { btns, type Btn, type BtnView } from "../constants/pageViews";
 import { MobileContext } from "../context/MobileContext";
-import { Link } from "react-router-dom";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   exclude?: BtnView[];
@@ -17,6 +17,8 @@ const NoteActionsMobile = ({
 }: Props) => {
   const { isDesktop } = useContext(MobileContext);
   const filteredBtns = btns.filter((btn) => !exclude?.includes(btn.view));
+
+  const navigate = useNavigate();
 
   const showBackBtn = !isDesktop && btns[0].view === "back";
   const BackIcon = showBackBtn ? btns[0].icon : null;
@@ -41,10 +43,10 @@ const NoteActionsMobile = ({
     <>
       {!isDesktop && filteredBtns[0].view === "back" && (
         <div className="mobile-go-back">
-          <Link to="/">
+          <a href="#" onClick={() => navigate(-1)}>
             {BackIcon && <BackIcon />}
             {filteredBtns[0].name}
-          </Link>
+          </a>
         </div>
       )}
       <ul>

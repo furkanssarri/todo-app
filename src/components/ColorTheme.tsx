@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
 import Button from "./Button";
-import { IconMoon, IconSun, IconSystemTheme } from "./icons";
+import { IconArrowLeft, IconMoon, IconSun, IconSystemTheme } from "./icons";
 import { ThemeContext, type Theme } from "../context/themeContext";
+import { MobileContext } from "../context/MobileContext";
+import { useNavigate } from "react-router-dom";
 
 const colorThemes = [
   {
@@ -32,6 +34,9 @@ const ColorTheme = () => {
     return (localStorage.getItem("theme") as Theme) || "system";
   });
 
+  const { isMobile, isTablet } = useContext(MobileContext);
+  const navigate = useNavigate();
+
   const themeCtx = useContext(ThemeContext);
   if (!themeCtx) {
     throw new Error("ColorTheme must be used within a ThemeProvider.");
@@ -40,6 +45,16 @@ const ColorTheme = () => {
 
   return (
     <>
+      {(isTablet || isMobile) && (
+        <div className="mobile-actions">
+          <div className="mobile-go-back">
+            <a href="#" onClick={() => navigate(-1)}>
+              <IconArrowLeft />
+              Settings
+            </a>
+          </div>
+        </div>
+      )}
       <h2 className="setting-heading">Color Theme</h2>
       <fieldset className="setting-selector">
         <legend>Choose your color theme:</legend>
