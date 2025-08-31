@@ -1,8 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { MobileContext } from "../context/MobileContext";
-import NoteActionsMobile from "./NoteActionsMobile";
 import { IconClock, IconTag } from "./icons";
+import NoteActionsMobile from "./NoteActionsMobile";
 import ActionsMenu from "./ActionsMenu";
+import ConfirmModal from "./ConfirmModal";
 import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
 import { formatISO } from "date-fns";
@@ -44,6 +45,14 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
           lastEdited: "",
           isArchived: false,
         };
+  });
+
+  const [modal, setModal] = useState<{
+    open: boolean;
+    action: "delete" | "archive" | "restore" | null;
+  }>({
+    open: false,
+    action: null,
   });
 
   // Form Title element auto focus
@@ -94,6 +103,17 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
     inputRef.current?.focus();
   };
 
+  const handleOpenConfirm = (
+    id: string,
+    action: "delete" | "archive" | "restore",
+  ) => {
+    if (action !== "restore") {
+      setModal({ open: true, action });
+    } else {
+      handleNoteActions(id, "archive");
+    }
+  };
+
   return (
     <>
       <article className="note-details">
@@ -101,9 +121,9 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
           <div className="mobile-actions">
             <NoteActionsMobile
               // TODO: this will be re-implemented as a "note-body" type of form in the future.
-              // exclude={["delete", "archive"]}
-              handleNoteActions={handleNoteActions}
-              noteId={id}
+              exclude={note?.isArchived ? ["archive"] : ["restore"]}
+              noteId={id!}
+              handleOpenConfirm={handleOpenConfirm}
             />
           </div>
         )}
@@ -192,8 +212,33 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
         )}
       </article>
       {isDesktop && (
-        <ActionsMenu handleNoteActions={handleNoteActions} noteId={id!} />
+        <ActionsMenu
+          handleOpenConfirm={handleOpenConfirm}
+          noteId={id!}
+          isArchived={note?.isArchived ?? false}
+        />
       )}
+      <ConfirmModal
+        isOpen={modal.open}
+        message={
+          modal.action === "delete"
+            ? "Are you sure you want to permanently delete this note? This action cannot be undone."
+            : "Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime."
+        }
+        title={modal.action === "delete" ? "Delete Note" : "Archive Note"}
+        type={modal.action}
+        onConfirm={() => {
+          if (modal.action && id) {
+            handleNoteActions(id, modal.action); // dynamically call delete or archive
+          }
+          setModal({ open: false, action: null });
+        }}
+        onCancel={() => setModal({ open: false, action: null })}
+        confirmLabel={
+          modal.action === "delete" ? "Delete Note" : "Archive Note"
+        }
+        cancelLabel="Cancel"
+      />
     </>
   );
 };

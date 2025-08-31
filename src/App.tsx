@@ -37,7 +37,7 @@ function App() {
     dataObj.setData((prev) =>
       prev.map((n) => {
         if (n.id === id) {
-          return { ...n, isArchived: true };
+          return { ...n, isArchived: !n.isArchived };
         }
         return n;
       }),

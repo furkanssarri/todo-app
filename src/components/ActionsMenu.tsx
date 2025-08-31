@@ -8,19 +8,21 @@ import { useActiveView } from "../utils/useActiveView";
 type Props = {
   handleNoteActions?: (id: string, action: string) => void;
   noteId?: string;
+  handleOpenConfirm: (
+    id: string,
+    action: "delete" | "archive" | "restore",
+  ) => void;
+  isArchived?: boolean | undefined;
 };
 
-const ActionsMenu = ({ handleNoteActions, noteId }: Props) => {
+const ActionsMenu = ({ noteId, handleOpenConfirm, isArchived }: Props) => {
   const { isMobile, isTablet } = useContext(MobileContext);
   const activeView = useActiveView();
 
   if (isMobile || isTablet) {
     return (
       <div className="mobile-actions">
-        <NoteActionsMobile
-          handleNoteActions={handleNoteActions}
-          noteId={noteId}
-        />
+        <NoteActionsMobile noteId={noteId} />
       </div>
     );
   }
@@ -35,8 +37,9 @@ const ActionsMenu = ({ handleNoteActions, noteId }: Props) => {
         {activeView.name !== "Create Note" && (
           <NoteActions
             activeView={activeView}
-            handleNoteActions={handleNoteActions}
+            handleOpenConfirm={handleOpenConfirm}
             noteId={noteId}
+            isArchived={isArchived}
           />
         )}
       </section>

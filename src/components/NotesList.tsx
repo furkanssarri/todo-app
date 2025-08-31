@@ -56,8 +56,6 @@ const NotesList = ({
     });
   }
 
-  console.log(activeView.path);
-
   return (
     <section className="inner-sidebar">
       {isDesktop && activeView.path !== "/settings" && (

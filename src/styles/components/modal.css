@@ -1,0 +1,48 @@
+@layer components {
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .confirm-modal {
+    background-color: var(--colors-neutral-700);
+    border: 1px solid var(--colors-neutral-500);
+
+    border-radius: 8px;
+    max-width: 455px;
+  }
+
+  .modal-info {
+    display: flex;
+    align-items: flex-start;
+    padding: var(--space-250);
+  }
+
+  .confirm-modal .modal-info .modal-details h3 {
+    margin-bottom: var(--space-100);
+  }
+
+  .confirm-modal .modal-info .modal-icon {
+    background-color: var(--colors-neutral-600);
+    border-radius: var(--radius-12);
+    padding: var(--space-150);
+    margin-right: var(--space-200);
+  }
+
+  .confirm-modal .modal-info .modal-icon svg {
+    font-size: 1.25rem;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--colors-neutral-500);
+  }
+}

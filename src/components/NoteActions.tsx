@@ -5,9 +5,19 @@ type Props = {
   activeView: View;
   handleNoteActions?: (id: string, action: string) => void;
   noteId?: string;
+  handleOpenConfirm?: (
+    id: string,
+    action: "delete" | "archive" | "restore",
+  ) => void;
+  isArchived: boolean | undefined;
 };
 
-const NoteActions = ({ activeView, handleNoteActions, noteId }: Props) => {
+const NoteActions = ({
+  activeView,
+  noteId,
+  handleOpenConfirm,
+  isArchived,
+}: Props) => {
   if (activeView.name === "Create Note") {
     return;
   }
@@ -15,13 +25,13 @@ const NoteActions = ({ activeView, handleNoteActions, noteId }: Props) => {
   return (
     <ul>
       <li className="action-button">
-        {handleNoteActions && (
+        {handleOpenConfirm && (
           <Button
             startIcon={"delete"}
             size={"lg"}
             variant={"outline"}
             onClick={() => {
-              if (noteId) return handleNoteActions(noteId, "delete");
+              if (noteId) return handleOpenConfirm(noteId, "delete");
             }}
           >
             {" "}
@@ -30,19 +40,30 @@ const NoteActions = ({ activeView, handleNoteActions, noteId }: Props) => {
         )}
       </li>
       <li className="action-button">
-        {handleNoteActions && (
-          <Button
-            startIcon={"archive"}
-            size={"lg"}
-            variant={"outline"}
-            onClick={() => {
-              if (noteId) return handleNoteActions(noteId, "archive");
-            }}
-          >
-            {" "}
-            Archive Note
-          </Button>
-        )}
+        {handleOpenConfirm &&
+          (isArchived === false ? (
+            <Button
+              startIcon={"archive"}
+              size={"lg"}
+              variant={"outline"}
+              onClick={() => {
+                if (noteId) return handleOpenConfirm(noteId, "archive");
+              }}
+            >
+              Archive Note
+            </Button>
+          ) : (
+            <Button
+              startIcon={"refresh"}
+              size={"lg"}
+              variant={"outline"}
+              onClick={() => {
+                if (noteId) return handleOpenConfirm(noteId, "restore");
+              }}
+            >
+              Restore Note
+            </Button>
+          ))}
       </li>
     </ul>
   );

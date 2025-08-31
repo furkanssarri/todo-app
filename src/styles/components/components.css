@@ -8,6 +8,8 @@
   aside {
     border-right: 1px solid var(--border-color);
     flex: 0 1 280px;
+    height: 95%;
+    overflow-y: auto;
   }
 
   a {
@@ -17,6 +19,10 @@
 
   a svg {
     margin-right: var(--space-100);
+  }
+
+  svg {
+    vertical-align: middle;
   }
 
   footer {

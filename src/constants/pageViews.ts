@@ -27,8 +27,9 @@ export const btns = [
   { id: 1, view: "back", name: "Go Back", icon: IconArrowLeft },
   { id: 2, view: "delete", name: "Delete", icon: "delete" },
   { id: 3, view: "archive", name: "Archive", icon: "archive" },
-  { id: 4, view: "cancel", name: "Cancel", icon: null },
-  { id: 5, view: "save", name: "Save Note", icon: null },
+  { id: 4, view: "restore", name: "Restore", icon: "refresh" },
+  { id: 5, view: "cancel", name: "Cancel", icon: null },
+  { id: 6, view: "save", name: "Save Note", icon: null },
 ] as const;
 
 export type BtnView = Btn["view"];

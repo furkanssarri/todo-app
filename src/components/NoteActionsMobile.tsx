@@ -8,12 +8,17 @@ type Props = {
   exclude?: BtnView[];
   handleNoteActions?: (id: string, action: string) => void;
   noteId?: string | undefined;
+  handleOpenConfirm?: (
+    id: string,
+    action: "delete" | "archive" | "restore",
+  ) => void;
 };
 
 const NoteActionsMobile = ({
   exclude = [],
-  handleNoteActions,
+  // handleNoteActions,
   noteId,
+  handleOpenConfirm,
 }: Props) => {
   const { isDesktop } = useContext(MobileContext);
   const filteredBtns = btns.filter((btn) => !exclude?.includes(btn.view));
@@ -26,12 +31,19 @@ const NoteActionsMobile = ({
   const onAction = (view: BtnView) => {
     switch (view) {
       case "delete":
-        if (noteId && handleNoteActions)
-          return handleNoteActions(noteId, "delete");
+        if (noteId && handleOpenConfirm)
+          return handleOpenConfirm(noteId, "delete");
+        console.log(noteId);
         break;
       case "archive":
-        if (noteId && handleNoteActions)
-          return handleNoteActions(noteId, "archive");
+        if (noteId && handleOpenConfirm)
+          return handleOpenConfirm(noteId, "archive");
+        console.log("ran");
+        break;
+      case "restore":
+        if (noteId && handleOpenConfirm)
+          return handleOpenConfirm(noteId, "restore");
+        console.log("ran");
         break;
       default:
         console.log("unhandled");
