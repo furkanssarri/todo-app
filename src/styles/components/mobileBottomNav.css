@@ -27,6 +27,7 @@
     border: 0;
     height: auto;
     width: 1px;
+    background-color: var(--border-color);
   }
 
   nav.mobile-nav ul li a {

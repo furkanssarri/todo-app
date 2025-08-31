@@ -35,7 +35,7 @@ const MobileBottomNav = ({ setSelectedTag }: MobileBottomNavProps) => {
                       {isTablet && item.name}
                     </Link>
                   </li>
-                  {isTablet && index < views.length - 2 && (
+                  {isTablet && index < views.length - 3 && (
                     <hr className="mobile-nav-line" />
                   )}
                 </Fragment>
