@@ -3,10 +3,10 @@ import { btns, type Btn, type BtnView } from "../constants/pageViews";
 import { MobileContext } from "../context/MobileContext";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   exclude?: BtnView[];
-  handleNoteActions?: (id: string, action: string) => void;
   noteId?: string | undefined;
   handleOpenConfirm?: (
     id: string,
@@ -16,11 +16,14 @@ type Props = {
 
 const NoteActionsMobile = ({
   exclude = [],
-  // handleNoteActions,
   noteId,
   handleOpenConfirm,
 }: Props) => {
+  const activeView = useActiveView();
   const { isDesktop } = useContext(MobileContext);
+  if (activeView.path === "/create") {
+    exclude.push("delete", "archive");
+  }
   const filteredBtns = btns.filter((btn) => !exclude?.includes(btn.view));
 
   const navigate = useNavigate();
