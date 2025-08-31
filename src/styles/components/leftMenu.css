@@ -216,6 +216,8 @@
     .inner-sidebar {
       border: none;
       padding: var(--space-200) 0;
+      height: auto;
+      overflow: hidden;
     }
     li .active::after {
       content: "";

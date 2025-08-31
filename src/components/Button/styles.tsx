@@ -34,7 +34,7 @@ const colors = {
     red100: "hsl(356, 100%, 92%)", // --colors-red-100
   },
   backgrounds: {
-    default: ["hsl(216, 33%, 97%)", "hsl(216, 33%, 97%)"], // --colors-neutral-50 / --colors-neutral-50
+    default: ["hsl(216, 33%, 97%)", "hsla(0, 0%, 86%, 1.00)"], // --colors-neutral-50 / --colors-neutral-50
     primary: ["hsl(228, 100%, 60%)", "hsl(228, 70%, 48%)"], // --colors-blue-500 / --colors-blue-700
     secondary: ["hsl(216, 26%, 96%)", "#ffffff"], // --colors-neutral-100 / white
     danger: ["#D32F2F", "#9A0007"],

@@ -10,11 +10,10 @@
   }
 
   .confirm-modal {
-    background-color: var(--colors-neutral-700);
-    border: 1px solid var(--colors-neutral-500);
-
+    background-color: var(--modal-bg);
+    border: 1px solid var(--modal-border);
     border-radius: 8px;
-    max-width: 455px;
+    width: 455px;
   }
 
   .modal-info {
@@ -28,7 +27,7 @@
   }
 
   .confirm-modal .modal-info .modal-icon {
-    background-color: var(--colors-neutral-600);
+    background-color: var(--modal-icon-bg);
     border-radius: var(--radius-12);
     padding: var(--space-150);
     margin-right: var(--space-200);
@@ -44,5 +43,11 @@
     gap: 1rem;
     margin-top: 1.5rem;
     border-top: 1px solid var(--colors-neutral-500);
+  }
+
+  @media (max-width: 425px) {
+    .confirm-modal {
+      width: 90%;
+    }
   }
 }

@@ -120,6 +120,9 @@
     --border-color: var(--colors-neutral-200);
     --hover-bg: var(--colors-neutral-100);
     --svg-color: var(--colors-neutral-700);
+    --modal-bg: var(--colors-neutral-0);
+    --modal-border: var(--colors-neutral-500);
+    --modal-icon-bg: var(--colors-neutral-100);
   }
 
   :root[data-theme="dark"] {
@@ -128,6 +131,9 @@
     --border-color: var(--colors-neutral-700);
     --hover-bg: var(--colors-neutral-800);
     --svg-color: var(--colors-neutral-200);
+    --modal-bg: var(--colors-neutral-800);
+    --modal-border: var(--colors-neutral-200);
+    --modal-icon-bg: var(--colors-neutral-600);
   }
 
   :root[data-font="sans-serif"] {

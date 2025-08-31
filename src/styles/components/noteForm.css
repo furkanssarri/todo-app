@@ -8,12 +8,6 @@
     margin: var(--space-200) 0;
   }
 
-  @media (max-width: 768px) {
-    .properties {
-      max-width: 70%;
-    }
-  }
-
   .properties {
     display: flex;
     justify-content: space-between;
@@ -85,6 +79,9 @@
   @media (max-width: 768px) {
     #add-new-form {
       padding: 0;
+    }
+    .properties {
+      max-width: 70%;
     }
   }
 }

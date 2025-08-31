@@ -61,6 +61,11 @@
     background-color: inherit !important;
   }
 
+  .mobile-actions ul li button:hover {
+    background-color: var(--hover-bg) !important;
+    color: var(--primary-foreground) !important;
+  }
+
   .mobile-actions ul li button svg {
     font-size: large;
   }
