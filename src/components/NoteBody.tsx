@@ -11,10 +11,9 @@ import type { UseDataResult } from "../utils/useData";
 
 type Props = {
   dataObj: UseDataResult;
-  handleNoteActions: (id: string, action: string) => void;
 };
 
-const NoteBody = ({ dataObj, handleNoteActions }: Props) => {
+const NoteBody = ({ dataObj }: Props) => {
   const { data, error, isLoading } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
@@ -43,9 +42,7 @@ const NoteBody = ({ dataObj, handleNoteActions }: Props) => {
   return (
     <>
       <article className="note-details">
-        {(isTablet || isMobile) && (
-          <ActionsMenu handleNoteActions={handleNoteActions} noteId={id!} />
-        )}
+        {(isTablet || isMobile) && <ActionsMenu noteId={id!} />}
 
         <div className="note-content">
           <h2>{note.title}</h2>
@@ -70,9 +67,7 @@ const NoteBody = ({ dataObj, handleNoteActions }: Props) => {
           </div>
         </div>
       </article>
-      {isDesktop && (
-        <ActionsMenu handleNoteActions={handleNoteActions} noteId={id} />
-      )}
+      {isDesktop && <ActionsMenu noteId={id} />}
     </>
   );
 };

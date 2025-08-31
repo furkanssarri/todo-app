@@ -6,9 +6,8 @@ import NoteActionsMobile from "./NoteActionsMobile";
 import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
-  handleNoteActions?: (id: string, action: string) => void;
   noteId?: string;
-  handleOpenConfirm: (
+  handleOpenConfirm?: (
     id: string,
     action: "delete" | "archive" | "restore",
   ) => void;
