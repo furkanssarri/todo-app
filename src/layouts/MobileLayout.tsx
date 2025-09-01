@@ -8,6 +8,7 @@ import type { UseDataResult } from "../utils/useData";
 import { mobileRoutes } from "../routes/routeConfig";
 import Toast from "../components/Toast";
 import { AnimatePresence, motion } from "motion/react";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
@@ -29,6 +30,8 @@ const MobileLayout = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { isDesktop } = useContext(MobileContext);
+
+  const activeView = useActiveView();
 
   return (
     <>
@@ -76,16 +79,19 @@ const MobileLayout = ({
               }
             /> */}
         </div>
-        {!isDesktop && (
-          <span className="mobile-add-note-button">
-            <Button
-              startIcon="plus"
-              color="primary"
-              size="lg"
-              onClick={() => navigate("/create")}
-            />
-          </span>
-        )}
+
+        {!isDesktop &&
+          activeView.path !== "/create" &&
+          activeView.path !== "/note" && (
+            <span className="mobile-add-note-button">
+              <Button
+                startIcon="plus"
+                color="primary"
+                size="lg"
+                onClick={() => navigate("/create")}
+              />
+            </span>
+          )}
         <Toast />
       </main>
 
