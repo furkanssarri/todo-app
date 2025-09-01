@@ -92,24 +92,50 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newNote = {
-      id: Date.now().toString(),
-      title: formData.title,
-      tags: formData.tags,
-      content: formData.content,
-      lastEdited: formatISO(Date.now()),
-      isArchived: false,
-    };
-    setData((prev) => [...prev, newNote]);
-    setFormData({
-      title: "",
-      tags: [],
-      content: "",
-      lastEdited: "",
-      isArchived: false,
-    });
-    inputRef.current?.focus();
-    showToast("Note saved successfully!", "", "success");
+
+    if (note) {
+      // Editing an existing note
+      setData((prev) =>
+        prev.map((n) =>
+          n.id === note.id
+            ? {
+                ...n,
+                title: formData.title,
+                tags: formData.tags,
+                content: formData.content,
+                lastEdited: formatISO(Date.now()),
+                isArchived: formData.isArchived,
+              }
+            : n,
+        ),
+      );
+      showToast("Note updated successfully!", "", "success");
+    } else {
+      // Creating a new note
+      const newNote = {
+        id: Date.now().toString(),
+        title: formData.title,
+        tags: formData.tags,
+        content: formData.content,
+        lastEdited: formatISO(Date.now()),
+        isArchived: false,
+      };
+      setData((prev) => [...prev, newNote]);
+      showToast("Note saved successfully!", "", "success");
+    }
+
+    // reset only if creating
+    if (!note) {
+      setFormData({
+        title: "",
+        tags: [],
+        content: "",
+        lastEdited: "",
+        isArchived: false,
+      });
+      inputRef.current?.focus();
+    }
+    navigate("/");
   };
 
   const handleOpenConfirm = (
