@@ -16,7 +16,7 @@
     align-items: center;
     gap: 0.75rem;
     width: 390px;
-    height: 32px;
+    height: auto;
     border: 1px solid var(--border-color);
     background-color: var(--primary-bg);
     padding: var(--space-100);
@@ -41,6 +41,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .toast-info p {
+    width: auto;
   }
 
   .toast-info a {
@@ -83,10 +87,14 @@
   }
 
   @media (max-width: 425px) {
+    .toast-container {
+      right: 0.2rem;
+    }
     .toast {
-      width: 90%;
+      width: 295px;
       right: 0.3125rem;
       bottom: 4.1875rem;
+      font-size: 0.75rem;
     }
   }
 }
