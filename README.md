@@ -35,7 +35,7 @@ This is both a modernisation of my old TODO App project (also available in the "
 ### Links
 
 - The [Live Preview](https://furkanssarri-notes-app.netlify.app/) hosted on Netlify.
-- The [Solution](https://www.frontendmentor.io/solutions/path-to-the-solution) on Frontend Mentor. (Soon™)
+- The [Solution](https://www.frontendmentor.io/solutions/responsive-note-app-built-with-reactjs-_CJ2r6dV1E) on Frontend Mentor. (Soon™)
 
 ## Technologies Used
 
