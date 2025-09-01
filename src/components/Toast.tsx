@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 import { IconCheckmark, IconCross } from "./icons";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ToastContext } from "../context/toastContext";
 
 const Toast = () => {
   const { isVisible, message, link, toastType, hideToast } =
     useContext(ToastContext);
-  const toastCtx = useContext(ToastContext);
-  useEffect(() => {
-    console.log(toastCtx);
-  }, [toastCtx]);
+
   if (!isVisible) return null;
 
   return (

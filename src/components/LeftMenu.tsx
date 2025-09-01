@@ -16,7 +16,7 @@ const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
   return (
     <section className="left-menu">
       <Logo />
-      <main className="left-menu-content text-preset-sans-4">
+      <div className="left-menu-content text-preset-sans-4">
         <nav className="main-filter">
           <ul>
             <li>
@@ -29,7 +29,8 @@ const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
                 to="/"
                 onClick={() => setSelectedTag(null)}
               >
-                <IconHome /> All Notes
+                <IconHome />
+                All Notes
               </NavLink>
             </li>
             <li>
@@ -40,7 +41,8 @@ const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
                 onClick={() => setSelectedTag(null)}
               >
                 {" "}
-                <IconArchive /> Archived Notes
+                <IconArchive />
+                Archived Notes
               </NavLink>
             </li>
           </ul>
@@ -50,7 +52,7 @@ const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
           selectedTag={selectedTag}
           setSelectedTag={setSelectedTag}
         />
-      </main>
+      </div>
     </section>
   );
 };

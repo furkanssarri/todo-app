@@ -48,8 +48,11 @@ const NoteActionsMobile = ({
           return handleOpenConfirm(noteId, "restore");
         console.log("ran");
         break;
+      case "cancel":
+        navigate("/");
+        break;
       default:
-        console.log("unhandled");
+        return;
         break;
     }
   };

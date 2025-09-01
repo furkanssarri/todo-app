@@ -7,7 +7,7 @@ import ConfirmModal from "./ConfirmModal";
 import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
 import { format, formatISO } from "date-fns";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { ToastContext } from "../context/toastContext";
 
 type Props = {
@@ -29,7 +29,11 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
   const { data, setData } = dataObj;
   const { id } = useParams();
   const note = data?.find((n) => n.id.toString() === id);
+  const navigate = useNavigate();
 
+  const [tagsText, setTagsText] = useState<string>(() =>
+    note ? note.tags.join(", ") : "",
+  );
   const [formData, setFormData] = useState<FormData>(() => {
     return note
       ? {
@@ -83,6 +87,7 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
             isArchived: false,
           };
     });
+    setTagsText(note ? note.tags.join(", ") : "");
   }, [note]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -104,6 +109,7 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
       isArchived: false,
     });
     inputRef.current?.focus();
+    showToast("Note saved successfully!", "", "success");
   };
 
   const handleOpenConfirm = (
@@ -167,19 +173,28 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
                 name="tags"
                 id="tags"
                 placeholder="Add tags by commas (e.g. Work, Planning)"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    const input = e.currentTarget.value
+                value={tagsText}
+                onChange={(e) => {
+                  const text = e.target.value;
+                  setTagsText(text);
+                  const parsed = text
+                    .split(",")
+                    .map((tag) => tag.trim())
+                    .filter((tag) => tag.length > 0);
+                  setFormData((prev) => ({
+                    ...prev,
+                    tags: parsed,
+                  }));
+                }}
+                onBlur={() => {
+                  setTagsText((prev) => {
+                    const normalized = prev
                       .split(",")
-                      .map((tag: string) => tag.trim())
-                      .filter((tag: string) => tag.length > 0);
-                    setFormData((prev) => ({
-                      ...prev,
-                      tags: [...prev.tags, ...input],
-                    }));
-                    e.currentTarget.value = "";
-                  }
+                      .map((t) => t.trim())
+                      .filter(Boolean)
+                      .join(", ");
+                    return normalized;
+                  });
                 }}
               />
               {note ? (
@@ -214,16 +229,10 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
         </form>
         {isDesktop && (
           <div className="submit-buttons">
-            <Button
-              color="primary"
-              size="lg"
-              type="submit"
-              form="add-new-form"
-              onClick={() => showToast("Note saved successfully!", "success")}
-            >
+            <Button color="primary" size="lg" type="submit" form="add-new-form">
               Save Note
             </Button>
-            <Button color="default" size="lg">
+            <Button color="default" size="lg" onClick={() => navigate("/")}>
               Cancel
             </Button>
           </div>
