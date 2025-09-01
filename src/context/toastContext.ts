@@ -1,27 +1,27 @@
 import { createContext } from "react";
 
-export type ToastType = "success" | "error" | "info" | "warning" | undefined;
+export type ToastType = "success" | "error" | "info" | "warning";
 
-interface ToastContextType {
-  isVisible: boolean;
+export interface ToastItem {
+  id: string;
   message: string;
   link?: string;
-  toastType?: string;
+  toastType?: ToastType;
+}
+
+interface ToastContextType {
+  toasts: ToastItem[];
   showToast: (
     message: string,
     link?: string,
     toastType?: ToastType,
     duration?: number,
   ) => void;
-  hideToast: () => void;
+  hideToast: (id: string) => void;
 }
 
-// Default values
 export const ToastContext = createContext<ToastContextType>({
-  isVisible: false,
-  message: "",
-  link: "",
-  toastType: undefined,
+  toasts: [],
   showToast: () => {},
   hideToast: () => {},
 });

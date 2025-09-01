@@ -1,17 +1,8 @@
-import { useState, useRef, type ReactNode } from "react";
-import { ToastContext, type ToastType } from "./toastContext";
+import { useState, type ReactNode } from "react";
+import { ToastContext, type ToastType, type ToastItem } from "./toastContext";
 
-interface ToastProviderProps {
-  children: ReactNode;
-}
-
-export const ToastProvider = ({ children }: ToastProviderProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [message, setMessage] = useState("");
-  const [link, setLink] = useState("");
-  const [toastType, setToastType] = useState<ToastType>(undefined);
-
-  const timeoutRef = useRef<number | null>(null);
+export const ToastProvider = ({ children }: { children: ReactNode }) => {
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const showToast = (
     message: string,
@@ -19,28 +10,22 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
     toastType?: ToastType,
     duration: number = 3000,
   ) => {
-    setMessage(message);
-    setLink(link ?? "");
-    setToastType(toastType);
-    setIsVisible(true);
-    console.log("başarılı işlem");
+    const id = Date.now().toString();
 
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    const newToast: ToastItem = { id, message, link, toastType };
+    setToasts((prev) => [...prev, newToast]);
 
-    timeoutRef.current = setTimeout(() => {
-      setIsVisible(false);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
     }, duration);
   };
 
-  const hideToast = () => {
-    setIsVisible(false);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  const hideToast = (id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
   return (
-    <ToastContext.Provider
-      value={{ isVisible, message, link, toastType, showToast, hideToast }}
-    >
+    <ToastContext.Provider value={{ toasts, showToast, hideToast }}>
       {children}
     </ToastContext.Provider>
   );

@@ -1,4 +1,14 @@
 @layer components {
+  .toast-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+    position: fixed;
+    bottom: 4.1875rem;
+    right: 1.5rem;
+    z-index: 1000;
+  }
+
   .toast {
     display: flex;
     flex-direction: row;
@@ -12,11 +22,13 @@
     padding: var(--space-100);
     border-radius: 0.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    position: fixed;
+    /* position: fixed; */
     bottom: 4.1875rem;
     right: 1.5rem;
     z-index: 1000;
-    animation: slideIn 0.3s ease-out;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out forwards;
   }
   .toast-icon {
     display: flex;
@@ -34,6 +46,18 @@
   .toast-info a {
     text-decoration: underline;
   }
+
+  .toast button {
+    display: inline;
+    width: 25px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .toast button:hover {
+    border-color: var(--border-color);
+  }
+
   @keyframes slideIn {
     from {
       transform: translateY(20px);
@@ -43,6 +67,19 @@
         opacity: 1;
       }
     }
+  }
+  @keyframes slideOut {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+  }
+  .toast-exit {
+    animation: slideOut 0.3s ease-in forwards;
   }
 
   @media (max-width: 425px) {

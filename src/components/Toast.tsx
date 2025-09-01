@@ -4,26 +4,26 @@ import { useContext } from "react";
 import { ToastContext } from "../context/toastContext";
 
 const Toast = () => {
-  const { isVisible, message, link, toastType, hideToast } =
-    useContext(ToastContext);
+  const { toasts, hideToast } = useContext(ToastContext);
 
-  if (!isVisible) return null;
+  if (toasts.length === 0) return null;
 
   return (
-    <div className="toast">
-      <span className="toast-icon">
-        {toastType === "success" && <IconCheckmark />}
-      </span>
-      <div className="toast-info">
-        <p>{message}</p>
-        {link && <Link to={`/${link}`}>{link}</Link>}
-      </div>
-      {/* <Button startIcon="plus" variant="text" onClick={hideToast}>
-        X
-      </Button> */}
-      <a href="#" onClick={hideToast}>
-        <IconCross />
-      </a>
+    <div className="toast-container">
+      {toasts.map(({ id, message, link, toastType }) => (
+        <div className="toast" key={id}>
+          <span className="toast-icon">
+            {toastType === "success" && <IconCheckmark />}
+          </span>
+          <div className="toast-info">
+            <p>{message}</p>
+            {link && <Link to={`/${link}`}>{link}</Link>}
+          </div>
+          <button type="button" onClick={() => hideToast(id)}>
+            <IconCross />
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
