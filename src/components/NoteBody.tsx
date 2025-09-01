@@ -20,11 +20,7 @@ const NoteBody = ({ dataObj }: Props) => {
   const { isTablet, isMobile, isDesktop } = useContext(MobileContext);
 
   if (!id) {
-    return (
-      <article className="note-details">
-        <p>Select a note to view</p>
-      </article>
-    );
+    return <article className="note-details"></article>;
   }
 
   if (!note) {

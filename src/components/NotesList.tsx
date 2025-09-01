@@ -1,14 +1,14 @@
 import Button from "./Button/index.js";
-import { format } from "date-fns";
-
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { UseDataResult } from "../utils/useData.js";
 import MainTitle from "./MainTitle.js";
 import SearchBar from "./SearchBar.js";
 import { useActiveView } from "../utils/useActiveView.js";
 import SettingsList from "./SettingsList.js";
+import EmptyStateIndicator from "./EmptyStateIndicator.js";
+import NoteListItem from "./NoteListItem.js";
 
 type PropTypes = {
   dataObj: UseDataResult;
@@ -23,7 +23,6 @@ const NotesList = ({
   searchQuery,
   setSearchQuery,
 }: PropTypes) => {
-  const location = useLocation();
   const { error, isLoading } = dataObj;
   let data = dataObj.data;
   const navigate = useNavigate();
@@ -32,6 +31,10 @@ const NotesList = ({
 
   if (activeView.path === "/archive") {
     const archivedData = data.filter((note) => note.isArchived);
+    if (!Array.isArray(archivedData) && archivedData < 1)
+      return (
+        <EmptyStateIndicator message="No notes have been archived yet. Move notes here for safekeeping, or create a new note." />
+      );
     data = archivedData;
   }
 
@@ -100,38 +103,21 @@ const NotesList = ({
       {activeView.path === "/settings" ? (
         <SettingsList />
       ) : (
-        <ul>
-          {data &&
-            data.map((item, index) => {
-              const isActive = location.pathname === `/note/${item.id}`;
-              return (
-                <Fragment key={item.id}>
-                  <li
-                    className={`note-item text-preset-sans-3 ${
-                      isActive ? "active" : ""
-                    }`}
-                  >
-                    <Link to={`/note/${item.id}`}>
-                      {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
-                      <div className="item-details text-preset-sans-6">
-                        <div className="item-tags">
-                          {item.tags.map((tag) => (
-                            <span key={tag} className="item-tag">
-                              {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                            </span>
-                          ))}
-                        </div>
-                        <span className="item-date">
-                          {format(item.lastEdited, "dd MMM yyyy")}
-                        </span>
-                      </div>
-                    </Link>
-                  </li>
-                  {index !== data.length - 1 && <hr />}
-                </Fragment>
-              );
-            })}
-        </ul>
+        <>
+          {Array.isArray(data) && data.length > 0 ? (
+            <NoteListItem data={data} />
+          ) : (
+            <EmptyStateIndicator
+              message={
+                activeView.path === "/archive"
+                  ? "No notes have been archived yet. Move notes here for safekeeping, or create a new note."
+                  : activeView.path === "/search" || searchQuery
+                  ? `No notes match yout search. Try a different keyword or create a new note.`
+                  : "You don't have any notes yet. Start a new note to capture your thoughts and ideas."
+              }
+            />
+          )}
+        </>
       )}
     </section>
   );
