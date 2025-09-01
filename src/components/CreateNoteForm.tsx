@@ -6,7 +6,7 @@ import ActionsMenu from "./ActionsMenu";
 import ConfirmModal from "./ConfirmModal";
 import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
-import { formatISO } from "date-fns";
+import { format, formatISO } from "date-fns";
 import { useParams } from "react-router";
 import { ToastContext } from "../context/toastContext";
 
@@ -138,6 +138,7 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
               name="title"
               id="title"
               placeholder="Enter a title..."
+              required
               ref={inputRef}
               value={formData.title}
               onChange={(e) =>
@@ -159,6 +160,7 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
                 <label htmlFor="lastEdited">Last Edited</label>
               </span>
             </div>
+            {/* TODO: refactor this into tags being separated by a comma and shown properly */}
             <div className="properties-inputs">
               <input
                 type="text"
@@ -180,12 +182,19 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
                   }
                 }}
               />
-              <input
-                type="text"
-                name="lastEdited"
-                id="lastEdited"
-                placeholder="Not yet saved"
-              />
+              {note ? (
+                <p className="last-edited-span">
+                  {format(note.lastEdited, "dd MMM yyyy")}
+                </p>
+              ) : (
+                <input
+                  type="text"
+                  name="lastEdited"
+                  id="lastEdited"
+                  placeholder="Not yet saved"
+                  disabled
+                />
+              )}
             </div>
           </div>
           <div className="textarea">

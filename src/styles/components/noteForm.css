@@ -25,7 +25,8 @@
     flex: 1;
   }
 
-  .properties-inputs input {
+  .properties-inputs input,
+  p {
     align-self: flex-end;
     width: 90%;
   }
