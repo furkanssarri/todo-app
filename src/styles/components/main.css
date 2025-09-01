@@ -97,6 +97,8 @@
   @media (max-width: 425px) {
     .main-wrapper {
       padding: var(--space-200);
+      position: relative;
+      min-height: 100%;
     }
 
     .note-details {

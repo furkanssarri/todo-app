@@ -53,6 +53,9 @@
       flex-direction: column;
       position: fixed;
       bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
     }
 
     .mobile-nav ul {
@@ -60,6 +63,9 @@
     }
   }
 
+  nav.mobile-nav {
+    overflow-anchor: none;
+  }
   @media (max-width: 425px) {
     nav.mobile-nav ul li a {
       width: auto;
