@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import Logo from "../components/Logo";
 import { MobileContext } from "../context/MobileContext";
@@ -7,6 +7,7 @@ import MobileBottomNav from "../components/MobileBottomNav";
 import type { UseDataResult } from "../utils/useData";
 import { mobileRoutes } from "../routes/routeConfig";
 import Toast from "../components/Toast";
+import { AnimatePresence, motion } from "motion/react";
 
 type Props = {
   dataObj: UseDataResult;
@@ -26,6 +27,7 @@ const MobileLayout = ({
   setSearchQuery,
 }: Props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isDesktop } = useContext(MobileContext);
 
   return (
@@ -35,24 +37,34 @@ const MobileLayout = ({
       </header>
       <main>
         <div className="main-wrapper">
-          <Routes>
-            {mobileRoutes.map(({ path, element: Component }) => (
-              <Route
-                key={path}
-                path={path}
-                element={
-                  <Component
-                    dataObj={dataObj}
-                    handleNoteActions={handleNoteActions}
-                    selectedTag={selectedTag}
-                    setSelectedTag={setSelectedTag}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                  />
-                }
-              />
-            ))}
-          </Routes>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              {mobileRoutes.map(({ path, element: Component }) => (
+                <Route
+                  key={path}
+                  path={path}
+                  element={
+                    <motion.div
+                      key={path}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Component
+                        dataObj={dataObj}
+                        handleNoteActions={handleNoteActions}
+                        selectedTag={selectedTag}
+                        setSelectedTag={setSelectedTag}
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
+                      />
+                    </motion.div>
+                  }
+                />
+              ))}
+            </Routes>
+          </AnimatePresence>
           {/* <Route
               path="/note/:id"
               element={
