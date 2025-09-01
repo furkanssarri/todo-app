@@ -41,9 +41,9 @@ function App() {
     if (!note) return;
 
     if (note.isArchived) {
-      showToast("Note restored to active notes.", "notes", "success");
+      showToast("Note restored to active notes.", "/", "success");
     } else {
-      showToast("Note archived.", "", "success");
+      showToast("Note archived.", "/archive", "success");
     }
     dataObj.setData((prev) =>
       prev.map((n) => {

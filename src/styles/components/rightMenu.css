@@ -50,6 +50,7 @@
 
   .mobile-actions ul li button {
     color: var(--primary-foreground) !important;
+    padding: var(--space-050);
   }
 
   .mobile-actions ul li:last-child button {
@@ -73,6 +74,9 @@
   @media (max-width: 425px) {
     .mobile-actions {
       padding: var(--space-150) 0;
+    }
+    .mobile-actions ul li {
+      margin: 0;
     }
   }
 }

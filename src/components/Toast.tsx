@@ -17,7 +17,12 @@ const Toast = () => {
           </span>
           <div className="toast-info">
             <p>{message}</p>
-            {link && <Link to={`/${link}`}>{link}</Link>}
+
+            {link && (
+              <Link to={`${link}`}>
+                {link === "/" ? "All Notes" : "Archived Notes"}
+              </Link>
+            )}
           </div>
           <button type="button" onClick={() => hideToast(id)}>
             <IconCross />

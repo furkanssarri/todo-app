@@ -14,8 +14,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 0.75rem;
-    width: 390px;
+    gap: 5px;
+
     height: auto;
     border: 1px solid var(--border-color);
     background-color: var(--primary-bg);

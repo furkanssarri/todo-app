@@ -36,17 +36,14 @@ const NoteActionsMobile = ({
       case "delete":
         if (noteId && handleOpenConfirm)
           return handleOpenConfirm(noteId, "delete");
-        console.log(noteId);
         break;
       case "archive":
         if (noteId && handleOpenConfirm)
           return handleOpenConfirm(noteId, "archive");
-        console.log("ran");
         break;
       case "restore":
         if (noteId && handleOpenConfirm)
           return handleOpenConfirm(noteId, "restore");
-        console.log("ran");
         break;
       case "cancel":
         navigate("/");
