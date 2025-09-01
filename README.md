@@ -68,16 +68,21 @@ This is both a modernisation of my old TODO App project (also available in the "
 In addition to Node.js (v14 or higher), the following packages are required:
 
 ```json
-// package.json
-  "dependencies": {
-    "date-fns": "^4.1.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-icons": "^5.5.0",
-    "react-markdown": "^10.1.0",
-    "react-responsive": "^10.0.1",
-    "styled-components": "^6.1.19"
-  },
+"dependencies": {
+  "@types/react": "19.1.10",
+  "@types/react-dom": "19.1.7",
+  "date-fns": "4.1.0",
+  "motion": "12.23.12",
+  "react": "19.1.1",
+  "react-dom": "19.1.1",
+  "react-icons": "5.5.0",
+  "react-markdown": "10.1.0",
+  "react-responsive": "10.0.1",
+  "react-router-dom": "7.8.1",
+  "styled-components": "6.1.19",
+  "typescript": "5.8.3",
+  "vite": "7.1.2"
+}
 ```
 
 ### Installation
