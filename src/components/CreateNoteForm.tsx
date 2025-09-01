@@ -8,6 +8,7 @@ import Button from "./Button";
 import type { UseDataResult } from "../utils/useData";
 import { formatISO } from "date-fns";
 import { useParams } from "react-router";
+import { ToastContext } from "../context/toastContext";
 
 type Props = {
   dataObj: UseDataResult;
@@ -54,6 +55,8 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
     open: false,
     action: null,
   });
+
+  const { showToast } = useContext(ToastContext);
 
   // Form Title element auto focus
   useEffect(() => {
@@ -202,7 +205,13 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
         </form>
         {isDesktop && (
           <div className="submit-buttons">
-            <Button color="primary" size="lg" type="submit" form="add-new-form">
+            <Button
+              color="primary"
+              size="lg"
+              type="submit"
+              form="add-new-form"
+              onClick={() => showToast("Note saved successfully!", "success")}
+            >
               Save Note
             </Button>
             <Button color="default" size="lg">

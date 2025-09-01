@@ -9,6 +9,7 @@ import {
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { MobileContext } from "../context/MobileContext";
+import { ToastContext } from "../context/toastContext";
 
 const fontThemes = [
   {
@@ -49,6 +50,8 @@ const FontTheme = () => {
   }
 
   const { setFontTheme } = fontThemeCtx;
+
+  const { showToast } = useContext(ToastContext);
 
   return (
     <>
@@ -108,6 +111,7 @@ const FontTheme = () => {
             onClick={() => {
               setFontTheme(selectedFontTheme);
               localStorage.setItem("font-theme", selectedFontTheme);
+              showToast("Settings Updated successfully!", "", "success");
             }}
           >
             Apply Changes

@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import MobileBottomNav from "../components/MobileBottomNav";
 import type { UseDataResult } from "../utils/useData";
 import { mobileRoutes } from "../routes/routeConfig";
+import Toast from "../components/Toast";
 
 type Props = {
   dataObj: UseDataResult;
@@ -73,6 +74,7 @@ const MobileLayout = ({
             />
           </span>
         )}
+        <Toast />
       </main>
 
       <footer>

@@ -5,13 +5,16 @@ import App from "./App.tsx";
 import MobileContextProvider from "./context/MobileContextProvider.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { UIProvider } from "./context/UIProvider.tsx";
+import { ToastProvider } from "./context/ToastProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <MobileContextProvider>
         <UIProvider>
-          <App />
+          <ToastProvider>
+            <App />
+          </ToastProvider>
         </UIProvider>
       </MobileContextProvider>
     </BrowserRouter>

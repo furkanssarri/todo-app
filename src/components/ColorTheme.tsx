@@ -4,6 +4,7 @@ import { IconArrowLeft, IconMoon, IconSun, IconSystemTheme } from "./icons";
 import { ThemeContext, type Theme } from "../context/themeContext";
 import { MobileContext } from "../context/MobileContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContext } from "../context/toastContext";
 
 const colorThemes = [
   {
@@ -42,6 +43,8 @@ const ColorTheme = () => {
     throw new Error("ColorTheme must be used within a ThemeProvider.");
   }
   const { setTheme } = themeCtx;
+
+  const { showToast } = useContext(ToastContext);
 
   return (
     <>
@@ -101,6 +104,7 @@ const ColorTheme = () => {
             onClick={() => {
               setTheme(selectedTheme);
               localStorage.setItem("theme", selectedTheme);
+              showToast("Settings updated successfully!", "", "success");
             }}
           >
             Apply Changes

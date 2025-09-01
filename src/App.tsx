@@ -5,9 +5,11 @@ import DesktopLayout from "./layouts/DesktopLayout";
 import MobileLayout from "./layouts/MobileLayout";
 import useData from "./utils/useData";
 import { useLocation } from "react-router-dom";
+import { ToastContext } from "./context/toastContext";
 
 function App() {
   const context = useContext(MobileContext);
+  const { showToast } = useContext(ToastContext);
   const { isDesktop } = context;
   const location = useLocation();
   const dataObj = useData("local");
@@ -31,9 +33,18 @@ function App() {
 
   const handleDeleteNote = (id: string) => {
     dataObj.setData((prev) => prev.filter((n) => n.id !== id));
+    showToast("Note permanently deleted.", "", "success");
   };
 
   const handleArchiveNote = (id: string) => {
+    const note = dataObj.data.find((n) => n.id === id);
+    if (!note) return;
+
+    if (note.isArchived) {
+      showToast("Note restored to active notes.", "notes", "success");
+    } else {
+      showToast("Note archived.", "", "success");
+    }
     dataObj.setData((prev) =>
       prev.map((n) => {
         if (n.id === id) {

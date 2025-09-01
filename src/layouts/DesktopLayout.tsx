@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import type { UseDataResult } from "../utils/useData";
 import { useActiveView } from "../utils/useActiveView";
 import { desktopRoutes } from "../routes/routeConfig";
+import Toast from "../components/Toast";
 
 type Props = {
   dataObj: UseDataResult;
@@ -69,6 +70,7 @@ const DeskttopLayout = ({
           </div>
         </main>
       </div>
+      <Toast />
       <footer>
         <Footer />
       </footer>
