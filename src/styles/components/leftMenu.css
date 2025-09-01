@@ -21,24 +21,21 @@
     border-bottom: 1px solid var(--border-color);
   }
   ul li {
+    border: 1px solid transparent;
     margin: var(--space-050) 0;
   }
 
   .left-menu ul li a {
+    border: 1px solid transparent;
     border-radius: var(--radius-8);
   }
 
   .left-menu ul li:hover a::after {
     content: ">";
     float: right;
-    margin-top: var(--space-050);
+    border-color: transparent;
+    vertical-align: middle;
   }
-
-  /* .left-menu ul li:active a::after {
-    content: ">";
-    float: right;
-    margin-top: var(--space-050);
-  } */
 
   .left-menu ul li svg {
     font-size: 1.2rem;
@@ -78,7 +75,7 @@
   .mobile-add-note-button button {
     width: 100%;
     padding: var(--space-150);
-    border: none;
+    border: 1px solid transparent;
     border-radius: var(--radius-8) !important;
     background-color: var(--colors-blue-500);
     color: white;
@@ -136,7 +133,7 @@
   }
 
   .inner-sidebar .settings-menu li {
-    border: none;
+    border: 1px solid transparent;
     padding: 0;
     margin: var(--space-100) 0;
     border-radius: var(--radius-8);

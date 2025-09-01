@@ -65,8 +65,7 @@
   .setting-selector .setting-item-inner {
     flex: 1;
     display: flex;
-    /* flex-direction: column;w */
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
   }
 
@@ -74,6 +73,10 @@
     flex: 1;
     display: flex;
     flex-direction: row;
+  }
+
+  .setting-selector .setting-item-inner .item-middle span {
+    flex: 1;
   }
 
   .setting-selector .setting-item p {
@@ -87,6 +90,9 @@
     border-radius: var(--radius-12);
     padding: var(--space-100);
     margin-right: var(--space-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .setting-selector .setting-item .setting-icon svg {

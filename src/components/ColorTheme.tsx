@@ -72,14 +72,14 @@ const ColorTheme = () => {
               key={theme.id}
             >
               <div className="text-preset-4 setting-item-inner">
+                <span className="setting-icon">
+                  <Icon />
+                </span>
                 <div className="item-middle">
-                  <span className="setting-icon">
-                    <Icon />
-                  </span>
-                  <div>
+                  <span>
                     {theme.title}
                     <p className="text-preset-6">{theme.description}</p>
-                  </div>
+                  </span>
                 </div>
                 <input
                   type="radio"
