@@ -93,6 +93,12 @@
     vertical-align: middle;
   }
 
+  .inner-sidebar .empty-state {
+    background-color: var(--border-color);
+    border-radius: var(--radius-8);
+    padding: var(--space-100);
+  }
+
   .inner-sidebar ul {
     margin-left: var(--space-100);
   }

@@ -20,6 +20,10 @@ const ChangePassword = () => {
         </div>
       )}
       <h2 className="setting-heading">Change Password</h2>
+      <p>
+        This page is a placeholder for the future. Currently, there's no
+        atuhentication and a backend implemented yet.
+      </p>
       <form className="setting-selector">
         <div className="pw-form-row">
           <label htmlFor="old-password" className="text-preset-4">

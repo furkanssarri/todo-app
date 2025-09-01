@@ -21,6 +21,7 @@
 
   .mobile-nav ul li a svg {
     font-size: 1.5rem;
+    margin: 0;
   }
 
   .mobile-nav-line {
