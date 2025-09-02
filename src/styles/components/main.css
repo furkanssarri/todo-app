@@ -60,6 +60,18 @@
   .note-body p {
     margin: var(--space-200) auto;
   }
+
+  .return-link {
+    color: var(--primary-foreground);
+    text-decoration: underline 5px solid var(--colors-blue-500);
+    text-underline-offset: 5px;
+  }
+
+  .return-link:hover {
+    color: var(--colors-blue-500);
+    text-decoration-color: var(--primary-foreground);
+  }
+
   @media (max-width: 768px) {
     .mobile-add-note-button {
       position: relative;
