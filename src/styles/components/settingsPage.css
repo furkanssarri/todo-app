@@ -135,7 +135,7 @@
     }
   }
 
-  @media (min-width: 1441px) {
+  @media (min-width: 1500px) {
     .setting-selector {
       max-width: 50%;
     }

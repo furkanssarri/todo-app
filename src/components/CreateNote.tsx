@@ -83,7 +83,7 @@ const CreateNote = ({ note, setData }: Props) => {
     } else {
       // Creating a new note
       const newNote = {
-        id: Date.now().toString(),
+        id: crypto.randomUUID(),
         title: formData.title,
         tags: formData.tags,
         content: formData.content,
@@ -148,7 +148,6 @@ const CreateNote = ({ note, setData }: Props) => {
               <label htmlFor="lastEdited">Last Edited</label>
             </span>
           </div>
-          {/* TODO: refactor this into tags being separated by a comma and shown properly */}
           <div className="properties-inputs">
             <input
               type="text"
