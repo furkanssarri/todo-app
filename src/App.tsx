@@ -12,7 +12,7 @@ function App() {
   const { showToast } = useContext(ToastContext);
   const { isDesktop } = context;
   const location = useLocation();
-  const dataObj = useData("db.json");
+  const dataObj = useData("local");
 
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
