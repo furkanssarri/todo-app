@@ -35,7 +35,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--radius-8);
     background: transparent;
-    color: var(--colors-neutral-500);
+
     box-shadow: var(--shadow-1);
     transition: all 0.3s ease;
   }
