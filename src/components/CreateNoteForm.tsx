@@ -5,10 +5,11 @@ import NoteActionsMobile from "./NoteActionsMobile";
 import ActionsMenu from "./ActionsMenu";
 import ConfirmModal from "./ConfirmModal";
 import Button from "./Button";
-import type { UseDataResult } from "../utils/useData";
+import type { Note, UseDataResult } from "../utils/useData";
 import { format, formatISO } from "date-fns";
 import { useParams, useNavigate } from "react-router";
 import { ToastContext } from "../context/toastContext";
+import { useActiveView } from "../utils/useActiveView";
 
 type Props = {
   dataObj: UseDataResult;
@@ -28,8 +29,22 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
   const { isDesktop } = useContext(MobileContext);
   const { data, setData } = dataObj;
   const { id } = useParams();
-  const note = data?.find((n) => n.id.toString() === id);
+
   const navigate = useNavigate();
+  const activeView = useActiveView();
+
+  const [note, setNote] = useState<Note>();
+
+  useEffect(() => {
+    if (activeView.path !== "/create") {
+      const currentNote = id
+        ? data?.find((n) => n.id.toString() === id)
+        : data[0];
+      setNote(currentNote);
+    } else if (activeView.path === "/create") {
+      setNote(undefined);
+    }
+  }, [activeView, id, data]);
 
   const [tagsText, setTagsText] = useState<string>(() =>
     note ? note.tags.join(", ") : "",
@@ -64,10 +79,12 @@ const CreateNoteForm = ({ dataObj, handleNoteActions }: Props) => {
 
   // Form Title element auto focus
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+    if (activeView.path === "/create") {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
     }
-  }, []);
+  }, [activeView]);
 
   useEffect(() => {
     setFormData(() => {
