@@ -17,7 +17,7 @@ type Props = {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const DeskttopLayout = ({
+const DesktopLayout = ({
   dataObj,
   handleNoteActions,
   selectedTag,
@@ -78,4 +78,4 @@ const DeskttopLayout = ({
   );
 };
 
-export default DeskttopLayout;
+export default DesktopLayout;
