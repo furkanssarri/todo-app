@@ -17,6 +17,7 @@
     flex-direction: column;
     gap: 0 !important;
     justify-content: center !important;
+    text-decoration: none;
   }
 
   .mobile-nav ul li a svg {

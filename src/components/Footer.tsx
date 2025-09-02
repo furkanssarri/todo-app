@@ -11,7 +11,8 @@ const Footer = () => {
         className="footer-link"
         aria-label="GitHub profile of furkanssarri"
       >
-        <FaGithub className="footer-icon" /> furkanssarri {currentYear}
+        <FaGithub className="footer-icon" />
+        furkanssarri {currentYear}
       </a>{" "}
       <div className="attribution">
         Challenge by{" "}

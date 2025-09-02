@@ -7,7 +7,7 @@ import { MobileContext } from "../context/MobileContext";
 import ActionsMenu from "./ActionsMenu";
 
 const SettingsPage = () => {
-  const { isDesktop } = useContext(MobileContext);
+  const { isDesktop, isLaptop } = useContext(MobileContext);
   const { setting } = useParams();
 
   return (
@@ -21,7 +21,7 @@ const SettingsPage = () => {
           </div>
         </div>
       </article>
-      {isDesktop && <ActionsMenu />}
+      {isDesktop && !isLaptop && <ActionsMenu />}
     </>
   );
 };
