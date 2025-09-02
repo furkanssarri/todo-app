@@ -53,7 +53,7 @@
   .settings-button {
     background-color: transparent;
     border: none;
-    margin-left: var(--space-300);
+    padding: var(--space-150);
   }
 
   .settings-button svg {

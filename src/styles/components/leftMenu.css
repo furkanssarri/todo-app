@@ -4,7 +4,7 @@
   }
 
   .left-menu .tags-wrapper h4 {
-    color: var(--colors-neutral-500);
+    color: var(--svg-color);
     margin: var(--space-100);
   }
 
@@ -115,6 +115,13 @@
     padding: var(--space-100);
     border-radius: var(--radius-6);
     height: 8.75rem;
+  }
+
+  .inner-sidebar ul .note-item::after {
+    content: "";
+    border-bottom: 1px solid var(--border-color);
+    height: 1.6875rem;
+    display: block;
   }
 
   .inner-sidebar ul li:hover {

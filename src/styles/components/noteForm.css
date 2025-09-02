@@ -31,7 +31,8 @@
     width: 90%;
   }
 
-  .properties-labels span label {
+  .properties-labels span label,
+  span {
     margin-left: var(--space-100);
   }
 

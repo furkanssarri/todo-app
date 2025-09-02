@@ -12,7 +12,7 @@ const NoteListItem = ({ data }: Props) => {
   return (
     <ul>
       {data &&
-        data.map((item, index) => {
+        data.map((item) => {
           const isActive = location.pathname === `/note/${item.id}`;
           return (
             <Fragment key={item.id}>
@@ -37,7 +37,6 @@ const NoteListItem = ({ data }: Props) => {
                   </div>
                 </Link>
               </li>
-              {index !== data.length - 1 && <hr />}
             </Fragment>
           );
         })}

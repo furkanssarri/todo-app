@@ -145,7 +145,11 @@ const CreateNote = ({ note, setData }: Props) => {
             </span>
             <span className="lastEdited-label">
               <IconClock />
-              <label htmlFor="lastEdited">Last Edited</label>
+              {note ? (
+                <span className="last-edited-label-span">Last Edited</span>
+              ) : (
+                <label htmlFor="lastEdited">Last Edited</label>
+              )}
             </span>
           </div>
           <div className="properties-inputs">

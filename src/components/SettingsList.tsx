@@ -8,11 +8,10 @@ const SettingsList = () => {
       {/* TODO: fix the class name to a more meaningful one or refactor existing left-menu styling to fiti; */}
 
       <ul className="settings-menu">
-        {settingsViews.map((view, index) => {
+        {settingsViews.map((view) => {
           const Icon = view.icon;
           return (
             <Fragment key={view.id}>
-              {index === settingsViews.length - 1 && <hr />}
               <li>
                 <NavLink
                   to={`/settings/${view.path}`}

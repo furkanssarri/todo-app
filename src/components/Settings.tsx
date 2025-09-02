@@ -3,11 +3,9 @@ import { IconSettings } from "./icons";
 
 const Settings = () => {
   return (
-    <button className="settings-button">
-      <Link to="/settings">
-        <IconSettings />
-      </Link>
-    </button>
+    <Link to="/settings" className="settings-button" aria-label="Open settings">
+      <IconSettings aria-hidden="true" />
+    </Link>
   );
 };
 
