@@ -50,10 +50,16 @@ export default function useData(source: string): UseDataResult {
         if (source !== "local") {
           try {
             const response = await fetch(source, { signal: controller.signal });
+            const contentType = response.headers.get("content-type");
             if (!response.ok) {
               setError("Error: cannot find the product");
               setData([]);
               return;
+            }
+            if (!contentType?.includes("application/json")) {
+              throw new Error(
+                `Expected JSON, got ${contentType}, ${response.body}`,
+              );
             }
             const json: Note[] = await response.json();
             setData(json);
