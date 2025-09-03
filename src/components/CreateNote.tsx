@@ -205,9 +205,6 @@ const CreateNote = ({ note, setData }: Props) => {
           </div>
         </fieldset>
         <div className="textarea">
-          <label htmlFor="content" className="sr-only">
-            Note content
-          </label>
           <textarea
             name="content"
             id="content"

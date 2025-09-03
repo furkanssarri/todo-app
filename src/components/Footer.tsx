@@ -12,8 +12,9 @@ const Footer = () => {
         aria-label="Open GitHub profile of furkanssarri in a new tab"
       >
         <FaGithub className="footer-icon" aria-hidden="true" />
-        furkanssarri {currentYear}
-      </a>
+        furkanssarri
+      </a>{" "}
+      {currentYear}
       <div className="attribution">
         Challenge by{" "}
         <a

@@ -27,7 +27,7 @@ const DesktopLayout = ({
 }: Props) => {
   const activeView = useActiveView();
   return (
-    <div id="app-container">
+    <>
       <div id="content">
         <aside role="complementary" aria-label="Left menu">
           <LeftMenu
@@ -74,7 +74,7 @@ const DesktopLayout = ({
       <footer aria-label="Footer">
         <Footer />
       </footer>
-    </div>
+    </>
   );
 };
 
