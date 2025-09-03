@@ -1,27 +1,18 @@
-import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { useContext } from "react";
 import { MobileContext } from "../context/MobileContext";
-import IconArrowLeft from "./icons/IconArrowLeft";
+import NoteActionsMobile from "./NoteActionsMobile";
 
 const ChangePassword = () => {
   const { isMobile, isTablet } = useContext(MobileContext);
-  const navigate = useNavigate();
   return (
     <>
       {(isTablet || isMobile) && (
         <div className="mobile-actions">
           <div className="mobile-go-back">
-            <button
-              type="button"
-              className="back-btn"
-              onClick={() => navigate(-1)}
-              aria-label="Go back to Settings"
-            >
-              <IconArrowLeft aria-hidden="true" focusable="false" />
-              <span className="sr-only">Back to Settings</span>
-              Settings
-            </button>
+            <NoteActionsMobile
+              exclude={["archive", "restore", "cancel", "delete", "save"]}
+            />
           </div>
         </div>
       )}

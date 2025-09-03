@@ -1,46 +1,15 @@
 import { useContext, useState } from "react";
 import { FontThemeContext, type FontsTheme } from "../context/fontThemeContext";
-import {
-  IconArrowLeft,
-  IconFontMonospace,
-  IconFontSansSerif,
-  IconFontSerif,
-} from "./icons";
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
 import { MobileContext } from "../context/MobileContext";
 import { ToastContext } from "../context/toastContext";
-
-const fontThemes = [
-  {
-    id: 1,
-    name: "sans-serif",
-    title: "Sans Serif",
-    description: "Clean and modern, easy to read.",
-    icon: IconFontSansSerif,
-  },
-  {
-    id: 2,
-    name: "serif",
-    title: "Serif",
-    description: "Classic and elegant for a timeless feel.",
-    icon: IconFontSerif,
-  },
-  {
-    id: 3,
-    name: "monospace",
-    title: "Monospace",
-    description: "Code-like, great for a technical vibe.",
-    icon: IconFontMonospace,
-  },
-];
+import { fontThemes } from "../constants/themes";
+import NoteActionsMobile from "./NoteActionsMobile";
 
 const FontTheme = () => {
   const [selectedFontTheme, setSelectedFontTheme] = useState<FontsTheme>(() => {
     return (localStorage.getItem("font-theme") as FontsTheme) || "sans-serif";
   });
-
-  const navigate = useNavigate();
 
   const { isMobile, isTablet } = useContext(MobileContext);
 
@@ -58,16 +27,9 @@ const FontTheme = () => {
       {(isTablet || isMobile) && (
         <div className="mobile-actions">
           <div className="mobile-go-back">
-            <button
-              type="button"
-              className="back-btn"
-              onClick={() => navigate(-1)}
-              aria-label="Go back to Settings"
-            >
-              <IconArrowLeft aria-hidden="true" />
-              <span className="sr-only">Back</span>
-              Settings
-            </button>
+            <NoteActionsMobile
+              exclude={["archive", "restore", "cancel", "delete", "save"]}
+            />
           </div>
         </div>
       )}

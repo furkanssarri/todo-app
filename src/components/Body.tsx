@@ -77,6 +77,7 @@ const Body = ({ dataObj, handleNoteActions }: Props) => {
           </div>
         )}
         <CreateNote note={note} setData={setData} />
+
         {isDesktop && (
           <div className="submit-buttons">
             <Button

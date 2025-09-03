@@ -1,34 +1,10 @@
 import { useContext, useState } from "react";
 import Button from "./Button";
-import { IconArrowLeft, IconMoon, IconSun, IconSystemTheme } from "./icons";
 import { ThemeContext, type Theme } from "../context/themeContext";
 import { MobileContext } from "../context/MobileContext";
-import { useNavigate } from "react-router-dom";
 import { ToastContext } from "../context/toastContext";
-
-const colorThemes = [
-  {
-    id: 1,
-    name: "light",
-    title: "Light Mode",
-    description: "Pick a clean and classic light theme",
-    icon: IconSun,
-  },
-  {
-    id: 2,
-    name: "dark",
-    title: "Dark Mode",
-    description: "Select a sleek and modern dark theme",
-    icon: IconMoon,
-  },
-  {
-    id: 3,
-    name: "system",
-    title: "System",
-    description: "Adapts to your device's theme",
-    icon: IconSystemTheme,
-  },
-];
+import { colorThemes } from "../constants/themes";
+import NoteActionsMobile from "./NoteActionsMobile";
 
 const ColorTheme = () => {
   const [selectedTheme, setSelectedTheme] = useState<Theme>(() => {
@@ -36,7 +12,6 @@ const ColorTheme = () => {
   });
 
   const { isMobile, isTablet } = useContext(MobileContext);
-  const navigate = useNavigate();
 
   const themeCtx = useContext(ThemeContext);
   if (!themeCtx) {
@@ -51,16 +26,9 @@ const ColorTheme = () => {
       {(isTablet || isMobile) && (
         <div className="mobile-actions">
           <div className="mobile-go-back">
-            <button
-              type="button"
-              className="back-btn"
-              onClick={() => navigate(-1)}
-              aria-label="Go back to Settings"
-            >
-              <IconArrowLeft aria-hidden="true" />
-              <span className="sr-only">Back</span>
-              Settings
-            </button>
+            <NoteActionsMobile
+              exclude={["archive", "restore", "cancel", "delete", "save"]}
+            />
           </div>
         </div>
       )}
