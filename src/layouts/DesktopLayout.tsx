@@ -27,17 +27,17 @@ const DesktopLayout = ({
 }: Props) => {
   const activeView = useActiveView();
   return (
-    <>
+    <div id="app-container">
       <div id="content">
-        <aside>
+        <aside role="complementary" aria-label="Left menu">
           <LeftMenu
             dataObj={dataObj}
             selectedTag={selectedTag}
             setSelectedTag={setSelectedTag}
           />
         </aside>
-        <main>
-          <header>
+        <main role="main" aria-label="Main content">
+          <header aria-label="Page header">
             <Header
               title={activeView.name}
               searchQuery={searchQuery}
@@ -70,11 +70,11 @@ const DesktopLayout = ({
           </div>
         </main>
       </div>
-      <Toast />
-      <footer>
+      <Toast aria-live="polite" />
+      <footer aria-label="Footer">
         <Footer />
       </footer>
-    </>
+    </div>
   );
 };
 

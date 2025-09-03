@@ -35,10 +35,13 @@ const MobileLayout = ({
 
   return (
     <>
-      <header>
+      <header role="banner">
         <Logo />
       </header>
-      <main>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      <main id="main-content" role="main" aria-label="Main content">
         <div className="main-wrapper">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -49,10 +52,11 @@ const MobileLayout = ({
                   element={
                     <motion.div
                       key={path}
+                      aria-live="polite"
                       initial={{ opacity: 0, y: 50 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -50 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
                     >
                       <Component
                         dataObj={dataObj}
@@ -68,34 +72,28 @@ const MobileLayout = ({
               ))}
             </Routes>
           </AnimatePresence>
-          {/* <Route
-              path="/note/:id"
-              element={
-                // TODO: this will be replaced with a note body-type form component for design fidelity.
-                <CreateNoteForm
-                  dataObj={dataObj}
-                  handleNoteActions={handleNoteActions}
-                />
-              }
-            /> */}
         </div>
 
         {!isDesktop &&
           activeView.path !== "/create" &&
-          activeView.path !== "/note" && (
+          activeView.path !== "/note" &&
+          activeView.path !== "/settings" && (
             <span className="mobile-add-note-button">
               <Button
                 startIcon="plus"
                 color="primary"
                 size="lg"
+                aria-label="Create a new note"
                 onClick={() => navigate("/create")}
               />
             </span>
           )}
-        <Toast />
+        <div role="status" aria-live="polite">
+          <Toast />
+        </div>
       </main>
 
-      <footer>
+      <footer role="contentinfo">
         <MobileBottomNav setSelectedTag={setSelectedTag} />
       </footer>
     </>

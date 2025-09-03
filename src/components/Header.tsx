@@ -11,10 +11,10 @@ type Props = {
 const Header = ({ title, searchQuery, setSearchQuery }: Props) => {
   return (
     <>
-      <section className="heading">
+      <section className="heading" aria-label="Main title">
         <MainTitle title={title} />
       </section>
-      <section className="header-right">
+      <section className="header-right" aria-label="Search and settings">
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Settings />
       </section>

@@ -60,13 +60,14 @@ const NotesList = ({
   }
 
   return (
-    <section className="inner-sidebar">
+    <section className="inner-sidebar" aria-label="Notes list" role="region">
       {isDesktop && activeView.path !== "/settings" && (
         <Button
           startIcon="plus"
           color="primary"
           size="lg"
           onClick={() => navigate("/create")}
+          aria-label="Create a new note"
         >
           Create New Note
         </Button>
@@ -87,13 +88,17 @@ const NotesList = ({
 
       {activeView.path === "/search" && (
         <>
-          <section className="search-area">
+          <section className="search-area" aria-label="Search notes">
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
           </section>
-          <p className="text-preset-5 search-bar-desc">
+          <p
+            className="text-preset-5 search-bar-desc"
+            role="status"
+            aria-live="polite"
+          >
             All notes matching{" "}
             <b>{!searchQuery ? "your search term" : searchQuery}</b> are
             displayed here.
@@ -112,7 +117,7 @@ const NotesList = ({
                 activeView.path === "/archive"
                   ? "No notes have been archived yet. Move notes here for safekeeping, or create a new note."
                   : activeView.path === "/search" || searchQuery
-                  ? `No notes match yout search. Try a different keyword or create a new note.`
+                  ? `No notes match your search. Try a different keyword or create a new note.`
                   : "You don't have any notes yet. Start a new note to capture your thoughts and ideas."
               }
             />

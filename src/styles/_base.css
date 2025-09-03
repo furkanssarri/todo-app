@@ -1,20 +1,20 @@
 @layer base {
   @font-face {
     font-family: "Inter";
-    src: url("../assets/fonts/inter/Inter-VariableFont_opsz,wght.ttf")
-      format("truetype");
+    src: url("../assets/fonts/inter/Inter-VariableFont_opsz,wght-subset.woff2")
+      format("woff2");
     font-display: swap;
   }
   @font-face {
     font-family: "Noto-serif";
-    src: url("../assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght.ttf")
-      format("truetype");
+    src: url("../assets/fonts/noto-serif/NotoSerif-VariableFont_wdth,wght-subset.woff2")
+      format("woff2");
     font-display: swap;
   }
   @font-face {
     font-family: "Source-code-pro";
-    src: url("../assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght.ttf")
-      format("truetype");
+    src: url("../assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght-subset.woff2")
+      format("woff2");
     font-display: swap;
   }
 

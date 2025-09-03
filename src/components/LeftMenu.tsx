@@ -14,10 +14,10 @@ type Props = {
 const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
   const activeView = useActiveView();
   return (
-    <section className="left-menu">
+    <section className="left-menu" aria-label="Main filtering">
       <Logo />
       <div className="left-menu-content text-preset-sans-4">
-        <nav className="main-filter">
+        <nav className="main-filter" aria-label="Primary note filters">
           <ul>
             <li>
               <NavLink
@@ -26,10 +26,11 @@ const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
                     ? "active"
                     : ""
                 }
+                aria-current="page"
                 to="/"
                 onClick={() => setSelectedTag(null)}
               >
-                <IconHome />
+                <IconHome aria-hidden="true" focusable="false" />
                 All Notes
               </NavLink>
             </li>
@@ -38,10 +39,11 @@ const LeftMenuNav = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
               <NavLink
                 to="/archive"
                 className={({ isActive }) => ` ${isActive ? "active" : ""}`}
+                aria-current="page"
                 onClick={() => setSelectedTag(null)}
               >
                 {" "}
-                <IconArchive />
+                <IconArchive aria-hidden="true" focusable="false" />
                 Archived Notes
               </NavLink>
             </li>

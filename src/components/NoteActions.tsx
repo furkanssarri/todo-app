@@ -30,6 +30,7 @@ const NoteActions = ({
             startIcon={"delete"}
             size={"lg"}
             variant={"outline"}
+            aria-label="Delete this note"
             onClick={() => {
               if (noteId) return handleOpenConfirm(noteId, "delete");
             }}
@@ -46,6 +47,7 @@ const NoteActions = ({
               startIcon={"archive"}
               size={"lg"}
               variant={"outline"}
+              aria-label="Archive this note"
               onClick={() => {
                 if (noteId) return handleOpenConfirm(noteId, "archive");
               }}
@@ -57,6 +59,7 @@ const NoteActions = ({
               startIcon={"refresh"}
               size={"lg"}
               variant={"outline"}
+              aria-label="Restore this note"
               onClick={() => {
                 if (noteId) return handleOpenConfirm(noteId, "restore");
               }}

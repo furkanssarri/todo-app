@@ -31,7 +31,7 @@ const TagsList = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
       ) : (
         <h4 className="text-preset-sans-4">Tags</h4>
       )}
-      <ul>
+      <ul aria-label="Filter tags list">
         {uniqueTags.map((tag, index) => (
           <li key={`${tag}-${index}`} className="tag-item">
             {!isDesktop ? (
@@ -40,20 +40,24 @@ const TagsList = ({ dataObj, selectedTag, setSelectedTag }: Props) => {
                 className={({ isActive }) =>
                   `text-preset-sans-4 ${isActive ? "active" : ""}`
                 }
+                aria-current={selectedTag === tag ? "page" : undefined}
                 onClick={() => setSelectedTag(tag)}
               >
-                <IconTag /> {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                <IconTag aria-hidden="true" focusable="false" />{" "}
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}
               </NavLink>
             ) : (
-              <a
-                href="#"
+              <button
+                type="button"
                 className={`text-preset-sans-4 ${
                   selectedTag === tag ? "active" : ""
                 }`}
                 onClick={() => setSelectedTag(tag)}
+                aria-current={selectedTag === tag ? "page" : undefined}
               >
-                <IconTag /> {tag.charAt(0).toUpperCase() + tag.slice(1)}
-              </a>
+                <IconTag aria-hidden="true" focusable="false" />{" "}
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              </button>
             )}
           </li>
         ))}

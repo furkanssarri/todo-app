@@ -20,40 +20,58 @@ const NoteBody = ({ dataObj }: Props) => {
   const { isTablet, isMobile, isDesktop } = useContext(MobileContext);
 
   if (!id) {
-    return <article className="note-details"></article>;
+    return (
+      <article
+        className="note-details"
+        role="main"
+        aria-label="Note content"
+      ></article>
+    );
   }
 
   if (!note) {
     return (
-      <article className="note-details">
-        <p>Note not found</p>
+      <article className="note-details" role="main" aria-label="Note content">
+        <p role="status" aria-live="polite">
+          Note not found
+        </p>
       </article>
     );
   }
 
-  if (error) return <p>{error}</p>;
+  if (error)
+    return (
+      <p role="status" aria-live="polite">
+        {error}
+      </p>
+    );
 
-  if (isLoading) return <p>Loading data...</p>;
+  if (isLoading)
+    return (
+      <p role="status" aria-live="polite">
+        Loading data...
+      </p>
+    );
 
   return (
     <>
-      <article className="note-details">
+      <article className="note-details" role="main" aria-label="Note content">
         {(isTablet || isMobile) && <ActionsMenu noteId={id!} />}
 
         <div className="note-content">
-          <h2>{note.title}</h2>
+          <h2 aria-label={`Note title: ${note.title}`}>{note.title}</h2>
           <div className="quick-info">
             <div className="info-line">
               <span>
-                <IconTag />
-                Tags:{" "}
+                <IconTag aria-hidden="true" focusable="false" />
+                <span className="visually-hidden">Tags: </span>
               </span>{" "}
               <span>{note.tags.join(", ")}</span>
             </div>
             <div className="info-line">
               <span>
-                <IconClock />
-                Last Edited:{" "}
+                <IconClock aria-hidden="true" focusable="false" />
+                <span className="visually-hidden">Last Edited: </span>
               </span>{" "}
               <span>{format(note.lastEdited, "dd MMM yyyy")}</span>
             </div>

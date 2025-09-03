@@ -1,7 +1,6 @@
 import NotesList from "../components/NotesList";
 import Body from "../components/Body";
 import TagsList from "../components/TagsList";
-// import NoteBody from "../components/NoteBody";
 import SettingsPage from "../components/SettingsPage";
 import NotFound from "../pages/NotFound";
 

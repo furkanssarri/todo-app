@@ -1,4 +1,32 @@
 @layer components {
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 100; /* keep it above other elements */
+    text-decoration: none;
+    border-radius: 4px;
+
+    /* Hide visually but keep available for screen readers & keyboard */
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  .skip-link:focus {
+    top: 0; /* move into view */
+    clip: auto; /* unclip */
+    height: auto;
+    width: auto;
+    overflow: visible;
+    white-space: normal;
+  }
+
   main {
     display: flex;
     flex-direction: column;

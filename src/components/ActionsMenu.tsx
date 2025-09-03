@@ -20,7 +20,11 @@ const ActionsMenu = ({ noteId, handleOpenConfirm, isArchived }: Props) => {
 
   if (isMobile || isTablet) {
     return (
-      <div className="mobile-actions">
+      <div
+        className="mobile-actions"
+        role="region"
+        aria-label="Note actions for mobile"
+      >
         <NoteActionsMobile noteId={noteId} />
       </div>
     );
@@ -31,8 +35,9 @@ const ActionsMenu = ({ noteId, handleOpenConfirm, isArchived }: Props) => {
       className={`right-menu ${
         activeView.path === `/settings` ? "border-transparent" : ""
       }`}
+      aria-label="Note actions menu"
     >
-      <section className="actions">
+      <section className="actions" role="group" aria-label="Note actions">
         {activeView.name !== "Create Note" && (
           <NoteActions
             activeView={activeView}

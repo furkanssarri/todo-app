@@ -11,8 +11,8 @@ const SettingsPage = () => {
   const { setting } = useParams();
 
   return (
-    <>
-      <article className="note-details">
+    <main role="main" aria-label="Settings content">
+      <section aria-label="Settings section">
         <div className="note-content">
           <div className="note-body">
             {setting === "color-theme" && <ColorTheme />}
@@ -20,9 +20,13 @@ const SettingsPage = () => {
             {setting === "change-password" && <ChangePassword />}
           </div>
         </div>
-      </article>
-      {isDesktop && !isLaptop && <ActionsMenu />}
-    </>
+      </section>
+      {isDesktop && !isLaptop && (
+        <nav aria-label="Settings actions menu">
+          <ActionsMenu />
+        </nav>
+      )}
+    </main>
   );
 };
 

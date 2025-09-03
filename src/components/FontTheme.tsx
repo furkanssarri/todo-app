@@ -58,10 +58,16 @@ const FontTheme = () => {
       {(isTablet || isMobile) && (
         <div className="mobile-actions">
           <div className="mobile-go-back">
-            <a href="#" onClick={() => navigate(-1)}>
-              <IconArrowLeft />
+            <button
+              type="button"
+              className="back-btn"
+              onClick={() => navigate(-1)}
+              aria-label="Go back to Settings"
+            >
+              <IconArrowLeft aria-hidden="true" />
+              <span className="sr-only">Back</span>
               Settings
-            </a>
+            </button>
           </div>
         </div>
       )}
@@ -80,7 +86,7 @@ const FontTheme = () => {
             >
               <div className="text-preset-4 setting-item-inner">
                 <span className="setting-icon">
-                  <Icon />
+                  <Icon aria-hidden="true" focusable="false" />
                 </span>
                 <div className="item-middle">
                   <span>
@@ -113,6 +119,7 @@ const FontTheme = () => {
               localStorage.setItem("font-theme", selectedFontTheme);
               showToast("Settings Updated successfully!", "", "success");
             }}
+            aria-label="Apply font theme changes"
           >
             Apply Changes
           </Button>

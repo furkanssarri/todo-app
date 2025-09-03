@@ -58,39 +58,43 @@ const NoteActionsMobile = ({
     <>
       {!isDesktop && filteredBtns[0].view === "back" && (
         <div className="mobile-go-back">
-          <a href="#" onClick={() => navigate(-1)}>
-            {BackIcon && <BackIcon />}
+          <button
+            type="button"
+            className="back-btn"
+            onClick={() => navigate(-1)}
+            aria-label="Go back"
+          >
+            {BackIcon && <BackIcon aria-hidden="true" focusable="false" />}
             {filteredBtns[0].name}
-          </a>
+          </button>
         </div>
       )}
       <ul>
-        <ul>
-          {!isDesktop &&
-            filteredBtns.map((btn: Btn) => {
-              if (btn.view === "back") return null;
+        {!isDesktop &&
+          filteredBtns.map((btn: Btn) => {
+            if (btn.view === "back") return null;
 
-              const isTextOnly = btn.view === "cancel" || btn.view === "save";
+            const isTextOnly = btn.view === "cancel" || btn.view === "save";
 
-              return (
-                <li key={btn.id}>
-                  <Button
-                    variant="text"
-                    color={isTextOnly ? undefined : "primary"}
-                    size={isTextOnly ? undefined : "lg"}
-                    className={isTextOnly ? undefined : "btn"}
-                    startIcon={isTextOnly ? undefined : btn.icon}
-                    type={btn.view === "save" ? "submit" : "button"}
-                    form={btn.view === "save" ? "add-new-form" : undefined}
-                    id={btn.view}
-                    onClick={() => onAction(btn.view)}
-                  >
-                    {isTextOnly && btn.name}
-                  </Button>
-                </li>
-              );
-            })}
-        </ul>
+            return (
+              <li key={btn.id}>
+                <Button
+                  variant="text"
+                  color={isTextOnly ? undefined : "primary"}
+                  size={isTextOnly ? undefined : "lg"}
+                  className={isTextOnly ? undefined : "btn"}
+                  startIcon={isTextOnly ? undefined : btn.icon}
+                  type={btn.view === "save" ? "submit" : "button"}
+                  form={btn.view === "save" ? "add-new-form" : undefined}
+                  id={btn.view}
+                  aria-label={isTextOnly ? undefined : btn.name}
+                  onClick={() => onAction(btn.view)}
+                >
+                  {isTextOnly && btn.name}
+                </Button>
+              </li>
+            );
+          })}
       </ul>
     </>
   );

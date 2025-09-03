@@ -22,22 +22,24 @@ import {
 import "./button.css";
 
 const icons = {
-  home_default: <HomeIconDefault />,
-  local_grocery_store: <ShoppingCartIcon />,
-  arrow_left: <ArrowLeftIcon />,
-  arrow_right: <ArrowRightIcon />,
-  thumbs_up: <ThumbsUpIcon />,
+  home_default: <HomeIconDefault aria-hidden="true" focusable="false" />,
+  local_grocery_store: (
+    <ShoppingCartIcon aria-hidden="true" focusable="false" />
+  ),
+  arrow_left: <ArrowLeftIcon aria-hidden="true" focusable="false" />,
+  arrow_right: <ArrowRightIcon aria-hidden="true" focusable="false" />,
+  thumbs_up: <ThumbsUpIcon aria-hidden="true" focusable="false" />,
   // Additional icons
-  home: <IconHome />,
-  search: <IconSearch />,
-  archive: <IconArchive />,
-  settings: <IconSettings />,
-  delete: <IconDelete />,
-  plus: <IconPlus />,
-  refresh: <IconRestore />,
-  tag: <IconTag />,
+  home: <IconHome aria-hidden="true" focusable="false" />,
+  search: <IconSearch aria-hidden="true" focusable="false" />,
+  archive: <IconArchive aria-hidden="true" focusable="false" />,
+  settings: <IconSettings aria-hidden="true" focusable="false" />,
+  delete: <IconDelete aria-hidden="true" focusable="false" />,
+  plus: <IconPlus aria-hidden="true" focusable="false" />,
+  refresh: <IconRestore aria-hidden="true" focusable="false" />,
+  tag: <IconTag aria-hidden="true" focusable="false" />,
 
-  arrowLeft: <IconArrowLeft />,
+  arrowLeft: <IconArrowLeft aria-hidden="true" focusable="false" />,
 };
 
 type IconName = keyof typeof icons;
@@ -93,6 +95,7 @@ const Button = ({
 
   return (
     <StyledButton
+      type={rest.type || "button"}
       $variant={variant}
       $disableShadow={disableShadow}
       $size={size}
@@ -100,6 +103,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
       title={title}
+      aria-label={rest["aria-label"]}
       {...rest}
     >
       {startIcon_}

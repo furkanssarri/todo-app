@@ -62,13 +62,14 @@ const Body = ({ dataObj, handleNoteActions }: Props) => {
     }
   };
 
+  const handleCloseConfirm = () => setModal({ open: false, action: null });
+
   return (
     <>
-      <article className="note-details">
+      <article className="note-details" aria-label="Note details">
         {!isDesktop && (
           <div className="mobile-actions">
             <NoteActionsMobile
-              // TODO: this will be re-implemented as a "note-body" type of form in the future.
               exclude={note?.isArchived ? ["archive"] : ["restore"]}
               noteId={id!}
               handleOpenConfirm={handleOpenConfirm}
@@ -78,10 +79,21 @@ const Body = ({ dataObj, handleNoteActions }: Props) => {
         <CreateNote note={note} setData={setData} />
         {isDesktop && (
           <div className="submit-buttons">
-            <Button color="primary" size="lg" type="submit" form="add-new-form">
+            <Button
+              color="primary"
+              size="lg"
+              type="submit"
+              form="add-new-form"
+              aria-label="Save this note"
+            >
               Save Note
             </Button>
-            <Button color="default" size="lg" onClick={() => navigate("/")}>
+            <Button
+              color="default"
+              size="lg"
+              onClick={() => navigate("/")}
+              aria-label="Cancel editing"
+            >
               Cancel
             </Button>
           </div>
@@ -109,7 +121,7 @@ const Body = ({ dataObj, handleNoteActions }: Props) => {
           }
           setModal({ open: false, action: null });
         }}
-        onCancel={() => setModal({ open: false, action: null })}
+        onCancel={handleCloseConfirm}
         confirmLabel={
           modal.action === "delete" ? "Delete Note" : "Archive Note"
         }

@@ -14,7 +14,7 @@ const MobileBottomNav = ({ setSelectedTag }: MobileBottomNavProps) => {
   const activeView = useActiveView();
 
   return (
-    <nav className="mobile-nav">
+    <nav className="mobile-nav" aria-label="Mobile Navigation">
       <ul>
         {views &&
           !isDesktop &&
@@ -30,9 +30,16 @@ const MobileBottomNav = ({ setSelectedTag }: MobileBottomNavProps) => {
                       className={`${
                         activeView.path === item.path ? "active" : ""
                       }`}
+                      aria-current={
+                        activeView.path === item.path ? "page" : undefined
+                      }
                     >
-                      <Icon />
-                      {isTablet && item.name}
+                      <Icon aria-hidden="true" focusable="false" />
+                      {isTablet ? (
+                        item.name
+                      ) : (
+                        <span className="sr-only">{item.name}</span>
+                      )}
                     </Link>
                   </li>
                   {isTablet && index < views.length - 3 && (

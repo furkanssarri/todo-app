@@ -9,9 +9,9 @@ const Toast = () => {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="toast-container">
+    <div className="toast-container" role="status" aria-live="polite">
       {toasts.map(({ id, message, link, toastType }) => (
-        <div className="toast" key={id}>
+        <article className="toast" key={id}>
           <span className="toast-icon">
             {toastType === "success" && <IconCheckmark />}
           </span>
@@ -19,15 +19,24 @@ const Toast = () => {
             <p>{message}</p>
 
             {link && (
-              <Link to={`${link}`}>
+              <Link
+                to={`${link}`}
+                aria-label={`Go to ${
+                  link === "/" ? "All Notes" : "Archived Notes"
+                }`}
+              >
                 {link === "/" ? "All Notes" : "Archived Notes"}
               </Link>
             )}
           </div>
-          <button type="button" onClick={() => hideToast(id)}>
-            <IconCross />
+          <button
+            type="button"
+            onClick={() => hideToast(id)}
+            aria-label="Close notification"
+          >
+            <IconCross aria-hidden="true" />
           </button>
-        </div>
+        </article>
       ))}
     </div>
   );

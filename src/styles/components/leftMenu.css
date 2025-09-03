@@ -25,7 +25,8 @@
     margin: var(--space-050) 0;
   }
 
-  .left-menu ul li a {
+  .left-menu ul li a,
+  button {
     border: 1px solid transparent;
     border-radius: var(--radius-8);
   }
@@ -50,10 +51,15 @@
     color: var(--colors-blue-500);
   }
 
-  .left-menu a {
+  .left-menu a,
+  button {
     padding: var(--space-150);
     display: inline-block;
     width: 100%;
+  }
+
+  .left-menu ul li button {
+    text-align-last: left;
   }
 
   /* ___________ INNER SIDEBAR ____________ */
